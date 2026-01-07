@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* KAFA Brand Colors - inspired by logo */
+    --background: 0 0% 100%;
+    --foreground: 140 70% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 140 70% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 140 70% 15%;
+
+    /* Primary: Deep Forest Green from logo */
+    --primary: 140 65% 20%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Primary variants for depth */
+    --primary-dark: 140 70% 15%;
+    --primary-light: 140 60% 35%;
+
+    /* Secondary: Golden Yellow from logo */
+    --secondary: 48 100% 50%;
+    --secondary-foreground: 140 70% 15%;
+
+    /* Accent: Warm Earth Brown from logo hands */
+    --accent: 25 40% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Muted: Soft cream backgrounds */
+    --muted: 48 30% 95%;
+    --muted-foreground: 140 30% 40%;
+
+    /* Destructive: Keep red for errors */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 140 25% 85%;
+    --input: 140 25% 90%;
+    --ring: 140 65% 20%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(24 40% 45%) 0%, hsl(24 35% 55%) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(48 100% 50%) 0%, hsl(48 100% 60%) 100%);
+    
+    /* Shadows with brand color */
+    --shadow-primary: 0 4px 20px -2px hsl(140 65% 20% / 0.15);
+    --shadow-glow: 0 0 30px hsl(48 100% 50% / 0.3);
+  }
+
+  .dark {
+    --background: 140 50% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 140 45% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 140 45% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 48 100% 50%;
+    --primary-foreground: 140 70% 15%;
+
+    --primary-dark: 48 100% 40%;
+    --primary-light: 48 100% 60%;
+
+    --secondary: 140 50% 25%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 25 40% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 140 40% 15%;
+    --muted-foreground: 140 20% 70%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 140 40% 20%;
+    --input: 140 40% 20%;
+    --ring: 48 100% 50%;
+  }
+}
+
+/* Custom font import - using system fonts for speed but with character */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+    letter-spacing: -0.02em;
+  }
+  
+  /* Prevent layout shifts */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
