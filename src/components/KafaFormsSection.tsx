@@ -1,52 +1,55 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Users, Shield, Download } from "lucide-react";
 import kafaLogo from "@/assets/kafa-logo.png";
 
 const KafaFormsSection = () => {
+  const { t } = useTranslation();
+
   const forms = [
     {
       icon: FileText,
-      title: "Formulaire d'Adhésion",
-      description: "Fòmilè ofisyèl pou enskri kòm manm Koperativ Asirans Fòs Ayiti (KAFA).",
+      titleKey: "forms.membershipForm",
+      descriptionKey: "forms.membershipFormDesc",
       fields: [
-        "Informations personnelles du membre",
-        "Informations liées à KAFA",
-        "Héritier(s) ou ayant(s) droit",
-        "Engagement du membre"
+        t('forms.fields.personalInfo'),
+        t('forms.fields.kafaInfo'),
+        t('forms.fields.beneficiaries'),
+        t('forms.fields.memberCommitment')
       ],
-      ctaText: "Remplir le formulaire",
+      ctaTextKey: "forms.fillForm",
       ctaLink: "/become-member",
       downloadLink: "/documents/FormulaireAdhesion.docx",
       isDownload: true
     },
     {
       icon: Users,
-      title: "Devenir Membre KAFA",
-      description: "Tout kondisyon ak etap pou vin manm KAFA selon prensip koperativ la.",
+      titleKey: "forms.becomeMember",
+      descriptionKey: "forms.becomeMemberDesc",
       fields: [
-        "Conditions d'adhésion",
-        "Parts sociales minimum (5,000 Gdes)",
-        "Frais d'adhésion (500 Gdes)",
-        "Engagement aux statuts et règlements"
+        t('forms.fields.membershipConditions'),
+        t('forms.fields.socialShares'),
+        t('forms.fields.membershipFee'),
+        t('forms.fields.statuteCommitment')
       ],
-      ctaText: "Voir les conditions",
+      ctaTextKey: "forms.seeConditions",
       ctaLink: "/become-member",
       downloadLink: "/documents/DevenirMembre.docx",
       isDownload: true
     },
     {
       icon: Shield,
-      title: "Souscription Plan Funéraire",
-      description: "Fòmilè pou souskri ak chwazi plan antèman KAFA.",
+      titleKey: "forms.funeralPlan",
+      descriptionKey: "forms.funeralPlanDesc",
       fields: [
-        "Choix du plan funéraire",
-        "Informations de l'assuré",
-        "Bénéficiaires",
-        "Modalités de paiement"
+        t('forms.fields.planChoice'),
+        t('forms.fields.insuredInfo'),
+        t('forms.fields.beneficiaryInfo'),
+        t('forms.fields.paymentTerms')
       ],
-      ctaText: "Souscrire maintenant",
+      ctaTextKey: "forms.subscribeNow",
       ctaLink: "/funeral-application",
       downloadLink: "/documents/AppPlanFuneraire.docx",
       isDownload: true
@@ -54,10 +57,10 @@ const KafaFormsSection = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="section-padding bg-background">
+      <div className="section-container">
         {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+        <div className="section-header">
           <div className="flex justify-center mb-4">
             <img 
               src={kafaLogo} 
@@ -65,16 +68,16 @@ const KafaFormsSection = () => {
               className="h-16 sm:h-20 w-auto object-contain"
             />
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
-            Fòmilè KAFA
+          <h2 className="section-title">
+            {t('forms.title')}
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
-            Tout dokiman ofisyèl pou vin manm, souskri plan, ak jere afilyasyon ou ak KAFA.
+          <p className="section-subtitle">
+            {t('forms.subtitle')}
           </p>
         </div>
 
         {/* Forms Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="card-grid-3">
           {forms.map((form, index) => (
             <Card 
               key={index} 
@@ -85,10 +88,10 @@ const KafaFormsSection = () => {
                   <form.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
                 </div>
                 <CardTitle className="text-lg sm:text-xl font-bold text-foreground">
-                  {form.title}
+                  {t(form.titleKey)}
                 </CardTitle>
                 <CardDescription className="text-sm sm:text-base text-muted-foreground mt-2">
-                  {form.description}
+                  {t(form.descriptionKey)}
                 </CardDescription>
               </CardHeader>
               
@@ -113,7 +116,7 @@ const KafaFormsSection = () => {
                       size="lg" 
                       className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12"
                     >
-                      {form.ctaText}
+                      {t(form.ctaTextKey)}
                     </Button>
                   </Link>
                   
@@ -129,7 +132,7 @@ const KafaFormsSection = () => {
                         className="w-full h-11 border-primary text-primary hover:bg-primary/10"
                       >
                         <Download className="w-4 h-4 mr-2" />
-                        Telechaje Fòmilè
+                        {t('forms.downloadForm')}
                       </Button>
                     </a>
                   )}

@@ -157,26 +157,26 @@ const Communes = () => {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 py-16 md:py-20">
-          <div className="container mx-auto px-4 text-center">
+        <section className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 hero-padding">
+          <div className="section-container text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <MapPin className="h-10 w-10 text-primary" />
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+              <h1 className="hero-title text-foreground">
                 Lis Komin Ayiti
               </h1>
             </div>
             <p className="text-xl md:text-2xl text-primary font-semibold mb-2">
               146 Communes of Haiti
             </p>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="section-subtitle">
               Liste complète des communes de la République d'Haïti
             </p>
           </div>
         </section>
 
         {/* Communes List Section */}
-        <section className="py-12 md:py-16">
-          <div className="container mx-auto px-4">
+        <section className="section-padding">
+          <div className="section-container">
             <Card className="border-primary/20">
               <CardHeader className="text-center border-b border-border">
                 <CardTitle className="text-2xl text-primary flex items-center justify-center gap-2">

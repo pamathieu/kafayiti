@@ -1,0 +1,685 @@
+{
+  "common": {
+    "loading": "Ap chaje...",
+    "error": "Erè",
+    "success": "Siksè",
+    "save": "Anrejistre",
+    "cancel": "Anile",
+    "confirm": "Konfime",
+    "delete": "Efase",
+    "edit": "Modifye",
+    "add": "Ajoute",
+    "search": "Chèche",
+    "filter": "Filtre",
+    "clear": "Efase",
+    "download": "Telechaje",
+    "submit": "Soumèt",
+    "back": "Retounen",
+    "next": "Kontinye",
+    "previous": "Anvan",
+    "close": "Fèmen",
+    "yes": "Wi",
+    "no": "Non",
+    "all": "Tout",
+    "none": "Okenn",
+    "required": "Obligatwa",
+    "optional": "Opsyonèl"
+  },
+  "nav": {
+    "home": "Akèy",
+    "about": "Konsènan KAFA",
+    "plans": "Plan Antèman",
+    "documents": "Dokiman",
+    "becomeMember": "Vin Manm",
+    "contact": "Kontakte Nou",
+    "login": "Konekte",
+    "logout": "Dekonekte",
+    "dashboard": "Dashboard",
+    "memberLookup": "Chèche Nimewo Manb",
+    "memberNumbers": "Lis Nimewo Manm",
+    "communes": "Komin Ayiti (146)",
+    "adminDashboard": "Admin Dashboard",
+    "conditionsPolicy": "Conditions & Policy"
+  },
+  "home": {
+    "hero": {
+      "title": "Yon Asirans pou Tout Ayisyen",
+      "subtitle": "KAFA se yon koperativ asirans ki pwoteje fanmi ayisyen yo kont depans antèman. Nou garanti 100% pou peye epi nou gen plan abòdab pou tout moun.",
+      "ctaBecome": "Vin Manm KAFA",
+      "ctaPlans": "Gade Plan Yo"
+    },
+    "howItWorks": {
+      "title": "Ki Jan Sa Mache?",
+      "subtitle": "Vin manm KAFA fasil! Swiv 4 etap senp sa yo.",
+      "step1Title": "Enskri kòm Manm",
+      "step1Desc": "Ranpli fòm Adezyon an epi achte\nomwen yon pa sosyal (5,000 Gdes).",
+      "step2Title": "Chwazi Plan Ou",
+      "step2Desc": "Seleksyone plan antèman ki pi bon pou ou\n(250,000, 350,000, oswa 500,000 Gdes).",
+      "step3Title": "Peye Prim Ou",
+      "step3Desc": "Chwazi frekans pèman ou: chak mwa,\nchak trimès, oswa chak ane.",
+      "step4Title": "Ou Pwoteje!",
+      "step4Desc": "Fanmi'w pwoteje e ou gen lapè nan kè'w.",
+      "cta": "Kòmanse Kounye a",
+      "paymentDetails": "Wè detay peman yo",
+      "paymentMethods": "Metòd Peman Disponib:",
+      "paymentFrequency": "Opsyon Frekans Peman:",
+      "cashOffice": "Cash at KAFA Office",
+      "bankDeposit": "Bank Deposit or Transfer (Sogebank, Unibank, BNC)",
+      "moncash": "MonCash (Digicel)",
+      "natcash": "NatCash (Natcom)",
+      "westernUnion": "Western Union / CAM Transfer",
+      "onlinePayment": "Online payment (via KAFA platform)",
+      "monthly": "Chak mwa (Monthly)",
+      "quarterly": "Chak trimès (Quarterly)",
+      "annual": "Chak ane (Annual)"
+    },
+    "cta": {
+      "title": "Pare pou Pwoteje Fanmi w?",
+      "subtitle": "Pa tann! Enskri kòm manm KAFA jodi a epi gen lapè nan kè ou pou demen.",
+      "becomeMember": "Vin Manm Jodi a",
+      "contact": "Gen Kesyon? Kontakte Nou"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Sou Nou",
+      "subtitle": "Koperativ Asirans Fòs Ayiti"
+    },
+    "whoWeAre": {
+      "title": "Kiyès KAFA ye?",
+      "description": "<strong class=\"text-primary\">KOPERATIV ASIRANS FÒS AYITI (KAFA)</strong> se yon kooperativ asirans ki <strong>posede pa manm li yo menm</strong>. Misyon li se pwoteje manm yo kont gwo kou lavi a: lanmò, maladi, aksidan ak lòt sitiyasyon ki ka kraze ekonomi fanmi an. KAFA chèche toujou aji nan pi bon enterè kolektif manm li yo, pa nan enterè yon sèl moun.",
+      "principles": "Nou fonksyone sou prensip:",
+      "solidarity": "Solidarite",
+      "solidarityDesc": "chak manm ede pwoteje lòt la",
+      "democracy": "Demokrasi",
+      "democracyDesc": "chak manm gen yon sèl vwa nan desizyon yo, kèlkeswa kantite \"part sociale\" li genyen",
+      "mutualization": "Mutualizasyon risk",
+      "mutualizationDesc": "nou mete risk tout manm yo ansanm pou pi byen jere yo",
+      "frenchNote": "En français (résumé) : La KAFA est une entreprise d'assurance coopérative appartenant à ses membres assurés, fondée sur la solidarité, la démocratie et la mutualisation des risques."
+    },
+    "whyChoose": {
+      "title": "Poukisa Chwazi KAFA?",
+      "subtitle": "Nou konprann ki jan lanmò yon moun renmen ka koze pwoblèm finansye pou fanmi yo. Se pou sa nou kreye KAFA pou ede'w.",
+      "guarantee": "100% Garanti",
+      "guaranteeDesc": "Nou garanti pou peye tout reklamasyon ki valid selon kontra a.",
+      "affordable": "Prim Abòdab",
+      "affordableDesc": "Plan ki adapte pou tout bous, depi 250,000 rive 500,000 Gdes.",
+      "coverage": "Kouvèti Nasyonal",
+      "coverageDesc": "Sèvis nou yo disponib nan tout depatman Ayiti.",
+      "fast": "Tretman Rapid",
+      "fastDesc": "Nou trete reklamasyon yo byen vit pou soulaje fanmi yo.",
+      "noExam": "San Egzamen Medikal",
+      "noExamDesc": "Kèk plan pa mande egzamen medikal pou enskri.",
+      "cooperative": "Koperativ",
+      "cooperativeDesc": "Ou se pa sèlman kliyan, ou se pwopriyetè tou!"
+    },
+    "problemSolution": {
+      "title": "Pwoblèm ak Solisyon",
+      "description": "Lè yon moun gen yon pròch ki mouri, fanmi Ayisyen yo souvan fè fas ak gwo difikilte finansye. Se poutèt sa, KAFA rekonèt ijans ki genyen pou li aji pou bay yon repons rapid ak apwopriye a bezwen fanmi ki nan sitiyasyon ekonomik difisil sa."
+    },
+    "infoBlock": {
+      "whoWeAre": "Sa Nou Ye",
+      "whoWeAreDesc": "KAFA se yon antrepriz asirans ki posede pa manm asire li yo. Misyon li se pwoteje manm li yo kont risk ak pèt (lanmò, maladi, elatriye). Li la pou byen sèvi enterè kolektif manm li yo. KAFA fonksyone dapre prensip solidarite, demokrasi, ak repatisyon risk yo. Chak manm gen yon vòt nan pran desizyon, kèlkeswa kantite aksyon li posede.",
+      "missionDesc": "Ofri sèvis asirans ki aksesib pou tout Ayisyen, pou pwoteje yo kont evènman enprevi epi anpeche nenpòt pèt kapital nan ka difikilte sibit.",
+      "visionDesc": "Vini yon referans nan sektè asirans lan, pandan nap patisipe nan bati yon sosyete ki pi ekitab kote chak moun ka viv avèk konfyans malgre ensètitid lavi a.",
+      "objectivesTitle": "Objektif KAFA"
+    },
+    "mission": {
+      "title": "Misyon Nou",
+      "intro": "Misyon KAFA se:",
+      "point1": "Fè sèvis asirans yo vin <strong>aksesib pou tout Ayisyen</strong>, kote yo ye a",
+      "point2": "Pwoteje yo kont enprevizib lavi a (lanmò, maladi, aksidan, elatriye)",
+      "point3": "Evite fanmi yo tonbe nan mizè lè gen yon difikilte souden",
+      "frenchNote": "Mission (FR) : Offrir des services d'assurance accessibles à tous les Haïtiens afin de les protéger contre les imprévus et de prévenir toute décapitalisation en cas de difficultés soudaines.",
+      "description": "Fè sèvis asirans yo vin aksesib pou tout Ayisyen, kote yo ye a. Pwoteje yo kont enprevizib lavi a. Evite fanmi yo tonbe nan mizè lè gen yon difikilte souden."
+    },
+    "vision": {
+      "title": "Vizyon Nou",
+      "description": "Nou vle KAFA vin <strong class=\"text-primary\">yon referans nan domèn asirans an Ayiti</strong>, espesyalman pou moun ak revni limite yo.",
+      "description2": "Vizyon nou se bati yon sosyete kote chak moun ka viv ak plis konfyans, menm lè lavi pote move sipriz.",
+      "frenchNote": "Vision (FR) : Devenir un acteur de référence dans le domaine de l'assurance en bâtissant une société plus équitable où chaque personne peut vivre en confiance face aux aléas de la vie."
+    },
+    "principles": {
+      "p1": "Adrèsman volontè e ouvè pou tout moun ki vle rantre",
+      "p2": "Pouvwa demokratik: chak manm gen menm dwa vòt",
+      "p3": "Patisipasyon ekonomik manm yo atravè 'parts sociales'",
+      "p4": "Otonomi ak endepandans nan desizyon nou yo",
+      "p5": "Edikasyon ak enfòmasyon pou manm yo pi byen konprann finans ak asirans",
+      "p6": "Koperasyon ant kooperativ ak lòt patnè serye",
+      "p7": "Angajman anvè kominote a pou soutni devlopman sosyal ak ekonomik"
+    },
+    "objectives": {
+      "o1": "Ofri sèvis asirans ki aksesib e adapte ak bezwen manm li yo.",
+      "o2": "Pataje risk yo, kote chak moun kontribye selon mwayen yo epi benefisye lè sa nesesè.",
+      "o3": "Anpeche manm yo pèdi kapital yo nan ka difikilte sibit.",
+      "o4": "Ankouraje enklizyon finansyè nan rann asirans disponib menm pou moun ki gen ti revni.",
+      "o5": "Ranfòse rezistans ekonomik fanmi yo ak kominote yo.",
+      "o6": "Envesti nan devlopman lokal epi patisipe nan inisyativ sosyal ak ekonomik peyi a."
+    },
+    "cooperative": {
+      "title": "Ki jan nou fonksyone kòm kooperativ?",
+      "subtitle": "KAFA suiv modèl kooperativ entènasyonal la"
+    },
+    "joinUs": {
+      "title": "Vin fè pati fòs la",
+      "intro": "Lè ou vin manm KAFA, ou pa sèlman achte yon asirans:",
+      "point1": "Ou vin <strong>ko-pwopriyetè</strong> kooperativ la",
+      "point2": "Ou ede pwoteje lòt fanmi ayisyen tankou pa w la",
+      "point3": "Ou kontribye nan yon modèl ekonomik ki plis jis ak solid pou peyi a",
+      "cta": "Vin manm KAFA"
+    },
+    "policy": {
+      "title": "Conditions, Policy, and Privacy",
+      "regulationTitle": "RÈGLEMENT",
+      "regulationDesc": "Règlement sur un plan funéraire: Ce document définit les conditions, les prestations et les modalités d'indemnisation liées à un contrat d'assurance couvrant les frais funéraires. Il permet de garantir que la famille ou les proches d'un assuré puissent recevoir une aide financière pour couvrir une bonne partie des dépenses avant, pendant, et/ou après les funérailles.",
+      "section1Title": "1. Objet du contrat",
+      "objective": "Objectif",
+      "objectiveDesc": "Le plan funéraire choisi par l'assuré a pour objectif de couvrir tout ou une partie des dépenses exigées par les funérailles, conformément aux modalités établies.",
+      "beneficiaries": "Bénéficiaires",
+      "beneficiariesDesc": "KAFA fournira les prestations au(x) bénéficiaire(s) désigné(s) par l'assuré en cas de son décès.",
+      "section2Title": "2. Modalités de compensation",
+      "compensationIntro": "Les modalités de compensation sont les suivantes:",
+      "comp1": "Après l'accomplissement des deux premières années, à compter de la date d'émission du contrat, le bénéficiaire recevra 80 % de la prestation de décès.",
+      "comp2": "À compter de la troisième année, le bénéficiaire recevra 90 % de la prestation de décès.",
+      "comp3": "À partir de la quatrième année, la prestation est intégralement couverte soit (100 %).",
+      "comp4": "Cependant, si l'assuré(e) est décédé(e) avant 2 ans de son adhésion à KAFA, 85% des primes reçues par KAFA seront remboursées au bénéficiaire désigné.",
+      "comp5": "En cas de décès du propriétaire de la police d'assurance avant celui de l'assuré, ce dernier ou un autre membre devra continuer le paiement des primes d'assurance. Toutefois, il est important de noter que si les primes ne sont pas régulièrement payées par la suite, la couverture d'assurance ne sera plus valide.",
+      "section3Title": "3. Montant de la couverture",
+      "coverageAmountDesc": "Le montant de la couverture prévu par le plan funéraire est fixé dès la souscription.",
+      "premiumTitle": "Prime d'assurance",
+      "premiumDesc": "La prime d'assurance est le paiement régulier effectué auprès de KAFA par l'assuré ou par le propriétaire pour maintenir une police d'assurance active.",
+      "gracePeriodTitle": "Période de grâce",
+      "gracePeriodDesc": "Une extension de 30 jours est accordée à l'assuré après la date d'échéance d'une prime durant laquelle l'assuré peut encore payer sans perdre sa couverture ni subir de pénalités et/ou de résiliation de contrat.",
+      "nonPaymentTitle": "Non-Paiement",
+      "nonPaymentDesc": "À défaut de paiement d'une cotisation à l'échéance de la police d'assurance, la garantie sera suspendue 30 jours après la mise en demeure de l'assuré. Si le paiement n'intervient pas dans ce délai, le contrat est résilié de plein droit.",
+      "section4Title": "4. Modalités de souscription",
+      "eligibility": "Critères d'éligibilité",
+      "eligAge": "âge",
+      "eligResidence": "lieu de résidence",
+      "eligNote": "Toute souscription d'une personne âgée entre 65 et 80 ans doit inclure au moins un(e) assuré(e) âgé(e) de moins de 65 ans.",
+      "section5Title": "5. Exclusions",
+      "uncoveredCosts": "Frais non couverts",
+      "uncoveredCostsDesc": "Certains frais spécifiques ou prestations non pris en charge tels que les frais de voyage et/ou les biens personnels.",
+      "uncoveredDeaths": "Décès non couverts",
+      "uncoveredDeathsDesc": "Ce contrat exclut les décès dus aux actes de guerre, de désastres naturels, de disparition, de pandémie, de suicide, etc. (à définir).",
+      "section6Title": "6. Prestation de décès",
+      "requiredDocs": "Documents exigés",
+      "requiredDocsDesc": "En cas de décès, KAFA réclame l'originalité du contrat et l'acte de décès de l'assuré.",
+      "compensationDelay": "Délai de compensation",
+      "compensationDelayDesc": "La compensation sera versée au bénéficiaire désigné dans un délai de 7 à 14 jours ouvrables.",
+      "section7Title": "7. Bénéficiaires",
+      "beneficiaryDesignation": "Désignation des bénéficiaires",
+      "beneficiaryDesignationDesc": "L'assuré peut désigner les bénéficiaires des prestations.",
+      "beneficiaryChange": "Changement de bénéficiaires",
+      "beneficiaryChangeDesc": "Les modalités de changement de bénéficiaires seront modifiées seulement en cas de décès ou de mise à jour du contrat. L'assuré peut modifier la clause par avenant au contrat, par testament, ou par une lettre adressée à KAFA.",
+      "beneficiaryNote": "L'assuré peut changer de bénéficiaire si ce dernier est le propriétaire de l'assurance.",
+      "section8Title": "8. Condition de fin de contrat",
+      "section8Desc": "Le règlement définit les conditions sous lesquelles le contrat peut être résilié, que ce soit à l'initiative de l'assuré ou de l'assureur.",
+      "section9Title": "9. Condition de modification",
+      "section9Desc": "Des modifications pourront être apportées au présent règlement si les responsables le jugent opportun.",
+      "importantNote": "Les détails spécifiques peuvent varier, il est donc essentiel de lire attentivement le contrat pour comprendre exactement ce qui est couvert et les obligations de chaque partie.",
+      "headquarters": "Siège Social: Léogâne, Haiti"
+    }
+  },
+  "plans": {
+    "hero": {
+      "title": "Plan Asirans Antèman",
+      "subtitle": "Chwazi plan ki pi bon pou ou ak fanmi ou"
+    },
+    "description": "Tout plan KAFA yo ofri pwoteksyon solid pou fanmi ou. Chwazi kouvèti ki koresponn ak bezwen ou ak pwopriyete ou posede.",
+    "basic": "Plan Debaz",
+    "standard": "Plan Estanda",
+    "premium": "Plan Premyòm",
+    "savings": "Plan Sere Lajan",
+    "popular": "Pi Popilè",
+    "gourdes": "Gourdes",
+    "choosePlan": "Chwazi Plan Sa",
+    "features": {
+      "coverage": "Kouvèti",
+      "ageAcceptance": "Akseptasyon laj 0-80 an",
+      "allAges": "Ouvè pou TOUT laj",
+      "noExam": "San egzamen medikal",
+      "fixedPremium": "Prim fiks",
+      "flexiblePayment": "Peman fleksib (mwa/trimès/ane)",
+      "fastClaims": "Tretman rapid reklamasyon",
+      "support247": "Sipò telefòn 24/7",
+      "ceremonyAssist": "Asistans pou preparasyon seremoni",
+      "unlimitedSavings": "Epay san limit",
+      "continuousDeposit": "Fleksibilite depo kontinyèl"
+    },
+    "info": {
+      "title": "Enfòmasyon Enpòtan",
+      "whoCanJoin": "Ki moun ki ka enskri?",
+      "whoCanJoinDesc": "Tout moun ant 0 ak 80 an ki an bon sante ka enskri nan plan KAFA yo. Pou kèk plan, nou pa mande egzamen medikal, sa ki rann pwosesis la pi rapid ak pi senp.",
+      "paymentFrequency": "Frekans Peman",
+      "paymentFrequencyDesc": "Ou ka chwazi peye prim ou chak mwa, chak trimès (3 mwa), oswa chak ane. Nou aksepte lajan kach, chèk, transfè bankè, ak lajan mobil.",
+      "claimsProcess": "Pwosesis Reklamasyon",
+      "claimsProcessDesc": "Nan ka lanmò, fanmi a ka soumèt yon reklamasyon ak dokiman nesesè yo. Nou trete reklamasyon yo byen vit pou bay sipò finansye rapid nan moman difisil la.",
+      "beneficiaries": "Benefisyè",
+      "beneficiariesDesc": "Ou ka nonmen plizyè benefisyè ki pral resevwa lajan asirans la. Ou ka chanje benefisyè yo nenpòt lè nan kont manm ou."
+    },
+    "cta": {
+      "title": "Pare pou Kòmanse?",
+      "subtitle": "Enskri kòm manm KAFA jodi a epi chwazi plan ki pi bon pou ou.",
+      "submitRequest": "Soumèt Demann Asirans",
+      "becomeMember": "Vin Manm Kounye a",
+      "askQuestions": "Poze Kesyon"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Kontakte Nou",
+      "subtitle": "Nou la pou ede ou. Voye yon mesaj oswa vizite biwo nou."
+    },
+    "form": {
+      "title": "Voye Yon Mesaj",
+      "name": "Non Konplè",
+      "namePlaceholder": "Antre non ou",
+      "email": "Imèl",
+      "emailPlaceholder": "ou@egzanp.com",
+      "subject": "Sijè",
+      "subjectPlaceholder": "Ki sa ou vle pale de?",
+      "message": "Mesaj",
+      "messagePlaceholder": "Ekri mesaj ou isit...",
+      "submit": "Voye Mesaj",
+      "success": "Mesaj voye!",
+      "successDesc": "Mèsi pou mesaj ou. Nou pral reponn ou byento."
+    },
+    "info": {
+      "title": "Enfòmasyon Kontak",
+      "address": "Adrès",
+      "phone": "Telefòn",
+      "email": "Imèl",
+      "hours": "Èdtan",
+      "location": "Kote Nou Ye",
+      "viewOnMap": "Wè sou OpenStreetMap"
+    },
+    "validation": {
+      "nameRequired": "Non obligatwa",
+      "nameTooLong": "Non twò long",
+      "emailInvalid": "Imèl pa valid",
+      "emailTooLong": "Imèl twò long",
+      "subjectRequired": "Sijè obligatwa",
+      "subjectTooLong": "Sijè twò long",
+      "messageRequired": "Mesaj obligatwa",
+      "messageTooLong": "Mesaj twò long (maksimòm 1000 karaktè)"
+    }
+  },
+  "documents": {
+    "hero": {
+      "title": "Dokiman KAFA",
+      "subtitle": "Tout fòmilè ak dokiman ofisyèl pou manm KAFA yo. Telechaje sa ou bezwen an."
+    },
+    "categories": {
+      "membership": "Fòmilè Adezyon",
+      "membershipDesc": "Dokiman pou vin manm KAFA",
+      "funeral": "Plan Funéraire",
+      "funeralDesc": "Dokiman pou plan antèman"
+    },
+    "help": {
+      "title": "Bezwen Èd?",
+      "description": "Si ou gen kesyon sou fòmilè yo oswa bezwen asistans pou ranpli yo, kontakte nou."
+    },
+    "download": "Telechaje"
+  },
+  "auth": {
+    "login": {
+      "title": "Konekte nan Kont Ou",
+      "subtitle": "Antre enfòmasyon ou yo pou konekte",
+      "email": "Imèl",
+      "emailPlaceholder": "antre imèl ou la",
+      "password": "Modpas",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Konekte",
+      "loading": "Ap konekte...",
+      "noAccount": "Ou pa gen kont ankò?",
+      "createAccount": "Kreye yon kont",
+      "backToHome": "Retounen nan paj akèy",
+      "success": "Byenvini!",
+      "successDesc": "Ou konekte avèk siksè.",
+      "error": "Imèl oswa modpas pa kòrèk."
+    },
+    "register": {
+      "title": "Kreye Kont Ou",
+      "subtitle": "Kòmanse pwosesis pou vin manm KAFA",
+      "firstName": "Prenon",
+      "lastName": "Siyati",
+      "email": "Imèl",
+      "phone": "Nimewo Telefòn",
+      "password": "Modpas",
+      "submit": "Kreye Kont",
+      "loading": "Ap kreye...",
+      "hasAccount": "Ou gen kont deja?",
+      "login": "Konekte",
+      "backToHome": "Retounen nan paj akèy",
+      "success": "Kont kreye avèk siksè!",
+      "successDesc": "Ou ka konekte kounye a.",
+      "error": "Yon erè rive pandan kreye kont ou."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard Manm",
+    "welcome": "Byenvini",
+    "memberDashboard": "Dashboard Manm KAFA ou",
+    "tabs": {
+      "profile": "Pwofil",
+      "plan": "Plan",
+      "payments": "Peman",
+      "documents": "Dokiman",
+      "notifications": "Notif"
+    },
+    "noProfile": {
+      "title": "Pa gen Pwofil Manm",
+      "description": "Ou poko gen yon pwofil manm KAFA. Ou ka enskri pou vin manm oswa kontakte nou pou plis enfòmasyon.",
+      "becomeMember": "Vin Manm KAFA",
+      "contact": "Kontakte Nou"
+    }
+  },
+  "faq": {
+    "title": "Kesyon Moun Poze Souvan (FAQ)",
+    "subtitle": "YON ASIRANS POU TOUT AYISYEN",
+    "q1": "1. Kiyès ki kapab vin manm KAFA?",
+    "a1": {
+      "intro": "Tout Ayisyen, kèlkeswa kote ou rete (Ayiti oswa aletranje), kapab vin manm KAFA si ou:",
+      "item1": "Ranpli fich adhésion lan (anpapye oswa an liy)",
+      "item2": "Peye frè adhésion 500 Gdes",
+      "item3": "Achte omwen 1 \"part sociale\" ki vo 5,000 Gdes",
+      "item4": "Aksepte respekte règ ak statuts kooperativ la"
+    },
+    "q2": "2. Kisa \"Part Sociale\" vle di?",
+    "a2": {
+      "intro": "Se seyon pati ou posede nan kooperativ la. Li se kapital ou envesti kòm manm.",
+      "item1": "Pri minimòm: 5,000 Gdes",
+      "item2": "Li fè ou <strong>ko-pwopriyetè</strong> kooperativ la",
+      "item3": "Li ba ou dwa vote, dwa patisipe, epi dwa resevwa benefis nan fen ane si genyen",
+      "note": "En français: Une \"Part Sociale\" est un placement de capital qui confirme votre qualité de membre et copropriétaire de la coopérative."
+    },
+    "q3": "3. Kisa Asirans Antèman KAFA a ye?",
+    "a3": {
+      "intro": "Asirans antèman (Assurance Funéraire) se yon plan ki ede fanmi ou:",
+      "item1": "Kouvri depans antèman (frais funéraires)",
+      "item2": "Evite pèt ekonomik (décapitalisation)",
+      "item3": "Jere tout pwosedi administratif, sosyal ak sikolojik",
+      "guarantee": "Li pèmèt ou oswa fanmi ou resevwa <strong>garanti peman 100%</strong> selon plan ou te chwazi a."
+    },
+    "q4": "4. Ki plan asirans antèman ki disponib?",
+    "a4": {
+      "intro": "KAFA ofri <strong>3 plan prensipal</strong>:",
+      "table": {
+        "plan": "Plan",
+        "coverage": "Kouvèti",
+        "medicalExam": "Eksamen medikal",
+        "ageAcceptance": "Laj akseptasyon",
+        "basic": "Plan de base",
+        "standard": "Plan standard",
+        "premium": "Plan premium",
+        "notRequired": "Pa obligatwa"
+      },
+      "mobileNote": "* Tout plan yo: Pa gen eksamen medikal obligatwa, laj 0-80 ans",
+      "allPlansHave": "Tout plan yo gen:",
+      "features": {
+        "fixedPayment": "Peman fiks",
+        "immediateProtection": "Pwoteksyon imedya (apre 3 jou)",
+        "flexibleProcess": "Pwosedi fleksib",
+        "nationalCoverage": "Kouvèti nasyonal"
+      }
+    },
+    "q5": "5. Eske mwen bezwen vizit medikal pou mwen rantre?",
+    "a5": "Non. Pou tout plan funeral KAFA yo, <strong>pa gen okenn egzamen medikal obligatwa.</strong>",
+    "q6": "6. Ki dokiman mwen bezwen pou soumèt reklamasyon lan? (Claim)",
+    "a6": {
+      "intro": "Pou ouvri yon dosye reklamasyon, ou bezwen:",
+      "item1": "Sètifika lanmò (certificat de décès)",
+      "item2": "Kat idantite moun ki soumèt la",
+      "item3": "Nimewo kontra/Policy",
+      "item4": "Enfòmasyon sou moun ki mouri a (non, dat & kote lanmò)",
+      "item5": "Nenpòt lòt prèv ki mande pa administrasyon KAFA"
+    },
+    "q7": "7. Kijan pou mwen soumèt yon reklamasyon?",
+    "a7": {
+      "step1": "Konekte sou Portail Manm lan",
+      "step2": "Ale nan seksyon \"Reklamasyon\"",
+      "step3": "Ranpli fòm lan + telechaje dokiman yo",
+      "step4": "Soumèt dosye a",
+      "step5": "Admistrasyon KAFA verifye, epi kontakte ou"
+    },
+    "q8": "8. Konbyen tan li pran pou yon reklamasyon apwouve?",
+    "a8": {
+      "time": "⏳ Tan tretman mwayèn lan se <strong>3 a 10 jou ouvrab</strong>, selon konple dokiman yo.",
+      "goal": "KAFA travay pou ofri yon <em>pwosedi rapid, senp, epi san konplikasyon.</em>"
+    },
+    "q9": "9. Eske mwen ka peye prim mwen yo sou telefòn?",
+    "a9": {
+      "intro": "Wi, n ap mete plizyè opsyon peman:",
+      "moncash": "MonCash",
+      "bank": "Virement bancaire / transfè bankè",
+      "cash": "Cash / Chèk nan biwo KAFA",
+      "online": "Peman an liy (karta Visa/Mastercard)",
+      "comingSoon": "byento disponib"
+    },
+    "q10": "10. Kisa k rive si mwen pa kapab peye yon mwa?",
+    "a10": {
+      "intro": "KAFA pa revoke manm imedyatman.",
+      "grace": "Ou gen yon <strong>peryòd latans (grace period)</strong> pou regle reta a san penalite, selon tip plan ou.",
+      "privilege": "Manm yo toujou gen privilèj sijè a règleman kooperativ la."
+    },
+    "q11": "11. Eske mwen ka ajoute oswa chanje benefisyè mwen?",
+    "a11": {
+      "intro": "Wi. Ou kapab modifye oswa ajoute yon benefisyè anliy oswa nan biwo KAFA nenpòt moman, si:",
+      "item1": "Ou toujou vivan",
+      "item2": "Ou se pwopriyetè kontra a"
+    },
+    "q12": "12. Kisa ki diferans ant \"membre KAFA\" ak \"souscripteur asirans\"?",
+    "a12": {
+      "member": "<strong>Manm KAFA</strong> → moun ki posede parts sociales, gen dwa vote, e li co-propriétaire",
+      "subscriber": "<strong>Souscripteur asirans</strong> → moun ki achte yon plan funeral (pa nesesèman manm)",
+      "note": "(Ou ka gen toude wòl yo ansanm si w souscrir epi vin manm.)"
+    },
+    "q13": "13. Kijan pou mwen vin manm KAFA?",
+    "a13": {
+      "intro": "📝 4 etap senp:",
+      "step1": "Ranpli fich adhésion",
+      "step2": "Pèye frè adhésion (500 Gdes)",
+      "step3": "Achte 1 part sociale (5,000 Gdes minimòm)",
+      "step4": "Resevwa Nimewo Manm ou (ID a)"
+    },
+    "q14": "14. Ki kote KAFA ye?",
+    "a14": {
+      "address": "📍 874 Rue Ste Catherine, Léogâne, Haïti",
+      "phone": "📞 Téléphone: (509) 3500-0326 / (509) 4439-8595 / (850) 321-4670",
+      "email": "📧 Email: info@kafayiti.com",
+      "website": "🌐 Site web: www.kafayiti.com"
+    },
+    "q15": "15. Eske gen aplikasyon mobil?",
+    "a15": {
+      "coming": "Aplikasyon mobil lan ap disponib trè byento.",
+      "forNow": "Pou kounye a, tout sèvis yo disponib sou <strong>sit web ofisyèl ak Portail Manm lan</strong>."
+    },
+    "q16": "16. Kijan mwen ka kontakte KAFA?",
+    "a16": {
+      "phone": "📞 Telefòn",
+      "whatsapp": "💬 WhatsApp",
+      "email": "✉️ Email",
+      "website": "🌐 Sou sit web la (fòm kontak)",
+      "social": "📱 Rezo sosyal (Facebook, Instagram, TikTok, LinkedIn)"
+    },
+    "closing": {
+      "message": "Si ou gen lòt kesyon, pa ezite kontakte nou.",
+      "slogan": "KAFA — YON ASIRANS POU TOUT AYISYEN."
+    }
+  },
+  "forms": {
+    "title": "Fòmilè KAFA",
+    "subtitle": "Tout dokiman ofisyèl pou vin manm, souskri plan, ak jere afilyasyon ou ak KAFA.",
+    "membershipForm": "Fòmilè Adezyon",
+    "membershipFormDesc": "Fòmilè ofisyèl pou enskri kòm manm Koperativ Asirans Fòs Ayiti (KAFA).",
+    "becomeMember": "Vin Manm KAFA",
+    "becomeMemberDesc": "Tout kondisyon ak etap pou vin manm KAFA selon prensip koperativ la.",
+    "funeralPlan": "Souskri Plan Antèman",
+    "funeralPlanDesc": "Fòmilè pou souskri ak chwazi plan antèman KAFA.",
+    "fillForm": "Ranpli Fòmilè a",
+    "seeConditions": "Gade Kondisyon yo",
+    "subscribeNow": "Souskri Kounye a",
+    "downloadForm": "Telechaje Fòmilè",
+    "fields": {
+      "personalInfo": "Enfòmasyon pèsonèl manm nan",
+      "kafaInfo": "Enfòmasyon lye ak KAFA",
+      "beneficiaries": "Eritye oswa benefisyè yo",
+      "memberCommitment": "Angajman manm nan",
+      "membershipConditions": "Kondisyon adezyon",
+      "socialShares": "Pa sosyal minimòm (5,000 Gdes)",
+      "membershipFee": "Frè adezyon (500 Gdes)",
+      "statuteCommitment": "Angajman nan estati ak règleman",
+      "planChoice": "Chwa plan antèman",
+      "insuredInfo": "Enfòmasyon sou asire a",
+      "beneficiaryInfo": "Benefisyè yo",
+      "paymentTerms": "Modalite peman"
+    }
+  },
+  "footer": {
+    "description": "Yon asirans pou tout Ayisyen. KAFA se yon koperativ ki la pou ede fanmi yo nan moman difisil.",
+    "quickLinks": "Lyen Rapid",
+    "contactUs": "Kontakte Nou",
+    "hours": "ORÈ",
+    "weekdays": "Lendi - Vandredi: 9:00 - 16:00",
+    "saturday": "Samdi: 9:00 - 13:00",
+    "sunday": "Dimanch: Fèmen",
+    "copyright": "Koperativ Asirans KAFA. Tout dwa rezève."
+  },
+  "memberNumbers": {
+    "title": "Lis Nimewo Manm KAFA",
+    "subtitle": "Sistèm Nimewo Manm KAFA",
+    "available": "nimewo disponib",
+    "availableNumbers": "Nimewo Manm Disponib",
+    "showing": "Montre",
+    "of": "sou",
+    "page": "Paj",
+    "next": "Apre",
+    "previous": "Anvan"
+  },
+  "language": {
+    "select": "Lang",
+    "ht": "Kreyòl",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "becomeMember": {
+    "header": {
+      "title": "Koperativ Asirans Fòs Ayiti (KAFA)",
+      "address": "874 Rue Sainte Catherine, Léogâne, Haiti HT 6212",
+      "contact": "Telefòn: (509) 3500-0326 / 4439-8595 | Imèl: info@kafayiti.com"
+    },
+    "form": {
+      "title": "Fòmilè Adezyon",
+      "subtitle": "Manm Koperativ Asirans Fòs Ayiti (KAFA)"
+    },
+    "sections": {
+      "personalInfo": "Enfòmasyon pèsonèl manm nan",
+      "beneficiaries": "Eritye oswa benefisyè (an ka lanmò)",
+      "commitment": "Angajman manm nan",
+      "signature": "Siyati manm nan"
+    },
+    "fields": {
+      "lastName": "Siyati",
+      "firstName": "Prenon",
+      "birthPlace": "Kote ou te fèt",
+      "gender": "Sèks",
+      "profession": "Pwofesyon / Aktivite prensipal",
+      "idNumber": "Nimewo pyès idantite",
+      "idType": "Tip pyès",
+      "idIssueDetails": "Dat ak kote li te fèt",
+      "idExpiration": "Dat ekspirasyon",
+      "address": "Adrès konplè (lakay)",
+      "commune": "Komin",
+      "phone": "Telefòn",
+      "email": "Imèl"
+    },
+    "placeholders": {
+      "lastName": "Antre siyati ou",
+      "firstName": "Antre prenon ou",
+      "birthPlace": "Egz: Pòtoprens",
+      "profession": "Antre pwofesyon ou",
+      "idNumber": "Nimewo",
+      "idIssueDetails": "Egz: 10/05/2020, Pòtoprens",
+      "address": "Antre adrès konplè ou",
+      "commune": "Chwazi komin ou",
+      "phone": "Egz: 3700-0000",
+      "email": "egzanp@imèl.com"
+    },
+    "options": {
+      "male": "Gason",
+      "female": "Fi",
+      "cni": "CNI",
+      "nif": "NIF",
+      "passport": "Paspò",
+      "other": "Lòt"
+    },
+    "beneficiary": {
+      "title": "Eritye",
+      "fullName": "Non & Prenon",
+      "fullNamePlaceholder": "Non konplè eritye a",
+      "relationship": "Relasyon fanmi",
+      "relationshipPlaceholder": "Egz: Madanm/Mari, Pitit gason, Pitit fi",
+      "dob": "Dat nesans",
+      "phone": "Telefòn",
+      "email": "Imèl",
+      "percentage": "Pousantaj atribisyon %",
+      "percentagePlaceholder": "Egz: 50",
+      "addButton": "Ajoute yon eritye",
+      "noteLabel": "NB:",
+      "note": "Tout manm gen dwa modifye lis eritye li yo sou demann ekri."
+    },
+    "commitment": {
+      "declaration": "Mwen deklare sou lonè mwen ke enfòmasyon mwen bay yo egzak.",
+      "statutes": "Mwen angaje mwen pou respekte estati, règleman ak desizyon koperativ asirans la.",
+      "dataAuth": "Mwen otorize koperativ la itilize done mwen yo nan kad aktivite li yo."
+    },
+    "signature": {
+      "place": "Fèt nan",
+      "placePlaceholder": "Vil/Lokalite",
+      "date": "Dat la",
+      "signature": "Siyati manm nan",
+      "signaturePlaceholder": "Tape non konplè ou kòm siyati"
+    },
+    "buttons": {
+      "submit": "Soumèt fòmilè a",
+      "submitting": "Ap soumèt...",
+      "reset": "Reyinisyalize"
+    },
+    "validation": {
+      "lastNameRequired": "Siyati obligatwa",
+      "firstNameRequired": "Prenon obligatwa",
+      "fullNameRequired": "Non konplè obligatwa",
+      "birthPlaceRequired": "Kote ou te fèt obligatwa",
+      "genderRequired": "Sèks obligatwa",
+      "professionRequired": "Pwofesyon obligatwa",
+      "idNumberRequired": "Nimewo pyès idantite obligatwa",
+      "idTypeRequired": "Tip pyès obligatwa",
+      "idIssueRequired": "Dat ak kote li te fèt obligatwa",
+      "idExpirationRequired": "Dat ekspirasyon obligatwa",
+      "addressRequired": "Adrès konplè obligatwa",
+      "communeRequired": "Komin obligatwa",
+      "phoneRequired": "Nimewo telefòn obligatwa",
+      "emailInvalid": "Imèl pa valid",
+      "joinDateRequired": "Dat adezyon obligatwa",
+      "socialSharesRequired": "Kantite pa sosyal obligatwa",
+      "totalAmountRequired": "Montan total obligatwa",
+      "beneficiaryRequired": "Omwen yon eritye obligatwa",
+      "relationshipRequired": "Relasyon fanmi obligatwa",
+      "dobRequired": "Dat nesans obligatwa",
+      "percentageRequired": "Pousantaj obligatwa",
+      "declarationRequired": "Ou dwe deklare ke enfòmasyon yo egzak",
+      "signaturePlaceRequired": "Kote siyati a obligatwa",
+      "signatureDateRequired": "Dat siyati obligatwa",
+      "signatureRequired": "Siyati obligatwa"
+    },
+    "messages": {
+      "successTitle": "Fòmilè soumèt avèk siksè",
+      "successDesc": "Nimewo manm KAFA ou:",
+      "errorGenerating": "Erè pandan jenerasyon nimewo manm",
+      "errorSaving": "Erè pandan anrejistreman manm nan",
+      "genericError": "Yon erè rive"
+    }
+  }
+}

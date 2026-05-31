@@ -122,24 +122,26 @@ const FuneralApplication = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
-      <main className="flex-1 py-12 px-4">
-        <div className="max-w-4xl mx-auto">
-          <Card className="border-2">
-            <CardHeader className="text-center space-y-4">
-              <div className="space-y-2">
-                <h1 className="text-2xl md:text-3xl font-bold">ASSURANCE FUNÉRAIRE</h1>
-                <p className="text-sm text-muted-foreground">874 Rue Sainte Catherine, Léogâne, Haiti HT 6212</p>
-                <p className="text-sm text-muted-foreground">Téléphone: (509) 3500-0326 / 4439-8595</p>
-                <p className="text-sm text-muted-foreground">Email: info@kafayiti.com | Website: www.kafayiti.com</p>
-              </div>
-              <Separator />
-              <CardDescription className="text-base">
-                Formulaire de Demande d'Assurance Funéraire
-              </CardDescription>
-            </CardHeader>
+      <main className="flex-1">
+        <section className="section-padding-sm">
+          <div className="section-container">
+            <div className="content-container">
+              <Card className="border-2">
+                <CardHeader className="text-center space-y-4">
+                  <div className="space-y-2">
+                    <h1 className="text-2xl md:text-3xl font-bold">ASSURANCE FUNÉRAIRE</h1>
+                    <p className="text-sm text-muted-foreground">874 Rue Sainte Catherine, Léogâne, Haiti HT 6212</p>
+                    <p className="text-sm text-muted-foreground">Téléphone: (509) 3500-0326 / 4439-8595</p>
+                    <p className="text-sm text-muted-foreground">Email: info@kafayiti.com | Website: www.kafayiti.com</p>
+                  </div>
+                  <Separator />
+                  <CardDescription className="text-base">
+                    Formulaire de Demande d'Assurance Funéraire
+                  </CardDescription>
+                </CardHeader>
 
-            <CardContent>
-              <Form {...form}>
+                <CardContent>
+                  <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   
                   {/* Section 1: Souscripteur */}
@@ -735,7 +737,9 @@ const FuneralApplication = () => {
               </Form>
             </CardContent>
           </Card>
-        </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

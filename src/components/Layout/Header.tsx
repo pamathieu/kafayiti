@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Menu, X, User, LayoutDashboard, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import kafaLogo from "@/assets/kafa-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { t } = useTranslation();
 
   const navLinks = [
-    { label: "Akèy", href: "/" },
-    { label: "Konsènan KAFA", href: "/about" },
-    { label: "Plan Antèman", href: "/plans" },
-    { label: "Dokiman", href: "/documents" },
-    { label: "Vin Manm", href: "/become-member" },
+    { label: t('nav.home'), href: "/" },
+    { label: t('nav.about'), href: "/about" },
+    { label: t('nav.plans'), href: "/plans" },
+    { label: t('nav.documents'), href: "/documents" },
+    { label: t('nav.becomeMember'), href: "/become-member" },
   ];
 
   const handleSignOut = async () => {
@@ -51,7 +54,7 @@ const Header = () => {
                 <Link to="/dashboard">
                   <Button variant="ghost" className="text-foreground hover:text-primary hover:bg-muted">
                     <LayoutDashboard className="h-4 w-4 mr-2" />
-                    Dashboard
+                    {t('nav.dashboard')}
                   </Button>
                 </Link>
                 <Button 
@@ -60,16 +63,17 @@ const Header = () => {
                   onClick={handleSignOut}
                 >
                   <LogOut className="h-4 w-4 mr-2" />
-                  Dekonekte
+                  {t('nav.logout')}
                 </Button>
               </>
             ) : (
               <Link to="/auth/login">
-                <Button className="ml-4 bg-primary hover:bg-primary-dark">
-                  Konekte
+                <Button className="ml-2 bg-primary hover:bg-primary-dark">
+                  {t('nav.login')}
                 </Button>
               </Link>
             )}
+            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -103,23 +107,26 @@ const Header = () => {
                   className="flex items-center gap-2 py-2 px-4 text-foreground hover:bg-muted hover:text-primary rounded-md transition-colors"
                 >
                   <LayoutDashboard className="h-4 w-4" />
-                  Dashboard
+                  {t('nav.dashboard')}
                 </Link>
                 <button
                   onClick={handleSignOut}
                   className="flex items-center gap-2 w-full py-2 px-4 text-foreground hover:bg-muted hover:text-primary rounded-md transition-colors text-left"
                 >
                   <LogOut className="h-4 w-4" />
-                  Dekonekte
+                  {t('nav.logout')}
                 </button>
               </>
             ) : (
               <Link to="/auth/login" onClick={() => setIsMenuOpen(false)} className="block pt-2">
                 <Button className="w-full bg-primary hover:bg-primary-dark">
-                  Konekte
+                  {t('nav.login')}
                 </Button>
               </Link>
             )}
+            <div className="pt-2 px-4">
+              <LanguageSwitcher />
+            </div>
           </nav>
         )}
       </div>

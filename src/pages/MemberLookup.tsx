@@ -113,16 +113,16 @@ const MemberLookup = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-hero py-8 sm:py-12 text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
+        <section className="bg-gradient-hero hero-padding text-primary-foreground">
+          <div className="section-container">
+            <div className="content-container text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Search className="h-10 w-10" />
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
                   Chèche Nimewo Manb
                 </h1>
               </div>
-              <p className="text-sm sm:text-base opacity-95">
+              <p className="hero-subtitle">
                 Jwenn nimewo manb KAFA ou antre non ou ak komin ou
               </p>
             </div>
@@ -130,8 +130,8 @@ const MemberLookup = () => {
         </section>
 
         {/* Search Section */}
-        <section className="py-8 sm:py-12">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="section-padding-sm">
+          <div className="section-container">
             <div className="max-w-xl mx-auto">
               <Card className="border-border shadow-lg">
                 <CardHeader className="text-center">

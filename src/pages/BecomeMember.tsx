@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -20,57 +21,8 @@ import { haitiCommunes, parseFullName } from "@/lib/memberNumberUtils";
 import MembershipConfirmationDialog from "@/components/MembershipConfirmationDialog";
 import { useAuth } from "@/hooks/useAuth";
 
-const beneficiarySchema = z.object({
-  fullName: z.string().min(2, "Nom complet requis"),
-  relationship: z.string().min(1, "Lien de parenté requis"),
-  dateOfBirth: z.string().min(1, "Date de naissance requise"),
-  phone: z.string().min(8, "Numéro de téléphone requis"),
-  email: z.string().email("Email invalide").optional().or(z.literal("")),
-  percentage: z.string().min(1, "Pourcentage requis"),
-});
-
-const membershipSchema = z.object({
-  // Section A - Informations personnelles
-  lastName: z.string().min(2, "Nom de famille requis"),
-  firstName: z.string().min(2, "Prénom requis"),
-  fullName: z.string().min(2, "Nom et prénom(s) requis"),
-  birthDatePlace: z.string().min(2, "Lieu de naissance requis"),
-  gender: z.enum(["homme", "femme"], { required_error: "Sexe requis" }),
-  profession: z.string().min(2, "Profession requise"),
-  idNumber: z.string().min(5, "Numéro de pièce d'identité requis"),
-  idType: z.enum(["cni", "nif", "passeport", "autre"], { required_error: "Type de pièce requis" }),
-  idIssueDetails: z.string().min(2, "Date et lieu d'émission requis"),
-  idExpirationDate: z.string().min(1, "Date d'expiration requise"),
-  address: z.string().min(5, "Adresse complète requise"),
-  commune: z.string().min(1, "Commune requise"),
-  phone: z.string().min(8, "Numéro de téléphone requis"),
-  email: z.string().email("Email invalide"),
-
-  // Section B - Informations liées à KAFA
-  joinDate: z.string().min(1, "Date d'adhésion requise"),
-  memberNumber: z.string().optional(),
-  socialShares: z.string().min(1, "Nombre de parts sociales requis"),
-  totalAmount: z.string().min(1, "Montant total requis"),
-  insuranceProducts: z.array(z.string()).optional(),
-  otherInsurance: z.string().optional(),
-
-  // Section C - Héritiers
-  beneficiaries: z.array(beneficiarySchema).min(1, "Au moins un héritier requis"),
-
-  // Section D - Engagement
-  declaration: z.boolean().refine((val) => val === true, "Vous devez déclarer que les informations sont exactes"),
-  commitment: z.boolean().optional(),
-  dataAuthorization: z.boolean().optional(),
-
-  // Section E - Signature
-  signaturePlace: z.string().min(2, "Lieu de signature requis"),
-  signatureDate: z.string().min(1, "Date de signature requise"),
-  signature: z.string().min(2, "Signature requise"),
-});
-
-type MembershipFormData = z.infer<typeof membershipSchema>;
-
 const BecomeMember = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const { user } = useAuth();
   const [insuranceProducts, setInsuranceProducts] = useState<string[]>([]);
@@ -79,6 +31,57 @@ const BecomeMember = () => {
   const [generatedMemberNumber, setGeneratedMemberNumber] = useState("");
   const [confirmedFullName, setConfirmedFullName] = useState("");
   const [confirmedCommune, setConfirmedCommune] = useState("");
+
+  const beneficiarySchema = z.object({
+    fullName: z.string().min(2, t('becomeMember.validation.fullNameRequired')),
+    relationship: z.string().min(1, t('becomeMember.validation.relationshipRequired')),
+    dateOfBirth: z.string().min(1, t('becomeMember.validation.dobRequired')),
+    phone: z.string().min(8, t('becomeMember.validation.phoneRequired')),
+    email: z.string().email(t('becomeMember.validation.emailInvalid')).optional().or(z.literal("")),
+    percentage: z.string().min(1, t('becomeMember.validation.percentageRequired')),
+  });
+
+  const membershipSchema = z.object({
+    // Section A - Informations personnelles
+    lastName: z.string().min(2, t('becomeMember.validation.lastNameRequired')),
+    firstName: z.string().min(2, t('becomeMember.validation.firstNameRequired')),
+    fullName: z.string().min(2, t('becomeMember.validation.fullNameRequired')),
+    birthDatePlace: z.string().min(2, t('becomeMember.validation.birthPlaceRequired')),
+    gender: z.enum(["homme", "femme"], { required_error: t('becomeMember.validation.genderRequired') }),
+    profession: z.string().min(2, t('becomeMember.validation.professionRequired')),
+    idNumber: z.string().min(5, t('becomeMember.validation.idNumberRequired')),
+    idType: z.enum(["cni", "nif", "passeport", "autre"], { required_error: t('becomeMember.validation.idTypeRequired') }),
+    idIssueDetails: z.string().min(2, t('becomeMember.validation.idIssueRequired')),
+    idExpirationDate: z.string().min(1, t('becomeMember.validation.idExpirationRequired')),
+    address: z.string().min(5, t('becomeMember.validation.addressRequired')),
+    commune: z.string().min(1, t('becomeMember.validation.communeRequired')),
+    phone: z.string().min(8, t('becomeMember.validation.phoneRequired')),
+    email: z.string().email(t('becomeMember.validation.emailInvalid')),
+
+    // Section B - Informations liées à KAFA
+    joinDate: z.string().min(1, t('becomeMember.validation.joinDateRequired')),
+    memberNumber: z.string().optional(),
+    socialShares: z.string().min(1, t('becomeMember.validation.socialSharesRequired')),
+    totalAmount: z.string().min(1, t('becomeMember.validation.totalAmountRequired')),
+    insuranceProducts: z.array(z.string()).optional(),
+    otherInsurance: z.string().optional(),
+
+    // Section C - Héritiers
+    beneficiaries: z.array(beneficiarySchema).min(1, t('becomeMember.validation.beneficiaryRequired')),
+
+    // Section D - Engagement
+    declaration: z.boolean().refine((val) => val === true, t('becomeMember.validation.declarationRequired')),
+    commitment: z.boolean().optional(),
+    dataAuthorization: z.boolean().optional(),
+
+    // Section E - Signature
+    signaturePlace: z.string().min(2, t('becomeMember.validation.signaturePlaceRequired')),
+    signatureDate: z.string().min(1, t('becomeMember.validation.signatureDateRequired')),
+    signature: z.string().min(2, t('becomeMember.validation.signatureRequired')),
+  });
+
+  type MembershipFormData = z.infer<typeof membershipSchema>;
+
   const form = useForm<MembershipFormData>({
     resolver: zodResolver(membershipSchema),
     defaultValues: {
@@ -155,7 +158,7 @@ const BecomeMember = () => {
 
       if (fnError) {
         console.error('Error generating member number:', fnError);
-        throw new Error('Erreur lors de la génération du numéro de membre');
+        throw new Error(t('becomeMember.messages.errorGenerating'));
       }
 
       const memberNumber = memberNumberData as string;
@@ -196,7 +199,7 @@ const BecomeMember = () => {
 
       if (insertError) {
         console.error('Error inserting member:', insertError);
-        throw new Error('Erreur lors de l\'enregistrement du membre');
+        throw new Error(t('becomeMember.messages.errorSaving'));
       }
 
       // Set confirmation data and show dialog
@@ -206,8 +209,8 @@ const BecomeMember = () => {
       setShowConfirmation(true);
 
       toast({
-        title: "Formulaire soumis avec succès",
-        description: `Votre numéro de membre KAFA: ${memberNumber}`,
+        title: t('becomeMember.messages.successTitle'),
+        description: `${t('becomeMember.messages.successDesc')} ${memberNumber}`,
       });
 
       // Reset form after successful submission
@@ -216,8 +219,8 @@ const BecomeMember = () => {
     } catch (error) {
       console.error('Submission error:', error);
       toast({
-        title: "Erreur",
-        description: error instanceof Error ? error.message : "Une erreur s'est produite",
+        title: t('common.error'),
+        description: error instanceof Error ? error.message : t('becomeMember.messages.genericError'),
         variant: "destructive",
       });
     } finally {
@@ -231,33 +234,33 @@ const BecomeMember = () => {
 
       <main className="flex-grow bg-background">
         {/* Header Section */}
-        <section className="bg-gradient-hero py-8 sm:py-12 text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3">
-                Koperativ Asirans Fòs Ayiti (KAFA)
+        <section className="bg-gradient-hero hero-padding text-primary-foreground">
+          <div className="section-container">
+            <div className="content-container text-center">
+              <h1 className="hero-title">
+                {t('becomeMember.header.title')}
               </h1>
-              <p className="text-sm sm:text-base opacity-95 mb-1">
-                874 Rue Sainte Catherine, Léogâne, Haiti HT 6212
+              <p className="hero-subtitle mb-1">
+                {t('becomeMember.header.address')}
               </p>
-              <p className="text-sm sm:text-base opacity-95">
-                Téléphone: (509) 3500-0326 / 4439-8595 | Email: info@kafayiti.com
+              <p className="hero-subtitle">
+                {t('becomeMember.header.contact')}
               </p>
             </div>
           </div>
         </section>
 
         {/* Form Section */}
-        <section className="py-8 sm:py-12">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
+        <section className="section-padding-sm">
+          <div className="section-container">
+            <div className="content-container">
               <Card className="border-border shadow-lg">
                 <CardHeader className="text-center pb-4 sm:pb-6">
                   <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">
-                    Formulaire d'Adhésion
+                    {t('becomeMember.form.title')}
                   </CardTitle>
                   <CardDescription className="text-sm sm:text-base">
-                    Membre de Koperativ Asirans Fòs Ayiti (KAFA)
+                    {t('becomeMember.form.subtitle')}
                   </CardDescription>
                 </CardHeader>
 
@@ -267,7 +270,7 @@ const BecomeMember = () => {
                     <div className="space-y-4 sm:space-y-6">
                       <div>
                         <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          Informations personnelles du membre
+                          {t('becomeMember.sections.personalInfo')}
                         </h2>
                         <Separator className="mb-4" />
                       </div>
@@ -275,12 +278,12 @@ const BecomeMember = () => {
                       <div className="space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="lastName">Nom de famille *</Label>
+                            <Label htmlFor="lastName">{t('becomeMember.fields.lastName')} *</Label>
                             <Input
                               id="lastName"
                               {...form.register("lastName")}
                               className="mt-1.5"
-                              placeholder="Entrez votre nom de famille"
+                              placeholder={t('becomeMember.placeholders.lastName')}
                               onBlur={updateFullName}
                             />
                             {form.formState.errors.lastName && (
@@ -290,12 +293,12 @@ const BecomeMember = () => {
                             )}
                           </div>
                           <div>
-                            <Label htmlFor="firstName">Prénom(s) *</Label>
+                            <Label htmlFor="firstName">{t('becomeMember.fields.firstName')} *</Label>
                             <Input
                               id="firstName"
                               {...form.register("firstName")}
                               className="mt-1.5"
-                              placeholder="Entrez votre/vos prénom(s)"
+                              placeholder={t('becomeMember.placeholders.firstName')}
                               onBlur={updateFullName}
                             />
                             {form.formState.errors.firstName && (
@@ -307,12 +310,12 @@ const BecomeMember = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="birthDatePlace">Lieu de naissance *</Label>
+                          <Label htmlFor="birthDatePlace">{t('becomeMember.fields.birthPlace')} *</Label>
                           <Input
                             id="birthDatePlace"
                             {...form.register("birthDatePlace")}
                             className="mt-1.5"
-                            placeholder="Ex: Port-au-Prince"
+                            placeholder={t('becomeMember.placeholders.birthPlace')}
                           />
                           {form.formState.errors.birthDatePlace && (
                             <p className="text-sm text-destructive mt-1">
@@ -322,7 +325,7 @@ const BecomeMember = () => {
                         </div>
 
                         <div>
-                          <Label className="mb-3 block">Sexe *</Label>
+                          <Label className="mb-3 block">{t('becomeMember.fields.gender')} *</Label>
                           <RadioGroup
                             onValueChange={(value) => form.setValue("gender", value as "homme" | "femme")}
                             className="flex flex-col sm:flex-row gap-4"
@@ -330,13 +333,13 @@ const BecomeMember = () => {
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="homme" id="homme" />
                               <Label htmlFor="homme" className="font-normal cursor-pointer">
-                                Homme
+                                {t('becomeMember.options.male')}
                               </Label>
                             </div>
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="femme" id="femme" />
                               <Label htmlFor="femme" className="font-normal cursor-pointer">
-                                Femme
+                                {t('becomeMember.options.female')}
                               </Label>
                             </div>
                           </RadioGroup>
@@ -348,12 +351,12 @@ const BecomeMember = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="profession">Profession / Activité principale *</Label>
+                          <Label htmlFor="profession">{t('becomeMember.fields.profession')} *</Label>
                           <Input
                             id="profession"
                             {...form.register("profession")}
                             className="mt-1.5"
-                            placeholder="Entrez votre profession"
+                            placeholder={t('becomeMember.placeholders.profession')}
                           />
                           {form.formState.errors.profession && (
                             <p className="text-sm text-destructive mt-1">
@@ -364,12 +367,12 @@ const BecomeMember = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="idNumber">No. de pièce d'identité *</Label>
+                            <Label htmlFor="idNumber">{t('becomeMember.fields.idNumber')} *</Label>
                             <Input
                               id="idNumber"
                               {...form.register("idNumber")}
                               className="mt-1.5"
-                              placeholder="Numéro"
+                              placeholder={t('becomeMember.placeholders.idNumber')}
                             />
                             {form.formState.errors.idNumber && (
                               <p className="text-sm text-destructive mt-1">
@@ -378,7 +381,7 @@ const BecomeMember = () => {
                             )}
                           </div>
                           <div>
-                            <Label className="mb-3 block">Type de pièce *</Label>
+                            <Label className="mb-3 block">{t('becomeMember.fields.idType')} *</Label>
                             <RadioGroup
                               onValueChange={(value) =>
                                 form.setValue("idType", value as "cni" | "nif" | "passeport" | "autre")
@@ -388,25 +391,25 @@ const BecomeMember = () => {
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="cni" id="cni" />
                                 <Label htmlFor="cni" className="font-normal cursor-pointer text-sm">
-                                  CNI
+                                  {t('becomeMember.options.cni')}
                                 </Label>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="nif" id="nif" />
                                 <Label htmlFor="nif" className="font-normal cursor-pointer text-sm">
-                                  NIF
+                                  {t('becomeMember.options.nif')}
                                 </Label>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="passeport" id="passeport" />
                                 <Label htmlFor="passeport" className="font-normal cursor-pointer text-sm">
-                                  Passeport
+                                  {t('becomeMember.options.passport')}
                                 </Label>
                               </div>
                               <div className="flex items-center space-x-2">
                                 <RadioGroupItem value="autre" id="autre-id" />
                                 <Label htmlFor="autre-id" className="font-normal cursor-pointer text-sm">
-                                  Autre
+                                  {t('becomeMember.options.other')}
                                 </Label>
                               </div>
                             </RadioGroup>
@@ -420,12 +423,12 @@ const BecomeMember = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="idIssueDetails">Date et lieu d'émission *</Label>
+                            <Label htmlFor="idIssueDetails">{t('becomeMember.fields.idIssueDetails')} *</Label>
                             <Input
                               id="idIssueDetails"
                               {...form.register("idIssueDetails")}
                               className="mt-1.5"
-                              placeholder="Ex: 10/05/2020, Port-au-Prince"
+                              placeholder={t('becomeMember.placeholders.idIssueDetails')}
                             />
                             {form.formState.errors.idIssueDetails && (
                               <p className="text-sm text-destructive mt-1">
@@ -434,7 +437,7 @@ const BecomeMember = () => {
                             )}
                           </div>
                           <div>
-                            <Label htmlFor="idExpirationDate">Date d'expiration *</Label>
+                            <Label htmlFor="idExpirationDate">{t('becomeMember.fields.idExpiration')} *</Label>
                             <Input
                               id="idExpirationDate"
                               type="date"
@@ -450,12 +453,12 @@ const BecomeMember = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="address">Adresse complète (domicile) *</Label>
+                          <Label htmlFor="address">{t('becomeMember.fields.address')} *</Label>
                           <Textarea
                             id="address"
                             {...form.register("address")}
                             className="mt-1.5"
-                            placeholder="Entrez votre adresse complète"
+                            placeholder={t('becomeMember.placeholders.address')}
                             rows={3}
                           />
                           {form.formState.errors.address && (
@@ -466,13 +469,13 @@ const BecomeMember = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="commune">Commune *</Label>
+                          <Label htmlFor="commune">{t('becomeMember.fields.commune')} *</Label>
                           <Select
                             onValueChange={(value) => form.setValue("commune", value)}
                             value={form.watch("commune")}
                           >
                             <SelectTrigger className="mt-1.5">
-                              <SelectValue placeholder="Sélectionnez votre commune" />
+                              <SelectValue placeholder={t('becomeMember.placeholders.commune')} />
                             </SelectTrigger>
                             <SelectContent className="max-h-[300px]">
                               {haitiCommunes.map((commune) => (
@@ -491,13 +494,13 @@ const BecomeMember = () => {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="phone">Téléphone *</Label>
+                            <Label htmlFor="phone">{t('becomeMember.fields.phone')} *</Label>
                             <Input
                               id="phone"
                               type="tel"
                               {...form.register("phone")}
                               className="mt-1.5"
-                              placeholder="Ex: 3700-0000"
+                              placeholder={t('becomeMember.placeholders.phone')}
                             />
                             {form.formState.errors.phone && (
                               <p className="text-sm text-destructive mt-1">
@@ -506,13 +509,13 @@ const BecomeMember = () => {
                             )}
                           </div>
                           <div>
-                            <Label htmlFor="email">E-mail *</Label>
+                            <Label htmlFor="email">{t('becomeMember.fields.email')} *</Label>
                             <Input
                               id="email"
                               type="email"
                               {...form.register("email")}
                               className="mt-1.5"
-                              placeholder="exemple@email.com"
+                              placeholder={t('becomeMember.placeholders.email')}
                             />
                             {form.formState.errors.email && (
                               <p className="text-sm text-destructive mt-1">
@@ -528,7 +531,7 @@ const BecomeMember = () => {
                     <div className="space-y-4 sm:space-y-6">
                       <div>
                         <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          Héritier(s) ou ayant(s) droit (en cas de décès)
+                          {t('becomeMember.sections.beneficiaries')}
                         </h2>
                         <Separator className="mb-4" />
                       </div>
@@ -539,7 +542,7 @@ const BecomeMember = () => {
                             <CardContent className="pt-6">
                               <div className="flex justify-between items-center mb-4">
                                 <h3 className="font-semibold text-foreground">
-                                  Héritier #{index + 1}
+                                  {t('becomeMember.beneficiary.title')} #{index + 1}
                                 </h3>
                                 {fields.length > 1 && (
                                   <Button
@@ -556,12 +559,12 @@ const BecomeMember = () => {
                               <div className="space-y-4">
                                 <div>
                                   <Label htmlFor={`beneficiaries.${index}.fullName`}>
-                                    Nom & Prénom(s) *
+                                    {t('becomeMember.beneficiary.fullName')} *
                                   </Label>
                                   <Input
                                     {...form.register(`beneficiaries.${index}.fullName`)}
                                     className="mt-1.5"
-                                    placeholder="Nom complet de l'héritier"
+                                    placeholder={t('becomeMember.beneficiary.fullNamePlaceholder')}
                                   />
                                   {form.formState.errors.beneficiaries?.[index]?.fullName && (
                                     <p className="text-sm text-destructive mt-1">
@@ -573,12 +576,12 @@ const BecomeMember = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                   <div>
                                     <Label htmlFor={`beneficiaries.${index}.relationship`}>
-                                      Lien de parenté *
+                                      {t('becomeMember.beneficiary.relationship')} *
                                     </Label>
                                     <Input
                                       {...form.register(`beneficiaries.${index}.relationship`)}
                                       className="mt-1.5"
-                                      placeholder="Ex: Époux(se), Fils, Fille"
+                                      placeholder={t('becomeMember.beneficiary.relationshipPlaceholder')}
                                     />
                                     {form.formState.errors.beneficiaries?.[index]?.relationship && (
                                       <p className="text-sm text-destructive mt-1">
@@ -591,7 +594,7 @@ const BecomeMember = () => {
                                   </div>
                                   <div>
                                     <Label htmlFor={`beneficiaries.${index}.dateOfBirth`}>
-                                      Date de Naissance *
+                                      {t('becomeMember.beneficiary.dob')} *
                                     </Label>
                                     <Input
                                       type="date"
@@ -612,13 +615,13 @@ const BecomeMember = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                   <div>
                                     <Label htmlFor={`beneficiaries.${index}.phone`}>
-                                      Téléphone *
+                                      {t('becomeMember.beneficiary.phone')} *
                                     </Label>
                                     <Input
                                       type="tel"
                                       {...form.register(`beneficiaries.${index}.phone`)}
                                       className="mt-1.5"
-                                      placeholder="Ex: 3700-0000"
+                                      placeholder={t('becomeMember.placeholders.phone')}
                                     />
                                     {form.formState.errors.beneficiaries?.[index]?.phone && (
                                       <p className="text-sm text-destructive mt-1">
@@ -627,12 +630,12 @@ const BecomeMember = () => {
                                     )}
                                   </div>
                                   <div>
-                                    <Label htmlFor={`beneficiaries.${index}.email`}>Email</Label>
+                                    <Label htmlFor={`beneficiaries.${index}.email`}>{t('becomeMember.beneficiary.email')}</Label>
                                     <Input
                                       type="email"
                                       {...form.register(`beneficiaries.${index}.email`)}
                                       className="mt-1.5"
-                                      placeholder="exemple@email.com"
+                                      placeholder={t('becomeMember.placeholders.email')}
                                     />
                                     {form.formState.errors.beneficiaries?.[index]?.email && (
                                       <p className="text-sm text-destructive mt-1">
@@ -644,13 +647,13 @@ const BecomeMember = () => {
 
                                 <div>
                                   <Label htmlFor={`beneficiaries.${index}.percentage`}>
-                                    Pourcentage d'attribution % *
+                                    {t('becomeMember.beneficiary.percentage')} *
                                   </Label>
                                   <Input
                                     type="number"
                                     {...form.register(`beneficiaries.${index}.percentage`)}
                                     className="mt-1.5"
-                                    placeholder="Ex: 50"
+                                    placeholder={t('becomeMember.beneficiary.percentagePlaceholder')}
                                     min="0"
                                     max="100"
                                   />
@@ -684,13 +687,12 @@ const BecomeMember = () => {
                           className="w-full sm:w-auto"
                         >
                           <Plus className="w-4 h-4 mr-2" />
-                          Ajouter un héritier
+                          {t('becomeMember.beneficiary.addButton')}
                         </Button>
 
                         <div className="bg-muted/50 border border-border rounded-lg p-4">
                           <p className="text-sm text-muted-foreground italic">
-                            <strong>NB:</strong> Tout membre est autorisé à modifier la liste de
-                            ses héritiers sur demande écrite.
+                            <strong>{t('becomeMember.beneficiary.noteLabel')}</strong> {t('becomeMember.beneficiary.note')}
                           </p>
                         </div>
                       </div>
@@ -700,7 +702,7 @@ const BecomeMember = () => {
                     <div className="space-y-4 sm:space-y-6">
                       <div>
                         <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          Engagement du membre
+                          {t('becomeMember.sections.commitment')}
                         </h2>
                         <Separator className="mb-4" />
                       </div>
@@ -716,7 +718,7 @@ const BecomeMember = () => {
                             className="mt-1"
                           />
                           <Label htmlFor="declaration" className="font-normal cursor-pointer leading-relaxed">
-                            Je déclare sur l'honneur que les informations fournies sont exactes. *
+                            {t('becomeMember.commitment.declaration')} *
                           </Label>
                         </div>
                         {form.formState.errors.declaration && (
@@ -735,8 +737,7 @@ const BecomeMember = () => {
                             className="mt-1"
                           />
                           <Label htmlFor="commitment" className="font-normal cursor-pointer leading-relaxed">
-                            Je m'engage à respecter les statuts, règlements et décisions de la
-                            coopérative d'assurance.
+                            {t('becomeMember.commitment.statutes')}
                           </Label>
                         </div>
 
@@ -753,8 +754,7 @@ const BecomeMember = () => {
                             htmlFor="dataAuthorization"
                             className="font-normal cursor-pointer leading-relaxed"
                           >
-                            J'autorise la coopérative à utiliser mes données dans le cadre strict
-                            de ses activités.
+                            {t('becomeMember.commitment.dataAuth')}
                           </Label>
                         </div>
                       </div>
@@ -764,7 +764,7 @@ const BecomeMember = () => {
                     <div className="space-y-4 sm:space-y-6">
                       <div>
                         <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          Signature du membre
+                          {t('becomeMember.sections.signature')}
                         </h2>
                         <Separator className="mb-4" />
                       </div>
@@ -772,12 +772,12 @@ const BecomeMember = () => {
                       <div className="space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="signaturePlace">Fait à *</Label>
+                            <Label htmlFor="signaturePlace">{t('becomeMember.signature.place')} *</Label>
                             <Input
                               id="signaturePlace"
                               {...form.register("signaturePlace")}
                               className="mt-1.5"
-                              placeholder="Ville/Localité"
+                              placeholder={t('becomeMember.signature.placePlaceholder')}
                             />
                             {form.formState.errors.signaturePlace && (
                               <p className="text-sm text-destructive mt-1">
@@ -786,7 +786,7 @@ const BecomeMember = () => {
                             )}
                           </div>
                           <div>
-                            <Label htmlFor="signatureDate">Le *</Label>
+                            <Label htmlFor="signatureDate">{t('becomeMember.signature.date')} *</Label>
                             <Input
                               id="signatureDate"
                               type="date"
@@ -802,12 +802,12 @@ const BecomeMember = () => {
                         </div>
 
                         <div>
-                          <Label htmlFor="signature">Signature du membre *</Label>
+                          <Label htmlFor="signature">{t('becomeMember.signature.signature')} *</Label>
                           <Input
                             id="signature"
                             {...form.register("signature")}
                             className="mt-1.5"
-                            placeholder="Tapez votre nom complet comme signature"
+                            placeholder={t('becomeMember.signature.signaturePlaceholder')}
                           />
                           {form.formState.errors.signature && (
                             <p className="text-sm text-destructive mt-1">
@@ -829,10 +829,10 @@ const BecomeMember = () => {
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Soumission en cours...
+                            {t('becomeMember.buttons.submitting')}
                           </>
                         ) : (
-                          "Soumettre le formulaire"
+                          t('becomeMember.buttons.submit')
                         )}
                       </Button>
                       <Button
@@ -843,7 +843,7 @@ const BecomeMember = () => {
                         onClick={() => form.reset()}
                         disabled={isSubmitting}
                       >
-                        Réinitialiser
+                        {t('becomeMember.buttons.reset')}
                       </Button>
                     </div>
                   </form>

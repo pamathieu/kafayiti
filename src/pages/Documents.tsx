@@ -1,27 +1,30 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Users, Shield, Download, File, Folder } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { FileText, Users, Shield, Download, Folder } from "lucide-react";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import kafaLogo from "@/assets/kafa-logo.png";
 
 const Documents = () => {
+  const { t } = useTranslation();
+
   const documentCategories = [
     {
-      category: "Fòmilè Adezyon",
+      category: t('documents.categories.membership'),
       icon: Users,
-      description: "Dokiman pou vin manm KAFA",
+      description: t('documents.categories.membershipDesc'),
       documents: [
         {
           title: "Formulaire d'Adhésion",
-          description: "Fòmilè ofisyèl pou enskri kòm manm Koperativ Asirans Fòs Ayiti (KAFA).",
+          description: t('forms.membershipFormDesc'),
           fileType: "DOCX",
           fileSize: "45 KB",
           downloadLink: "/documents/FormulaireAdhesion.docx"
         },
         {
           title: "Devenir Membre KAFA",
-          description: "Tout kondisyon ak etap pou vin manm KAFA selon prensip koperativ la.",
+          description: t('forms.becomeMemberDesc'),
           fileType: "DOCX",
           fileSize: "32 KB",
           downloadLink: "/documents/DevenirMembre.docx"
@@ -29,13 +32,13 @@ const Documents = () => {
       ]
     },
     {
-      category: "Plan Funéraire",
+      category: t('documents.categories.funeral'),
       icon: Shield,
-      description: "Dokiman pou plan antèman",
+      description: t('documents.categories.funeralDesc'),
       documents: [
         {
           title: "Souscription Plan Funéraire",
-          description: "Fòmilè pou souskri ak chwazi plan antèman KAFA.",
+          description: t('forms.funeralPlanDesc'),
           fileType: "DOCX",
           fileSize: "52 KB",
           downloadLink: "/documents/AppPlanFuneraire.docx"
@@ -50,9 +53,9 @@ const Documents = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-primary/10 to-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto">
+        <section className="hero-padding bg-gradient-to-b from-primary/10 to-background">
+          <div className="section-container">
+            <div className="text-center content-container-sm">
               <div className="flex justify-center mb-6">
                 <img 
                   src={kafaLogo} 
@@ -60,20 +63,20 @@ const Documents = () => {
                   className="h-20 sm:h-24 w-auto object-contain"
                 />
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-                Dokiman KAFA
+              <h1 className="hero-title text-foreground">
+                {t('documents.hero.title')}
               </h1>
-              <p className="text-base sm:text-lg text-muted-foreground">
-                Tout fòmilè ak dokiman ofisyèl pou manm KAFA yo. Telechaje sa ou bezwen an.
+              <p className="section-subtitle">
+                {t('documents.hero.subtitle')}
               </p>
             </div>
           </div>
         </section>
 
         {/* Documents Grid */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="space-y-12">
+        <section className="section-padding bg-background">
+          <div className="section-container">
+            <div className="content-spacing-lg">
               {documentCategories.map((category, categoryIndex) => (
                 <div key={categoryIndex}>
                   {/* Category Header */}
@@ -92,7 +95,7 @@ const Documents = () => {
                   </div>
 
                   {/* Documents List */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  <div className="card-grid-2">
                     {category.documents.map((doc, docIndex) => (
                       <Card 
                         key={docIndex}
@@ -126,7 +129,7 @@ const Documents = () => {
                               className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
                             >
                               <Download className="w-4 h-4 mr-2" />
-                              Telechaje
+                              {t('documents.download')}
                             </Button>
                           </a>
                         </CardContent>
@@ -143,10 +146,10 @@ const Documents = () => {
                 <CardContent className="py-8 px-6">
                   <Folder className="w-12 h-12 text-primary mx-auto mb-4" />
                   <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">
-                    Bezwen Èd?
+                    {t('documents.help.title')}
                   </h3>
                   <p className="text-sm sm:text-base text-muted-foreground mb-4">
-                    Si ou gen kesyon sou fòmilè yo oswa bezwen asistans pou ranpli yo, kontakte nou.
+                    {t('documents.help.description')}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href="tel:+50935000326">

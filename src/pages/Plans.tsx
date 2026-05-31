@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,62 +7,64 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
 
 const Plans = () => {
+  const { t } = useTranslation();
+
   const plans = [
     {
-      name: "Plan Debaz",
+      name: t('plans.basic'),
       coverage: "250,000",
       features: [
-        "Kouvèti 250,000 Gdes",
-        "Akseptasyon laj 0-80 an",
-        "San egzamen medikal",
-        "Prim fiks",
-        "Peman fleksib (mwa/trimès/ane)",
-        "Tretman rapid reklamasyon"
+        `${t('plans.features.coverage')} 250,000 Gdes`,
+        t('plans.features.ageAcceptance'),
+        t('plans.features.noExam'),
+        t('plans.features.fixedPremium'),
+        t('plans.features.flexiblePayment'),
+        t('plans.features.fastClaims')
       ],
       color: "primary"
     },
     {
-      name: "Plan Estanda",
+      name: t('plans.standard'),
       coverage: "350,000",
       features: [
-        "Kouvèti 350,000 Gdes",
-        "Akseptasyon laj 0-80 an",
-        "San egzamen medikal",
-        "Prim fiks",
-        "Peman fleksib (mwa/trimès/ane)",
-        "Tretman rapid reklamasyon",
-        "Sipò telefòn 24/7"
+        `${t('plans.features.coverage')} 350,000 Gdes`,
+        t('plans.features.ageAcceptance'),
+        t('plans.features.noExam'),
+        t('plans.features.fixedPremium'),
+        t('plans.features.flexiblePayment'),
+        t('plans.features.fastClaims'),
+        t('plans.features.support247')
       ],
       color: "secondary",
       popular: true
     },
     {
-      name: "Plan Premyòm",
+      name: t('plans.premium'),
       coverage: "500,000",
       features: [
-        "Kouvèti 500,000 Gdes",
-        "Akseptasyon laj 0-80 an",
-        "San egzamen medikal",
-        "Prim fiks",
-        "Peman fleksib (mwa/trimès/ane)",
-        "Tretman rapid reklamasyon",
-        "Sipò telefòn 24/7",
-        "Asistans pou preparasyon seremoni"
+        `${t('plans.features.coverage')} 500,000 Gdes`,
+        t('plans.features.ageAcceptance'),
+        t('plans.features.noExam'),
+        t('plans.features.fixedPremium'),
+        t('plans.features.flexiblePayment'),
+        t('plans.features.fastClaims'),
+        t('plans.features.support247'),
+        t('plans.features.ceremonyAssist')
       ],
       color: "accent"
     },
     {
-      name: "Plan Sere Lajan",
+      name: t('plans.savings'),
       coverage: "750,000",
       features: [
-        "Kouvèti 750,000 Gdes",
-        "Ouvè pou TOUT laj",
-        "Epay san limit",
-        "Fleksibilite depo kontinyèl",
-        "Prim fiks",
-        "Peman fleksib (mwa/trimès/ane)",
-        "Tretman rapid reklamasyon",
-        "Sipò telefòn 24/7"
+        `${t('plans.features.coverage')} 750,000 Gdes`,
+        t('plans.features.allAges'),
+        t('plans.features.unlimitedSavings'),
+        t('plans.features.continuousDeposit'),
+        t('plans.features.fixedPremium'),
+        t('plans.features.flexiblePayment'),
+        t('plans.features.fastClaims'),
+        t('plans.features.support247')
       ],
       color: "primary",
       isSavings: true
@@ -74,30 +77,29 @@ const Plans = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-hero py-12 sm:py-16 text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
-                Plan Asirans Antèman
+        <section className="bg-gradient-hero hero-padding text-primary-foreground">
+          <div className="section-container">
+            <div className="content-container text-center">
+              <h1 className="hero-title">
+                {t('plans.hero.title')}
               </h1>
-              <p className="text-lg sm:text-xl opacity-95">
-                Chwazi plan ki pi bon pou ou ak fanmi ou
+              <p className="hero-subtitle">
+                {t('plans.hero.subtitle')}
               </p>
             </div>
           </div>
         </section>
 
         {/* Plans Section */}
-        <section className="py-12 sm:py-16 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8 sm:mb-12">
-              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-                Tout plan KAFA yo ofri pwoteksyon solid pou fanmi ou. Chwazi kouvèti ki koresponn ak
-                bezwen ou ak pwopriyete ou posede.
+        <section className="section-padding bg-background">
+          <div className="section-container">
+            <div className="section-header">
+              <p className="section-subtitle">
+                {t('plans.description')}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
               {plans.map((plan, index) => (
                 <Card 
                   key={index} 
@@ -108,7 +110,7 @@ const Plans = () => {
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
                       <span className="bg-secondary text-secondary-foreground px-5 py-1.5 rounded-full text-sm font-bold shadow-md">
-                        Pi Popilè
+                        {t('plans.popular')}
                       </span>
                     </div>
                   )}
@@ -122,7 +124,7 @@ const Plans = () => {
                         {plan.coverage}
                       </div>
                       <div className="text-muted-foreground mt-2 text-base">
-                        Gourdes
+                        {t('plans.gourdes')}
                       </div>
                     </div>
                   </CardHeader>
@@ -146,7 +148,7 @@ const Plans = () => {
                         }`}
                         size="lg"
                       >
-                        Chwazi Plan Sa
+                        {t('plans.choosePlan')}
                       </Button>
                     </Link>
                   </CardContent>
@@ -157,22 +159,21 @@ const Plans = () => {
         </section>
 
         {/* Additional Info Section */}
-        <section className="py-12 sm:py-16 bg-muted">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-6 sm:mb-8">
-                Enfòmasyon Enpòtan
+        <section className="section-padding bg-muted">
+          <div className="section-container">
+            <div className="content-container">
+              <h2 className="section-title-sm text-center mb-6 sm:mb-8">
+                {t('plans.info.title')}
               </h2>
 
-              <div className="space-y-4 sm:space-y-6">
+              <div className="content-spacing">
                 <Card className="border-border rounded-xl shadow-sm">
                   <CardContent className="pt-6 pb-6">
                     <h3 className="text-xl font-bold text-foreground mb-3">
-                      Ki moun ki ka enskri?
+                      {t('plans.info.whoCanJoin')}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Tout moun ant 0 ak 80 an ki an bon sante ka enskri nan plan KAFA yo.
-                      Pou kèk plan, nou pa mande egzamen medikal, sa ki rann pwosesis la pi rapid ak pi senp.
+                      {t('plans.info.whoCanJoinDesc')}
                     </p>
                   </CardContent>
                 </Card>
@@ -180,11 +181,10 @@ const Plans = () => {
                 <Card className="border-border rounded-xl shadow-sm">
                   <CardContent className="pt-6 pb-6">
                     <h3 className="text-xl font-bold text-foreground mb-3">
-                      Frekans Peman
+                      {t('plans.info.paymentFrequency')}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Ou ka chwazi peye prim ou chak mwa, chak trimès (3 mwa), oswa chak ane.
-                      Nou aksepte lajan kach, chèk, transfè bankè, ak lajan mobil.
+                      {t('plans.info.paymentFrequencyDesc')}
                     </p>
                   </CardContent>
                 </Card>
@@ -192,11 +192,10 @@ const Plans = () => {
                 <Card className="border-border rounded-xl shadow-sm">
                   <CardContent className="pt-6 pb-6">
                     <h3 className="text-xl font-bold text-foreground mb-3">
-                      Pwosesis Reklamasyon
+                      {t('plans.info.claimsProcess')}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Nan ka lanmò, fanmi a ka soumèt yon reklamasyon ak dokiman nesesè yo.
-                      Nou trete reklamasyon yo byen vit pou bay sipò finansye rapid nan moman difisil la.
+                      {t('plans.info.claimsProcessDesc')}
                     </p>
                   </CardContent>
                 </Card>
@@ -204,11 +203,10 @@ const Plans = () => {
                 <Card className="border-border rounded-xl shadow-sm">
                   <CardContent className="pt-6 pb-6">
                     <h3 className="text-xl font-bold text-foreground mb-3">
-                      Benefisyè
+                      {t('plans.info.beneficiaries')}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Ou ka nonmen plizyè benefisyè ki pral resevwa lajan asirans la.
-                      Ou ka chanje benefisyè yo nenpòt lè nan kont manm ou.
+                      {t('plans.info.beneficiariesDesc')}
                     </p>
                   </CardContent>
                 </Card>
@@ -218,28 +216,28 @@ const Plans = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 sm:py-16 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">
-              Pare pou Kòmanse?
+        <section className="section-padding bg-primary text-primary-foreground">
+          <div className="section-container text-center">
+            <h2 className="section-title text-primary-foreground">
+              {t('plans.cta.title')}
             </h2>
-            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-95 max-w-2xl mx-auto px-4">
-              Enskri kòm manm KAFA jodi a epi chwazi plan ki pi bon pou ou.
+            <p className="section-subtitle text-primary-foreground/90 mb-6 sm:mb-8">
+              {t('plans.cta.subtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+            <div className="button-group">
               <Link to="/funeral-application" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base sm:text-lg px-6 sm:px-8 h-12">
-                  Soumèt Demann Asirans
+                  {t('plans.cta.submitRequest')}
                 </Button>
               </Link>
               <Link to="/become-member" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base sm:text-lg px-6 sm:px-8 h-12">
-                  Vin Manm Kounye a
+                  {t('plans.cta.becomeMember')}
                 </Button>
               </Link>
               <Link to="/contact" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base sm:text-lg px-6 sm:px-8 h-12">
-                  Poze Kesyon
+                  {t('plans.cta.askQuestions')}
                 </Button>
               </Link>
             </div>

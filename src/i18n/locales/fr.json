@@ -1,0 +1,685 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "clear": "Effacer",
+    "download": "Télécharger",
+    "submit": "Soumettre",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "all": "Tous",
+    "none": "Aucun",
+    "required": "Obligatoire",
+    "optional": "Optionnel"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos de KAFA",
+    "plans": "Plans Funéraires",
+    "documents": "Documents",
+    "becomeMember": "Devenir Membre",
+    "contact": "Nous Contacter",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "dashboard": "Tableau de bord",
+    "memberLookup": "Rechercher un Membre",
+    "memberNumbers": "Liste des Numéros de Membre",
+    "communes": "Communes d'Haïti (146)",
+    "adminDashboard": "Tableau de bord Admin",
+    "conditionsPolicy": "Conditions et Politique"
+  },
+  "home": {
+    "hero": {
+      "title": "Une Assurance pour Tous les Haïtiens",
+      "subtitle": "KAFA est une assurance coopérative qui protège les familles haïtiennes contre les frais funéraires. Nous garantissons 100% du paiement et avons des plans abordables pour tous.",
+      "ctaBecome": "Devenir Membre KAFA",
+      "ctaPlans": "Voir les Plans"
+    },
+    "howItWorks": {
+      "title": "Comment Ça Marche?",
+      "subtitle": "Devenir membre KAFA est facile! Suivez ces 4 étapes simples.",
+      "step1Title": "S'inscrire comme Membre",
+      "step1Desc": "Remplissez le formulaire d'Adhésion et achetez\nau moins une part sociale (5,000 Gdes).",
+      "step2Title": "Choisissez Votre Plan",
+      "step2Desc": "Sélectionnez le plan funéraire qui vous convient le mieux\n(250,000, 350,000 ou 500,000 Gdes).",
+      "step3Title": "Payez Votre Prime",
+      "step3Desc": "Choisissez votre fréquence de paiement: mensuel,\ntrimestriel ou annuel.",
+      "step4Title": "Vous Êtes Protégé!",
+      "step4Desc": "Votre famille est protégée et vous avez la tranquillité d'esprit.",
+      "cta": "Commencer Maintenant",
+      "paymentDetails": "Voir les détails de paiement",
+      "paymentMethods": "Méthodes de Paiement Disponibles:",
+      "paymentFrequency": "Options de Fréquence de Paiement:",
+      "cashOffice": "Espèces au Bureau KAFA",
+      "bankDeposit": "Dépôt ou Virement Bancaire (Sogebank, Unibank, BNC)",
+      "moncash": "MonCash (Digicel)",
+      "natcash": "NatCash (Natcom)",
+      "westernUnion": "Western Union / Transfert CAM",
+      "onlinePayment": "Paiement en ligne (via plateforme KAFA)",
+      "monthly": "Mensuel",
+      "quarterly": "Trimestriel",
+      "annual": "Annuel"
+    },
+    "cta": {
+      "title": "Prêt à Protéger Votre Famille?",
+      "subtitle": "N'attendez pas! Inscrivez-vous comme membre KAFA aujourd'hui et ayez la tranquillité d'esprit pour demain.",
+      "becomeMember": "Devenir Membre Aujourd'hui",
+      "contact": "Avez-vous des Questions? Contactez-nous"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "À Propos de Nous",
+      "subtitle": "Coopérative d'Assurance Force d'Haïti"
+    },
+    "whoWeAre": {
+      "title": "Qui est KAFA?",
+      "description": "<strong class=\"text-primary\">COOPÉRATIVE D'ASSURANCE FORCE D'HAÏTI (KAFA)</strong> est une assurance coopérative <strong>appartenant à ses membres</strong>. Sa mission est de protéger les membres contre les grands défis de la vie: décès, maladie, accidents et autres situations qui peuvent dévaster les finances d'une famille. KAFA cherche toujours à agir dans le meilleur intérêt collectif de ses membres.",
+      "principles": "Nous fonctionnons sur les principes de:",
+      "solidarity": "Solidarité",
+      "solidarityDesc": "chaque membre aide à protéger les autres",
+      "democracy": "Démocratie",
+      "democracyDesc": "chaque membre a une voix dans les décisions, quel que soit le nombre de \"parts sociales\" qu'il possède",
+      "mutualization": "Mutualisation des Risques",
+      "mutualizationDesc": "nous regroupons les risques de tous les membres pour une meilleure gestion",
+      "frenchNote": "La KAFA est une entreprise d'assurance coopérative appartenant à ses membres assurés, fondée sur la solidarité, la démocratie et la mutualisation des risques."
+    },
+    "whyChoose": {
+      "title": "Pourquoi Choisir KAFA?",
+      "subtitle": "Nous comprenons comment le décès d'un être cher peut causer des difficultés financières pour les familles. C'est pourquoi nous avons créé KAFA pour vous aider.",
+      "guarantee": "Garantie à 100%",
+      "guaranteeDesc": "Nous garantissons le paiement de toutes les réclamations valides selon le contrat.",
+      "affordable": "Primes Abordables",
+      "affordableDesc": "Plans adaptés à tous les budgets, de 250,000 à 500,000 Gdes.",
+      "coverage": "Couverture Nationale",
+      "coverageDesc": "Nos services sont disponibles dans tous les départements d'Haïti.",
+      "fast": "Traitement Rapide",
+      "fastDesc": "Nous traitons les réclamations rapidement pour soulager les familles.",
+      "noExam": "Sans Examen Médical",
+      "noExamDesc": "Certains plans ne nécessitent pas d'examen médical pour s'inscrire.",
+      "cooperative": "Coopérative",
+      "cooperativeDesc": "Vous n'êtes pas seulement un client, vous êtes aussi propriétaire!"
+    },
+    "problemSolution": {
+      "title": "Problème et Solution",
+      "description": "Lorsqu'un proche décède, les familles haïtiennes font souvent face à de grandes difficultés financières. C'est pourquoi KAFA reconnaît l'urgence d'agir pour apporter une réponse rapide et appropriée aux familles dans des situations économiques difficiles."
+    },
+    "infoBlock": {
+      "whoWeAre": "Ce Que Nous Sommes",
+      "whoWeAreDesc": "KAFA est une entreprise d'assurance appartenant à ses membres assurés. Sa mission est de protéger ses membres contre les risques et les pertes (décès, maladie, etc.). Elle existe pour servir l'intérêt collectif de ses membres. KAFA fonctionne selon les principes de solidarité, de démocratie et de partage des risques. Chaque membre a une voix dans les décisions, quel que soit le nombre d'actions qu'il possède.",
+      "missionDesc": "Offrir des services d'assurance accessibles à tous les Haïtiens, pour les protéger des événements imprévus et prévenir toute perte de capital en cas de difficultés soudaines.",
+      "visionDesc": "Devenir une référence dans le secteur de l'assurance, tout en participant à la construction d'une société plus équitable où chacun peut vivre avec confiance malgré les incertitudes de la vie.",
+      "objectivesTitle": "Objectifs de KAFA"
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "intro": "La mission de KAFA est:",
+      "point1": "Rendre les services d'assurance <strong>accessibles à tous les Haïtiens</strong>, où qu'ils soient",
+      "point2": "Les protéger contre les événements imprévisibles de la vie (décès, maladie, accidents, etc.)",
+      "point3": "Empêcher les familles de tomber dans la pauvreté lors de difficultés soudaines",
+      "frenchNote": "Offrir des services d'assurance accessibles à tous les Haïtiens afin de les protéger contre les imprévus et de prévenir toute décapitalisation en cas de difficultés soudaines.",
+      "description": "Rendre les services d'assurance accessibles à tous les Haïtiens, où qu'ils soient. Les protéger contre les événements imprévisibles de la vie. Empêcher les familles de tomber dans la pauvreté lors de difficultés soudaines."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Nous voulons que KAFA devienne <strong class=\"text-primary\">une référence dans le secteur de l'assurance en Haïti</strong>, en particulier pour les personnes à revenus limités.",
+      "description2": "Notre vision est de construire une société où chacun peut vivre avec plus de confiance, même quand la vie apporte de mauvaises surprises.",
+      "frenchNote": "Devenir un acteur de référence dans le domaine de l'assurance en bâtissant une société plus équitable où chaque personne peut vivre en confiance face aux aléas de la vie."
+    },
+    "principles": {
+      "p1": "Adhésion volontaire et ouverte à tous ceux qui veulent rejoindre",
+      "p2": "Pouvoir démocratique: chaque membre a les mêmes droits de vote",
+      "p3": "Participation économique des membres à travers les 'parts sociales'",
+      "p4": "Autonomie et indépendance dans nos décisions",
+      "p5": "Éducation et information pour que les membres comprennent mieux la finance et l'assurance",
+      "p6": "Coopération entre coopératives et autres partenaires sérieux",
+      "p7": "Engagement envers la communauté pour soutenir le développement social et économique"
+    },
+    "objectives": {
+      "o1": "Offrir des services d'assurance accessibles et adaptés aux besoins des membres.",
+      "o2": "Partager les risques, où chacun contribue selon ses moyens et bénéficie quand c'est nécessaire.",
+      "o3": "Empêcher les membres de perdre leur capital en cas de difficultés soudaines.",
+      "o4": "Encourager l'inclusion financière en rendant l'assurance accessible même aux personnes à faibles revenus.",
+      "o5": "Renforcer la résilience économique des familles et des communautés.",
+      "o6": "Investir dans le développement local et participer aux initiatives sociales et économiques."
+    },
+    "cooperative": {
+      "title": "Comment fonctionnons-nous en tant que coopérative?",
+      "subtitle": "KAFA suit le modèle coopératif international"
+    },
+    "joinUs": {
+      "title": "Rejoignez la Force",
+      "intro": "Quand vous devenez membre de KAFA, vous n'achetez pas seulement une assurance:",
+      "point1": "Vous devenez <strong>copropriétaire</strong> de la coopérative",
+      "point2": "Vous aidez à protéger d'autres familles haïtiennes comme la vôtre",
+      "point3": "Vous contribuez à un modèle économique plus juste et solide pour le pays",
+      "cta": "Devenir Membre KAFA"
+    },
+    "policy": {
+      "title": "Conditions, Politique et Confidentialité",
+      "regulationTitle": "RÈGLEMENT",
+      "regulationDesc": "Règlement sur un plan funéraire: Ce document définit les conditions, les prestations et les modalités d'indemnisation liées à un contrat d'assurance couvrant les frais funéraires. Il permet de garantir que la famille ou les proches d'un assuré puissent recevoir une aide financière pour couvrir une bonne partie des dépenses avant, pendant, et/ou après les funérailles.",
+      "section1Title": "1. Objet du contrat",
+      "objective": "Objectif",
+      "objectiveDesc": "Le plan funéraire choisi par l'assuré a pour objectif de couvrir tout ou une partie des dépenses exigées par les funérailles, conformément aux modalités établies.",
+      "beneficiaries": "Bénéficiaires",
+      "beneficiariesDesc": "KAFA fournira les prestations au(x) bénéficiaire(s) désigné(s) par l'assuré en cas de son décès.",
+      "section2Title": "2. Modalités de compensation",
+      "compensationIntro": "Les modalités de compensation sont les suivantes:",
+      "comp1": "Après l'accomplissement des deux premières années, à compter de la date d'émission du contrat, le bénéficiaire recevra 80 % de la prestation de décès.",
+      "comp2": "À compter de la troisième année, le bénéficiaire recevra 90 % de la prestation de décès.",
+      "comp3": "À partir de la quatrième année, la prestation est intégralement couverte soit (100 %).",
+      "comp4": "Cependant, si l'assuré(e) est décédé(e) avant 2 ans de son adhésion à KAFA, 85% des primes reçues par KAFA seront remboursées au bénéficiaire désigné.",
+      "comp5": "En cas de décès du propriétaire de la police d'assurance avant celui de l'assuré, ce dernier ou un autre membre devra continuer le paiement des primes d'assurance.",
+      "section3Title": "3. Montant de la couverture",
+      "coverageAmountDesc": "Le montant de la couverture prévu par le plan funéraire est fixé dès la souscription.",
+      "premiumTitle": "Prime d'assurance",
+      "premiumDesc": "La prime d'assurance est le paiement régulier effectué auprès de KAFA par l'assuré ou par le propriétaire pour maintenir une police d'assurance active.",
+      "gracePeriodTitle": "Période de grâce",
+      "gracePeriodDesc": "Une extension de 30 jours est accordée à l'assuré après la date d'échéance d'une prime durant laquelle l'assuré peut encore payer sans perdre sa couverture ni subir de pénalités.",
+      "nonPaymentTitle": "Non-Paiement",
+      "nonPaymentDesc": "À défaut de paiement d'une cotisation à l'échéance de la police d'assurance, la garantie sera suspendue 30 jours après la mise en demeure de l'assuré.",
+      "section4Title": "4. Modalités de souscription",
+      "eligibility": "Critères d'éligibilité",
+      "eligAge": "âge",
+      "eligResidence": "lieu de résidence",
+      "eligNote": "Toute souscription d'une personne âgée entre 65 et 80 ans doit inclure au moins un(e) assuré(e) âgé(e) de moins de 65 ans.",
+      "section5Title": "5. Exclusions",
+      "uncoveredCosts": "Frais non couverts",
+      "uncoveredCostsDesc": "Certains frais spécifiques ou prestations non pris en charge tels que les frais de voyage et/ou les biens personnels.",
+      "uncoveredDeaths": "Décès non couverts",
+      "uncoveredDeathsDesc": "Ce contrat exclut les décès dus aux actes de guerre, de désastres naturels, de disparition, de pandémie, de suicide, etc.",
+      "section6Title": "6. Prestation de décès",
+      "requiredDocs": "Documents exigés",
+      "requiredDocsDesc": "En cas de décès, KAFA réclame l'originalité du contrat et l'acte de décès de l'assuré.",
+      "compensationDelay": "Délai de compensation",
+      "compensationDelayDesc": "La compensation sera versée au bénéficiaire désigné dans un délai de 7 à 14 jours ouvrables.",
+      "section7Title": "7. Bénéficiaires",
+      "beneficiaryDesignation": "Désignation des bénéficiaires",
+      "beneficiaryDesignationDesc": "L'assuré peut désigner les bénéficiaires des prestations.",
+      "beneficiaryChange": "Changement de bénéficiaires",
+      "beneficiaryChangeDesc": "Les modalités de changement de bénéficiaires seront modifiées seulement en cas de décès ou de mise à jour du contrat.",
+      "beneficiaryNote": "L'assuré peut changer de bénéficiaire si ce dernier est le propriétaire de l'assurance.",
+      "section8Title": "8. Condition de fin de contrat",
+      "section8Desc": "Le règlement définit les conditions sous lesquelles le contrat peut être résilié.",
+      "section9Title": "9. Condition de modification",
+      "section9Desc": "Des modifications pourront être apportées au présent règlement si les responsables le jugent opportun.",
+      "importantNote": "Les détails spécifiques peuvent varier, il est donc essentiel de lire attentivement le contrat pour comprendre exactement ce qui est couvert.",
+      "headquarters": "Siège Social: Léogâne, Haïti"
+    }
+  },
+  "plans": {
+    "hero": {
+      "title": "Plans d'Assurance Funéraire",
+      "subtitle": "Choisissez le plan qui vous convient le mieux, à vous et votre famille"
+    },
+    "description": "Tous les plans KAFA offrent une protection solide pour votre famille. Choisissez la couverture qui correspond à vos besoins et vos biens.",
+    "basic": "Plan de Base",
+    "standard": "Plan Standard",
+    "premium": "Plan Premium",
+    "savings": "Plan Épargne",
+    "popular": "Le Plus Populaire",
+    "gourdes": "Gourdes",
+    "choosePlan": "Choisir Ce Plan",
+    "features": {
+      "coverage": "Couverture",
+      "ageAcceptance": "Acceptation d'âge 0-80 ans",
+      "allAges": "Ouvert à TOUS les âges",
+      "noExam": "Sans examen médical",
+      "fixedPremium": "Prime fixe",
+      "flexiblePayment": "Paiement flexible (mensuel/trimestriel/annuel)",
+      "fastClaims": "Traitement rapide des réclamations",
+      "support247": "Support téléphonique 24/7",
+      "ceremonyAssist": "Assistance à la préparation de cérémonie",
+      "unlimitedSavings": "Épargne illimitée",
+      "continuousDeposit": "Flexibilité de dépôt continu"
+    },
+    "info": {
+      "title": "Informations Importantes",
+      "whoCanJoin": "Qui peut adhérer?",
+      "whoCanJoinDesc": "Toute personne entre 0 et 80 ans en bonne santé peut adhérer aux plans KAFA. Pour certains plans, nous ne demandons pas d'examen médical, ce qui rend le processus plus rapide et plus simple.",
+      "paymentFrequency": "Fréquence de Paiement",
+      "paymentFrequencyDesc": "Vous pouvez choisir de payer votre prime mensuellement, trimestriellement (3 mois) ou annuellement. Nous acceptons les espèces, les chèques, les virements bancaires et l'argent mobile.",
+      "claimsProcess": "Processus de Réclamation",
+      "claimsProcessDesc": "En cas de décès, la famille peut soumettre une réclamation avec les documents requis. Nous traitons les réclamations rapidement pour fournir un soutien financier rapide pendant les moments difficiles.",
+      "beneficiaries": "Bénéficiaires",
+      "beneficiariesDesc": "Vous pouvez nommer plusieurs bénéficiaires qui recevront l'argent de l'assurance. Vous pouvez changer les bénéficiaires à tout moment dans votre compte membre."
+    },
+    "cta": {
+      "title": "Prêt à Commencer?",
+      "subtitle": "Inscrivez-vous comme membre KAFA aujourd'hui et choisissez le plan qui vous convient le mieux.",
+      "submitRequest": "Soumettre une Demande d'Assurance",
+      "becomeMember": "Devenir Membre Maintenant",
+      "askQuestions": "Poser des Questions"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Nous Contacter",
+      "subtitle": "Nous sommes là pour vous aider. Envoyez un message ou visitez notre bureau."
+    },
+    "form": {
+      "title": "Envoyer un Message",
+      "name": "Nom Complet",
+      "namePlaceholder": "Entrez votre nom",
+      "email": "Email",
+      "emailPlaceholder": "vous@exemple.com",
+      "subject": "Sujet",
+      "subjectPlaceholder": "De quoi aimeriez-vous discuter?",
+      "message": "Message",
+      "messagePlaceholder": "Écrivez votre message ici...",
+      "submit": "Envoyer le Message",
+      "success": "Message envoyé!",
+      "successDesc": "Merci pour votre message. Nous vous répondrons bientôt."
+    },
+    "info": {
+      "title": "Informations de Contact",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "Email",
+      "hours": "Heures",
+      "location": "Notre Emplacement",
+      "viewOnMap": "Voir sur OpenStreetMap"
+    },
+    "validation": {
+      "nameRequired": "Le nom est obligatoire",
+      "nameTooLong": "Le nom est trop long",
+      "emailInvalid": "L'email n'est pas valide",
+      "emailTooLong": "L'email est trop long",
+      "subjectRequired": "Le sujet est obligatoire",
+      "subjectTooLong": "Le sujet est trop long",
+      "messageRequired": "Le message est obligatoire",
+      "messageTooLong": "Le message est trop long (maximum 1000 caractères)"
+    }
+  },
+  "documents": {
+    "hero": {
+      "title": "Documents KAFA",
+      "subtitle": "Tous les formulaires et documents officiels pour les membres KAFA. Téléchargez ce dont vous avez besoin."
+    },
+    "categories": {
+      "membership": "Formulaires d'Adhésion",
+      "membershipDesc": "Documents pour devenir membre KAFA",
+      "funeral": "Plan Funéraire",
+      "funeralDesc": "Documents pour les plans funéraires"
+    },
+    "help": {
+      "title": "Besoin d'Aide?",
+      "description": "Si vous avez des questions sur les formulaires ou besoin d'assistance pour les remplir, contactez-nous."
+    },
+    "download": "Télécharger"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion à Votre Compte",
+      "subtitle": "Entrez vos informations pour vous connecter",
+      "email": "Email",
+      "emailPlaceholder": "entrez votre email",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "••••••••",
+      "submit": "Se Connecter",
+      "loading": "Connexion en cours...",
+      "noAccount": "Vous n'avez pas encore de compte?",
+      "createAccount": "Créer un compte",
+      "backToHome": "Retour à la page d'accueil",
+      "success": "Bienvenue!",
+      "successDesc": "Vous êtes connecté avec succès.",
+      "error": "Email ou mot de passe incorrect."
+    },
+    "register": {
+      "title": "Créer Votre Compte",
+      "subtitle": "Commencez le processus pour devenir membre KAFA",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "email": "Email",
+      "phone": "Numéro de Téléphone",
+      "password": "Mot de passe",
+      "submit": "Créer un Compte",
+      "loading": "Création en cours...",
+      "hasAccount": "Vous avez déjà un compte?",
+      "login": "Se Connecter",
+      "backToHome": "Retour à la page d'accueil",
+      "success": "Compte créé avec succès!",
+      "successDesc": "Vous pouvez vous connecter maintenant.",
+      "error": "Une erreur s'est produite lors de la création de votre compte."
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de Bord Membre",
+    "welcome": "Bienvenue",
+    "memberDashboard": "Votre Tableau de Bord Membre KAFA",
+    "tabs": {
+      "profile": "Profil",
+      "plan": "Plan",
+      "payments": "Paiements",
+      "documents": "Documents",
+      "notifications": "Notif"
+    },
+    "noProfile": {
+      "title": "Pas de Profil Membre",
+      "description": "Vous n'avez pas encore de profil membre KAFA. Vous pouvez vous inscrire pour devenir membre ou nous contacter pour plus d'informations.",
+      "becomeMember": "Devenir Membre KAFA",
+      "contact": "Nous Contacter"
+    }
+  },
+  "faq": {
+    "title": "Questions Fréquemment Posées (FAQ)",
+    "subtitle": "UNE ASSURANCE POUR TOUS LES HAÏTIENS",
+    "q1": "1. Qui peut devenir membre de KAFA?",
+    "a1": {
+      "intro": "Tout Haïtien, où que vous résidiez (Haïti ou à l'étranger), peut devenir membre de KAFA si vous:",
+      "item1": "Remplissez le formulaire d'adhésion (papier ou en ligne)",
+      "item2": "Payez les frais d'adhésion de 500 Gdes",
+      "item3": "Achetez au moins 1 \"part sociale\" d'une valeur de 5 000 Gdes",
+      "item4": "Acceptez de respecter les règles et statuts de la coopérative"
+    },
+    "q2": "2. Que signifie \"Part Sociale\"?",
+    "a2": {
+      "intro": "C'est la part que vous possédez dans la coopérative. C'est le capital que vous investissez en tant que membre.",
+      "item1": "Prix minimum: 5 000 Gdes",
+      "item2": "Elle fait de vous un <strong>copropriétaire</strong> de la coopérative",
+      "item3": "Elle vous donne le droit de vote, de participation et de recevoir des bénéfices en fin d'année s'il y en a",
+      "note": "Une \"Part Sociale\" est un placement de capital qui confirme votre qualité de membre et copropriétaire de la coopérative."
+    },
+    "q3": "3. Qu'est-ce que l'Assurance Funéraire KAFA?",
+    "a3": {
+      "intro": "L'assurance funéraire est un plan qui aide votre famille à:",
+      "item1": "Couvrir les frais funéraires",
+      "item2": "Éviter la perte économique (décapitalisation)",
+      "item3": "Gérer toutes les procédures administratives, sociales et psychologiques",
+      "guarantee": "Elle permet à vous ou votre famille de recevoir une <strong>garantie de paiement à 100%</strong> selon le plan choisi."
+    },
+    "q4": "4. Quels plans d'assurance funéraire sont disponibles?",
+    "a4": {
+      "intro": "KAFA offre <strong>3 plans principaux</strong>:",
+      "table": {
+        "plan": "Plan",
+        "coverage": "Couverture",
+        "medicalExam": "Examen médical",
+        "ageAcceptance": "Âge d'acceptation",
+        "basic": "Plan de base",
+        "standard": "Plan standard",
+        "premium": "Plan premium",
+        "notRequired": "Non obligatoire"
+      },
+      "mobileNote": "* Tous les plans: Pas d'examen médical obligatoire, âge 0-80 ans",
+      "allPlansHave": "Tous les plans incluent:",
+      "features": {
+        "fixedPayment": "Paiement fixe",
+        "immediateProtection": "Protection immédiate (après 3 jours)",
+        "flexibleProcess": "Procédure flexible",
+        "nationalCoverage": "Couverture nationale"
+      }
+    },
+    "q5": "5. Ai-je besoin d'un examen médical pour adhérer?",
+    "a5": "Non. Pour tous les plans funéraires KAFA, <strong>aucun examen médical n'est obligatoire.</strong>",
+    "q6": "6. Quels documents dois-je fournir pour soumettre une réclamation?",
+    "a6": {
+      "intro": "Pour ouvrir un dossier de réclamation, vous avez besoin de:",
+      "item1": "Certificat de décès",
+      "item2": "Carte d'identité du demandeur",
+      "item3": "Numéro de contrat/Police",
+      "item4": "Informations sur le défunt (nom, date et lieu du décès)",
+      "item5": "Toute autre preuve demandée par l'administration KAFA"
+    },
+    "q7": "7. Comment soumettre une réclamation?",
+    "a7": {
+      "step1": "Connectez-vous au Portail Membre",
+      "step2": "Allez dans la section \"Réclamation\"",
+      "step3": "Remplissez le formulaire + téléchargez les documents",
+      "step4": "Soumettez le dossier",
+      "step5": "L'administration KAFA vérifie et vous contacte"
+    },
+    "q8": "8. Combien de temps faut-il pour qu'une réclamation soit approuvée?",
+    "a8": {
+      "time": "⏳ Le temps de traitement moyen est de <strong>3 à 10 jours ouvrables</strong>, selon la complétude des documents.",
+      "goal": "KAFA s'efforce d'offrir une <em>procédure rapide, simple et sans complications.</em>"
+    },
+    "q9": "9. Puis-je payer mes primes par téléphone?",
+    "a9": {
+      "intro": "Oui, nous proposons plusieurs options de paiement:",
+      "moncash": "MonCash",
+      "bank": "Virement bancaire / transfert bancaire",
+      "cash": "Espèces / Chèque au bureau KAFA",
+      "online": "Paiement en ligne (carte Visa/Mastercard)",
+      "comingSoon": "bientôt disponible"
+    },
+    "q10": "10. Que se passe-t-il si je ne peux pas payer un mois?",
+    "a10": {
+      "intro": "KAFA ne révoque pas les membres immédiatement.",
+      "grace": "Vous avez une <strong>période de grâce</strong> pour régler le retard sans pénalité, selon votre type de plan.",
+      "privilege": "Les membres conservent toujours leurs privilèges sous réserve des règlements de la coopérative."
+    },
+    "q11": "11. Puis-je ajouter ou modifier mes bénéficiaires?",
+    "a11": {
+      "intro": "Oui. Vous pouvez modifier ou ajouter un bénéficiaire en ligne ou au bureau KAFA à tout moment, si:",
+      "item1": "Vous êtes toujours vivant",
+      "item2": "Vous êtes le propriétaire du contrat"
+    },
+    "q12": "12. Quelle est la différence entre \"membre KAFA\" et \"souscripteur d'assurance\"?",
+    "a12": {
+      "member": "<strong>Membre KAFA</strong> → personne qui possède des parts sociales, a le droit de vote et est copropriétaire",
+      "subscriber": "<strong>Souscripteur d'assurance</strong> → personne qui achète un plan funéraire (pas nécessairement membre)",
+      "note": "(Vous pouvez avoir les deux rôles si vous souscrivez et devenez membre.)"
+    },
+    "q13": "13. Comment devenir membre de KAFA?",
+    "a13": {
+      "intro": "📝 4 étapes simples:",
+      "step1": "Remplir le formulaire d'adhésion",
+      "step2": "Payer les frais d'adhésion (500 Gdes)",
+      "step3": "Acheter 1 part sociale (5 000 Gdes minimum)",
+      "step4": "Recevoir votre numéro de membre (ID)"
+    },
+    "q14": "14. Où se trouve KAFA?",
+    "a14": {
+      "address": "📍 874 Rue Ste Catherine, Léogâne, Haïti",
+      "phone": "📞 Téléphone: (509) 3500-0326 / (509) 4439-8595 / (850) 321-4670",
+      "email": "📧 Email: info@kafayiti.com",
+      "website": "🌐 Site web: www.kafayiti.com"
+    },
+    "q15": "15. Y a-t-il une application mobile?",
+    "a15": {
+      "coming": "L'application mobile sera disponible très bientôt.",
+      "forNow": "Pour l'instant, tous les services sont disponibles sur <strong>le site web officiel et le Portail Membre</strong>."
+    },
+    "q16": "16. Comment puis-je contacter KAFA?",
+    "a16": {
+      "phone": "📞 Téléphone",
+      "whatsapp": "💬 WhatsApp",
+      "email": "✉️ Email",
+      "website": "🌐 Sur le site web (formulaire de contact)",
+      "social": "📱 Réseaux sociaux (Facebook, Instagram, TikTok, LinkedIn)"
+    },
+    "closing": {
+      "message": "Si vous avez d'autres questions, n'hésitez pas à nous contacter.",
+      "slogan": "KAFA — UNE ASSURANCE POUR TOUS LES HAÏTIENS."
+    }
+  },
+  "forms": {
+    "title": "Formulaires KAFA",
+    "subtitle": "Tous les documents officiels pour devenir membre, souscrire un plan et gérer votre affiliation avec KAFA.",
+    "membershipForm": "Formulaire d'Adhésion",
+    "membershipFormDesc": "Formulaire officiel pour s'inscrire comme membre de Koperativ Asirans Fòs Ayiti (KAFA).",
+    "becomeMember": "Devenir Membre KAFA",
+    "becomeMemberDesc": "Toutes les conditions et étapes pour devenir membre KAFA selon les principes coopératifs.",
+    "funeralPlan": "Souscription Plan Funéraire",
+    "funeralPlanDesc": "Formulaire pour souscrire et choisir un plan funéraire KAFA.",
+    "fillForm": "Remplir le formulaire",
+    "seeConditions": "Voir les conditions",
+    "subscribeNow": "Souscrire maintenant",
+    "downloadForm": "Télécharger le formulaire",
+    "fields": {
+      "personalInfo": "Informations personnelles du membre",
+      "kafaInfo": "Informations liées à KAFA",
+      "beneficiaries": "Héritier(s) ou ayant(s) droit",
+      "memberCommitment": "Engagement du membre",
+      "membershipConditions": "Conditions d'adhésion",
+      "socialShares": "Parts sociales minimum (5 000 Gdes)",
+      "membershipFee": "Frais d'adhésion (500 Gdes)",
+      "statuteCommitment": "Engagement aux statuts et règlements",
+      "planChoice": "Choix du plan funéraire",
+      "insuredInfo": "Informations de l'assuré",
+      "beneficiaryInfo": "Bénéficiaires",
+      "paymentTerms": "Modalités de paiement"
+    }
+  },
+  "footer": {
+    "description": "Assurance pour tous les Haïtiens. KAFA est une coopérative là pour aider les familles dans les moments difficiles.",
+    "quickLinks": "Liens Rapides",
+    "contactUs": "Nous Contacter",
+    "hours": "HEURES",
+    "weekdays": "Lundi - Vendredi: 9h00 - 16h00",
+    "saturday": "Samedi: 9h00 - 13h00",
+    "sunday": "Dimanche: Fermé",
+    "copyright": "Coopérative d'Assurance KAFA. Tous droits réservés."
+  },
+  "memberNumbers": {
+    "title": "Liste des Numéros de Membre KAFA",
+    "subtitle": "Système de Numéros de Membre KAFA",
+    "available": "numéros disponibles",
+    "availableNumbers": "Numéros de Membre Disponibles",
+    "showing": "Affichage",
+    "of": "sur",
+    "page": "Page",
+    "next": "Suivant",
+    "previous": "Précédent"
+  },
+  "language": {
+    "select": "Langue",
+    "ht": "Kreyòl",
+    "en": "English",
+    "es": "Español",
+    "fr": "Français"
+  },
+  "becomeMember": {
+    "header": {
+      "title": "Coopérative d'Assurance Force d'Haïti (KAFA)",
+      "address": "874 Rue Sainte Catherine, Léogâne, Haïti HT 6212",
+      "contact": "Téléphone: (509) 3500-0326 / 4439-8595 | Email: info@kafayiti.com"
+    },
+    "form": {
+      "title": "Formulaire d'Adhésion",
+      "subtitle": "Membre de la Coopérative d'Assurance Force d'Haïti (KAFA)"
+    },
+    "sections": {
+      "personalInfo": "Informations personnelles du membre",
+      "beneficiaries": "Héritier(s) ou ayant(s) droit (en cas de décès)",
+      "commitment": "Engagement du membre",
+      "signature": "Signature du membre"
+    },
+    "fields": {
+      "lastName": "Nom de famille",
+      "firstName": "Prénom(s)",
+      "birthPlace": "Lieu de naissance",
+      "gender": "Sexe",
+      "profession": "Profession / Activité principale",
+      "idNumber": "No. de pièce d'identité",
+      "idType": "Type de pièce",
+      "idIssueDetails": "Date et lieu d'émission",
+      "idExpiration": "Date d'expiration",
+      "address": "Adresse complète (domicile)",
+      "commune": "Commune",
+      "phone": "Téléphone",
+      "email": "E-mail"
+    },
+    "placeholders": {
+      "lastName": "Entrez votre nom de famille",
+      "firstName": "Entrez votre/vos prénom(s)",
+      "birthPlace": "Ex: Port-au-Prince",
+      "profession": "Entrez votre profession",
+      "idNumber": "Numéro",
+      "idIssueDetails": "Ex: 10/05/2020, Port-au-Prince",
+      "address": "Entrez votre adresse complète",
+      "commune": "Sélectionnez votre commune",
+      "phone": "Ex: 3700-0000",
+      "email": "exemple@email.com"
+    },
+    "options": {
+      "male": "Homme",
+      "female": "Femme",
+      "cni": "CNI",
+      "nif": "NIF",
+      "passport": "Passeport",
+      "other": "Autre"
+    },
+    "beneficiary": {
+      "title": "Héritier",
+      "fullName": "Nom & Prénom(s)",
+      "fullNamePlaceholder": "Nom complet de l'héritier",
+      "relationship": "Lien de parenté",
+      "relationshipPlaceholder": "Ex: Époux(se), Fils, Fille",
+      "dob": "Date de Naissance",
+      "phone": "Téléphone",
+      "email": "Email",
+      "percentage": "Pourcentage d'attribution %",
+      "percentagePlaceholder": "Ex: 50",
+      "addButton": "Ajouter un héritier",
+      "noteLabel": "NB:",
+      "note": "Tout membre est autorisé à modifier la liste de ses héritiers sur demande écrite."
+    },
+    "commitment": {
+      "declaration": "Je déclare sur l'honneur que les informations fournies sont exactes.",
+      "statutes": "Je m'engage à respecter les statuts, règlements et décisions de la coopérative d'assurance.",
+      "dataAuth": "J'autorise la coopérative à utiliser mes données dans le cadre strict de ses activités."
+    },
+    "signature": {
+      "place": "Fait à",
+      "placePlaceholder": "Ville/Localité",
+      "date": "Le",
+      "signature": "Signature du membre",
+      "signaturePlaceholder": "Tapez votre nom complet comme signature"
+    },
+    "buttons": {
+      "submit": "Soumettre le formulaire",
+      "submitting": "Soumission en cours...",
+      "reset": "Réinitialiser"
+    },
+    "validation": {
+      "lastNameRequired": "Nom de famille requis",
+      "firstNameRequired": "Prénom requis",
+      "fullNameRequired": "Nom complet requis",
+      "birthPlaceRequired": "Lieu de naissance requis",
+      "genderRequired": "Sexe requis",
+      "professionRequired": "Profession requise",
+      "idNumberRequired": "Numéro de pièce d'identité requis",
+      "idTypeRequired": "Type de pièce requis",
+      "idIssueRequired": "Date et lieu d'émission requis",
+      "idExpirationRequired": "Date d'expiration requise",
+      "addressRequired": "Adresse complète requise",
+      "communeRequired": "Commune requise",
+      "phoneRequired": "Numéro de téléphone requis",
+      "emailInvalid": "Email invalide",
+      "joinDateRequired": "Date d'adhésion requise",
+      "socialSharesRequired": "Nombre de parts sociales requis",
+      "totalAmountRequired": "Montant total requis",
+      "beneficiaryRequired": "Au moins un héritier requis",
+      "relationshipRequired": "Lien de parenté requis",
+      "dobRequired": "Date de naissance requise",
+      "percentageRequired": "Pourcentage requis",
+      "declarationRequired": "Vous devez déclarer que les informations sont exactes",
+      "signaturePlaceRequired": "Lieu de signature requis",
+      "signatureDateRequired": "Date de signature requise",
+      "signatureRequired": "Signature requise"
+    },
+    "messages": {
+      "successTitle": "Formulaire soumis avec succès",
+      "successDesc": "Votre numéro de membre KAFA:",
+      "errorGenerating": "Erreur lors de la génération du numéro de membre",
+      "errorSaving": "Erreur lors de l'enregistrement du membre",
+      "genericError": "Une erreur s'est produite"
+    }
+  }
+}

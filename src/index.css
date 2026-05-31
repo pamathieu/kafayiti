@@ -123,3 +123,153 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* ========================================
+   GLOBAL LAYOUT STANDARDIZATION SYSTEM
+   ======================================== */
+
+@layer components {
+  /* Standard Section Container */
+  .section-container {
+    @apply w-full max-w-7xl mx-auto;
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Standard Section Padding - Consistent vertical rhythm */
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .section-padding-sm {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .section-padding-lg {
+    @apply py-20 md:py-24 lg:py-32;
+  }
+
+  /* Hero Section Padding */
+  .hero-padding {
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
+  }
+
+  /* Section Header Spacing */
+  .section-header {
+    @apply text-center mb-10 sm:mb-12 lg:mb-16;
+  }
+
+  /* Section Title Typography */
+  .section-title {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4;
+  }
+
+  .section-title-sm {
+    @apply text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4;
+  }
+
+  /* Section Subtitle Typography */
+  .section-subtitle {
+    @apply text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto;
+  }
+
+  /* Hero Typography */
+  .hero-title {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6;
+  }
+
+  .hero-subtitle {
+    @apply text-lg sm:text-xl md:text-2xl opacity-95;
+  }
+
+  /* Standard Card Grid */
+  .card-grid {
+    @apply grid gap-6 sm:gap-8;
+  }
+
+  .card-grid-2 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8;
+  }
+
+  .card-grid-3 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8;
+  }
+
+  .card-grid-4 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8;
+  }
+
+  /* Standard Card Styling */
+  .standard-card {
+    @apply border-border rounded-lg shadow-sm hover:shadow-primary transition-all duration-300;
+  }
+
+  .standard-card-hover {
+    @apply border-border rounded-lg shadow-sm hover:shadow-primary transition-all duration-300 hover:-translate-y-1;
+  }
+
+  /* Card Content Padding */
+  .card-content-padding {
+    @apply p-6 sm:p-8;
+  }
+
+  /* Content Container - for narrower content sections */
+  .content-container {
+    @apply max-w-4xl mx-auto;
+  }
+
+  .content-container-sm {
+    @apply max-w-3xl mx-auto;
+  }
+
+  .content-container-lg {
+    @apply max-w-5xl mx-auto;
+  }
+
+  /* Responsive Image Container */
+  .img-responsive {
+    @apply w-full h-auto object-cover;
+  }
+
+  .img-responsive-contain {
+    @apply w-full h-auto object-contain;
+  }
+
+  /* Button Container */
+  .button-group {
+    @apply flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center;
+  }
+
+  /* Standard spacing between content blocks */
+  .content-spacing {
+    @apply space-y-4 sm:space-y-6;
+  }
+
+  .content-spacing-lg {
+    @apply space-y-6 sm:space-y-8;
+  }
+}
+
+/* ========================================
+   PREVENT LAYOUT SHIFTING
+   ======================================== */
+
+@layer base {
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Stable image loading */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Prevent content jumping on scroll */
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+}
