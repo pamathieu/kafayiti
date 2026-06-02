@@ -644,6 +644,9 @@
     },
     "buttons": {
       "submit": "Enviar formulario",
+      "submitNow": "Enviar ahora",
+      "submitWithMore": "Enviar con más información",
+      "seeLess": "Ver menos",
       "submitting": "Enviando...",
       "reset": "Restablecer"
     },

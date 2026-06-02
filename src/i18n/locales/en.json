@@ -1024,6 +1024,9 @@
     },
     "buttons": {
       "submit": "Submit Form",
+      "submitNow": "Submit Now",
+      "submitWithMore": "Submit With More Information",
+      "seeLess": "See Less",
       "submitting": "Submitting...",
       "reset": "Reset"
     },

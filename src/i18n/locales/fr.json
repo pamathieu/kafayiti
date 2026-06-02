@@ -644,6 +644,9 @@
     },
     "buttons": {
       "submit": "Soumettre le formulaire",
+      "submitNow": "Soumettre maintenant",
+      "submitWithMore": "Soumettre avec plus d'informations",
+      "seeLess": "Voir moins",
       "submitting": "Soumission en cours...",
       "reset": "Réinitialiser"
     },

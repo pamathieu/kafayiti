@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -10,14 +10,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Trash2, Loader2 } from "lucide-react";
+import { Plus, Trash2, Loader2, ChevronDown } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
-import { haitiCommunes, parseFullName } from "@/lib/memberNumberUtils";
+import { haitiCommunes } from "@/lib/memberNumberUtils";
 import MembershipConfirmationDialog from "@/components/MembershipConfirmationDialog";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -25,8 +24,12 @@ const BecomeMember = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { user } = useAuth();
-  const [insuranceProducts, setInsuranceProducts] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [personalInfoOpen, setPersonalInfoOpen] = useState(true);
+  const [beneficiariesOpen, setBeneficiariesOpen] = useState(true);
+  const [commitmentOpen, setCommitmentOpen] = useState(true);
+  const [signatureOpen, setSignatureOpen] = useState(true);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [generatedMemberNumber, setGeneratedMemberNumber] = useState("");
   const [confirmedFullName, setConfirmedFullName] = useState("");
@@ -42,42 +45,46 @@ const BecomeMember = () => {
   });
 
   const membershipSchema = z.object({
-    // Section A - Informations personnelles
-    lastName: z.string().min(2, t('becomeMember.validation.lastNameRequired')),
+    // Required fields
     firstName: z.string().min(2, t('becomeMember.validation.firstNameRequired')),
-    fullName: z.string().min(2, t('becomeMember.validation.fullNameRequired')),
-    birthDatePlace: z.string().min(2, t('becomeMember.validation.birthPlaceRequired')),
-    gender: z.enum(["homme", "femme"], { required_error: t('becomeMember.validation.genderRequired') }),
-    profession: z.string().min(2, t('becomeMember.validation.professionRequired')),
-    idNumber: z.string().min(5, t('becomeMember.validation.idNumberRequired')),
-    idType: z.enum(["cni", "nif", "passeport", "autre"], { required_error: t('becomeMember.validation.idTypeRequired') }),
-    idIssueDetails: z.string().min(2, t('becomeMember.validation.idIssueRequired')),
-    idExpirationDate: z.string().min(1, t('becomeMember.validation.idExpirationRequired')),
-    address: z.string().min(5, t('becomeMember.validation.addressRequired')),
-    commune: z.string().min(1, t('becomeMember.validation.communeRequired')),
+    lastName: z.string().min(2, t('becomeMember.validation.lastNameRequired')),
     phone: z.string().min(8, t('becomeMember.validation.phoneRequired')),
-    email: z.string().email(t('becomeMember.validation.emailInvalid')),
 
-    // Section B - Informations liées à KAFA
-    joinDate: z.string().min(1, t('becomeMember.validation.joinDateRequired')),
+    // Optional contact
+    email: z.string().email(t('becomeMember.validation.emailInvalid')).optional().or(z.literal("")),
+
+    // Section A - optional additional info
+    fullName: z.string().optional(),
+    birthDatePlace: z.string().optional(),
+    gender: z.enum(["homme", "femme"]).optional(),
+    profession: z.string().optional(),
+    idNumber: z.string().optional(),
+    idType: z.enum(["cni", "nif", "passeport", "autre"]).optional(),
+    idIssueDetails: z.string().optional(),
+    idExpirationDate: z.string().optional(),
+    address: z.string().optional(),
+    commune: z.string().optional(),
+
+    // Section B - optional KAFA info
+    joinDate: z.string().optional(),
     memberNumber: z.string().optional(),
-    socialShares: z.string().min(1, t('becomeMember.validation.socialSharesRequired')),
-    totalAmount: z.string().min(1, t('becomeMember.validation.totalAmountRequired')),
+    socialShares: z.string().optional(),
+    totalAmount: z.string().optional(),
     insuranceProducts: z.array(z.string()).optional(),
     otherInsurance: z.string().optional(),
 
-    // Section C - Héritiers
-    beneficiaries: z.array(beneficiarySchema).min(1, t('becomeMember.validation.beneficiaryRequired')),
+    // Section C - optional beneficiaries
+    beneficiaries: z.array(beneficiarySchema).optional(),
 
-    // Section D - Engagement
-    declaration: z.boolean().refine((val) => val === true, t('becomeMember.validation.declarationRequired')),
+    // Section D - optional commitment
+    declaration: z.boolean().optional(),
     commitment: z.boolean().optional(),
     dataAuthorization: z.boolean().optional(),
 
-    // Section E - Signature
-    signaturePlace: z.string().min(2, t('becomeMember.validation.signaturePlaceRequired')),
-    signatureDate: z.string().min(1, t('becomeMember.validation.signatureDateRequired')),
-    signature: z.string().min(2, t('becomeMember.validation.signatureRequired')),
+    // Section E - optional signature
+    signaturePlace: z.string().optional(),
+    signatureDate: z.string().optional(),
+    signature: z.string().optional(),
   });
 
   type MembershipFormData = z.infer<typeof membershipSchema>;
@@ -85,20 +92,13 @@ const BecomeMember = () => {
   const form = useForm<MembershipFormData>({
     resolver: zodResolver(membershipSchema),
     defaultValues: {
-      lastName: "",
       firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
       fullName: "",
       commune: "",
-      beneficiaries: [
-        {
-          fullName: "",
-          relationship: "",
-          dateOfBirth: "",
-          phone: "",
-          email: "",
-          percentage: "",
-        },
-      ],
+      beneficiaries: [],
       insuranceProducts: [],
       declaration: false,
       commitment: false,
@@ -111,21 +111,6 @@ const BecomeMember = () => {
     name: "beneficiaries",
   });
 
-  const handleInsuranceChange = (product: string, checked: boolean) => {
-    setInsuranceProducts((prev) => {
-      if (checked) {
-        return [...prev, product];
-      } else {
-        return prev.filter((p) => p !== product);
-      }
-    });
-    form.setValue("insuranceProducts", insuranceProducts);
-  };
-
-  // Auto-update fullName when lastName or firstName changes
-  const watchLastName = form.watch("lastName");
-  const watchFirstName = form.watch("firstName");
-
   const updateFullName = () => {
     const lastName = form.getValues("lastName");
     const firstName = form.getValues("firstName");
@@ -136,24 +121,16 @@ const BecomeMember = () => {
 
   const onSubmit = async (data: MembershipFormData) => {
     setIsSubmitting(true);
-    
-    try {
-      // Use lastName and firstName from form, or parse from fullName
-      let lastName = data.lastName;
-      let firstName = data.firstName;
-      
-      if (!lastName || !firstName) {
-        const parsed = parseFullName(data.fullName);
-        lastName = lastName || parsed.lastName;
-        firstName = firstName || parsed.firstName;
-      }
 
-      // Generate member number using the database function
+    try {
+      const lastName = data.lastName;
+      const firstName = data.firstName;
+
       const { data: memberNumberData, error: fnError } = await supabase
         .rpc('generate_kafa_member_number', {
           p_last_name: lastName,
           p_first_name: firstName,
-          p_commune: data.commune
+          p_commune: data.commune || '',
         });
 
       if (fnError) {
@@ -163,37 +140,36 @@ const BecomeMember = () => {
 
       const memberNumber = memberNumberData as string;
 
-      // Insert the member into the database with user_id if logged in
       const { error: insertError } = await supabase
         .from('kafa_members')
         .insert({
           member_number: memberNumber,
-          full_name: data.fullName,
+          full_name: data.fullName || `${lastName} ${firstName}`.trim(),
           first_name: firstName,
           last_name: lastName,
-          commune: data.commune,
-          birth_date_place: data.birthDatePlace,
-          gender: data.gender,
-          profession: data.profession,
-          id_number: data.idNumber,
-          id_type: data.idType,
-          id_issue_details: data.idIssueDetails,
-          id_expiration_date: data.idExpirationDate,
-          address: data.address,
+          commune: data.commune || null,
+          birth_date_place: data.birthDatePlace || null,
+          gender: data.gender || null,
+          profession: data.profession || null,
+          id_number: data.idNumber || null,
+          id_type: data.idType || null,
+          id_issue_details: data.idIssueDetails || null,
+          id_expiration_date: data.idExpirationDate || null,
+          address: data.address || null,
           phone: data.phone,
-          email: data.email,
-          join_date: data.joinDate,
-          social_shares: data.socialShares,
-          total_amount: data.totalAmount,
+          email: data.email || null,
+          join_date: data.joinDate || null,
+          social_shares: data.socialShares || null,
+          total_amount: data.totalAmount || null,
           insurance_products: data.insuranceProducts || [],
-          other_insurance: data.otherInsurance,
-          beneficiaries: data.beneficiaries,
-          declaration: data.declaration,
-          commitment: data.commitment,
-          data_authorization: data.dataAuthorization,
-          signature_place: data.signaturePlace,
-          signature_date: data.signatureDate,
-          signature: data.signature,
+          other_insurance: data.otherInsurance || null,
+          beneficiaries: data.beneficiaries || [],
+          declaration: data.declaration || false,
+          commitment: data.commitment || false,
+          data_authorization: data.dataAuthorization || false,
+          signature_place: data.signaturePlace || null,
+          signature_date: data.signatureDate || null,
+          signature: data.signature || null,
           user_id: user?.id || null,
         });
 
@@ -202,10 +178,10 @@ const BecomeMember = () => {
         throw new Error(t('becomeMember.messages.errorSaving'));
       }
 
-      // Set confirmation data and show dialog
+      const fullName = data.fullName || `${lastName} ${firstName}`.trim();
       setGeneratedMemberNumber(memberNumber);
-      setConfirmedFullName(data.fullName);
-      setConfirmedCommune(data.commune);
+      setConfirmedFullName(fullName);
+      setConfirmedCommune(data.commune || '');
       setShowConfirmation(true);
 
       toast({
@@ -213,7 +189,6 @@ const BecomeMember = () => {
         description: `${t('becomeMember.messages.successDesc')} ${memberNumber}`,
       });
 
-      // Reset form after successful submission
       form.reset();
 
     } catch (error) {
@@ -266,194 +241,187 @@ const BecomeMember = () => {
 
                 <CardContent>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8">
-                    {/* Section A - Informations personnelles */}
+
+                    {/* Required contact fields */}
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="firstName">{t('becomeMember.fields.firstName')} *</Label>
+                          <Input
+                            id="firstName"
+                            {...form.register("firstName")}
+                            className="mt-1.5"
+                            placeholder={t('becomeMember.placeholders.firstName')}
+                            onBlur={updateFullName}
+                          />
+                          {form.formState.errors.firstName && (
+                            <p className="text-sm text-destructive mt-1">
+                              {form.formState.errors.firstName.message}
+                            </p>
+                          )}
+                        </div>
+                        <div>
+                          <Label htmlFor="lastName">{t('becomeMember.fields.lastName')} *</Label>
+                          <Input
+                            id="lastName"
+                            {...form.register("lastName")}
+                            className="mt-1.5"
+                            placeholder={t('becomeMember.placeholders.lastName')}
+                            onBlur={updateFullName}
+                          />
+                          {form.formState.errors.lastName && (
+                            <p className="text-sm text-destructive mt-1">
+                              {form.formState.errors.lastName.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="phone">{t('becomeMember.fields.phone')} *</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            {...form.register("phone")}
+                            className="mt-1.5"
+                            placeholder={t('becomeMember.placeholders.phone')}
+                          />
+                          {form.formState.errors.phone && (
+                            <p className="text-sm text-destructive mt-1">
+                              {form.formState.errors.phone.message}
+                            </p>
+                          )}
+                        </div>
+                        <div>
+                          <Label htmlFor="email">{t('becomeMember.fields.email')}</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            {...form.register("email")}
+                            className="mt-1.5"
+                            placeholder={t('becomeMember.placeholders.email')}
+                          />
+                          {form.formState.errors.email && (
+                            <p className="text-sm text-destructive mt-1">
+                              {form.formState.errors.email.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {showMore && <>
+
+                    {/* Section A - Informations personnelles (optional) */}
                     <div className="space-y-4 sm:space-y-6">
                       <div>
-                        <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          {t('becomeMember.sections.personalInfo')}
-                        </h2>
+                        <button
+                          type="button"
+                          onClick={() => setPersonalInfoOpen((o) => !o)}
+                          className="flex items-center gap-2 w-full text-left mb-4"
+                        >
+                          <h2 className="text-lg sm:text-xl font-bold text-foreground">
+                            {t('becomeMember.sections.personalInfo')}
+                          </h2>
+                          <ChevronDown
+                            className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${personalInfoOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
                         <Separator className="mb-4" />
                       </div>
 
-                      <div className="space-y-4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="lastName">{t('becomeMember.fields.lastName')} *</Label>
-                            <Input
-                              id="lastName"
-                              {...form.register("lastName")}
-                              className="mt-1.5"
-                              placeholder={t('becomeMember.placeholders.lastName')}
-                              onBlur={updateFullName}
-                            />
-                            {form.formState.errors.lastName && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.lastName.message}
-                              </p>
-                            )}
-                          </div>
-                          <div>
-                            <Label htmlFor="firstName">{t('becomeMember.fields.firstName')} *</Label>
-                            <Input
-                              id="firstName"
-                              {...form.register("firstName")}
-                              className="mt-1.5"
-                              placeholder={t('becomeMember.placeholders.firstName')}
-                              onBlur={updateFullName}
-                            />
-                            {form.formState.errors.firstName && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.firstName.message}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-
+                      {personalInfoOpen && <div className="space-y-4">
                         <div>
-                          <Label htmlFor="birthDatePlace">{t('becomeMember.fields.birthPlace')} *</Label>
+                          <Label htmlFor="birthDatePlace">{t('becomeMember.fields.birthPlace')}</Label>
                           <Input
                             id="birthDatePlace"
                             {...form.register("birthDatePlace")}
                             className="mt-1.5"
                             placeholder={t('becomeMember.placeholders.birthPlace')}
                           />
-                          {form.formState.errors.birthDatePlace && (
-                            <p className="text-sm text-destructive mt-1">
-                              {form.formState.errors.birthDatePlace.message}
-                            </p>
-                          )}
                         </div>
 
                         <div>
-                          <Label className="mb-3 block">{t('becomeMember.fields.gender')} *</Label>
-                          <RadioGroup
+                          <Label>{t('becomeMember.fields.gender')}</Label>
+                          <Select
                             onValueChange={(value) => form.setValue("gender", value as "homme" | "femme")}
-                            className="flex flex-col sm:flex-row gap-4"
+                            value={form.watch("gender") || ""}
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="homme" id="homme" />
-                              <Label htmlFor="homme" className="font-normal cursor-pointer">
-                                {t('becomeMember.options.male')}
-                              </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="femme" id="femme" />
-                              <Label htmlFor="femme" className="font-normal cursor-pointer">
-                                {t('becomeMember.options.female')}
-                              </Label>
-                            </div>
-                          </RadioGroup>
-                          {form.formState.errors.gender && (
-                            <p className="text-sm text-destructive mt-1">
-                              {form.formState.errors.gender.message}
-                            </p>
-                          )}
+                            <SelectTrigger className="mt-1.5">
+                              <SelectValue placeholder={t('becomeMember.fields.gender')} />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="homme">{t('becomeMember.options.male')}</SelectItem>
+                              <SelectItem value="femme">{t('becomeMember.options.female')}</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
 
                         <div>
-                          <Label htmlFor="profession">{t('becomeMember.fields.profession')} *</Label>
+                          <Label htmlFor="profession">{t('becomeMember.fields.profession')}</Label>
                           <Input
                             id="profession"
                             {...form.register("profession")}
                             className="mt-1.5"
                             placeholder={t('becomeMember.placeholders.profession')}
                           />
-                          {form.formState.errors.profession && (
-                            <p className="text-sm text-destructive mt-1">
-                              {form.formState.errors.profession.message}
-                            </p>
-                          )}
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="idNumber">{t('becomeMember.fields.idNumber')} *</Label>
+                            <Label htmlFor="idNumber">{t('becomeMember.fields.idNumber')}</Label>
                             <Input
                               id="idNumber"
                               {...form.register("idNumber")}
                               className="mt-1.5"
                               placeholder={t('becomeMember.placeholders.idNumber')}
                             />
-                            {form.formState.errors.idNumber && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.idNumber.message}
-                              </p>
-                            )}
                           </div>
                           <div>
-                            <Label className="mb-3 block">{t('becomeMember.fields.idType')} *</Label>
-                            <RadioGroup
+                            <Label>{t('becomeMember.fields.idType')}</Label>
+                            <Select
                               onValueChange={(value) =>
                                 form.setValue("idType", value as "cni" | "nif" | "passeport" | "autre")
                               }
-                              className="grid grid-cols-2 gap-2"
+                              value={form.watch("idType") || ""}
                             >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="cni" id="cni" />
-                                <Label htmlFor="cni" className="font-normal cursor-pointer text-sm">
-                                  {t('becomeMember.options.cni')}
-                                </Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="nif" id="nif" />
-                                <Label htmlFor="nif" className="font-normal cursor-pointer text-sm">
-                                  {t('becomeMember.options.nif')}
-                                </Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="passeport" id="passeport" />
-                                <Label htmlFor="passeport" className="font-normal cursor-pointer text-sm">
-                                  {t('becomeMember.options.passport')}
-                                </Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="autre" id="autre-id" />
-                                <Label htmlFor="autre-id" className="font-normal cursor-pointer text-sm">
-                                  {t('becomeMember.options.other')}
-                                </Label>
-                              </div>
-                            </RadioGroup>
-                            {form.formState.errors.idType && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.idType.message}
-                              </p>
-                            )}
+                              <SelectTrigger className="mt-1.5">
+                                <SelectValue placeholder={t('becomeMember.fields.idType')} />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="cni">{t('becomeMember.options.cni')}</SelectItem>
+                                <SelectItem value="nif">{t('becomeMember.options.nif')}</SelectItem>
+                                <SelectItem value="passeport">{t('becomeMember.options.passport')}</SelectItem>
+                                <SelectItem value="autre">{t('becomeMember.options.other')}</SelectItem>
+                              </SelectContent>
+                            </Select>
                           </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="idIssueDetails">{t('becomeMember.fields.idIssueDetails')} *</Label>
+                            <Label htmlFor="idIssueDetails">{t('becomeMember.fields.idIssueDetails')}</Label>
                             <Input
                               id="idIssueDetails"
                               {...form.register("idIssueDetails")}
                               className="mt-1.5"
                               placeholder={t('becomeMember.placeholders.idIssueDetails')}
                             />
-                            {form.formState.errors.idIssueDetails && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.idIssueDetails.message}
-                              </p>
-                            )}
                           </div>
                           <div>
-                            <Label htmlFor="idExpirationDate">{t('becomeMember.fields.idExpiration')} *</Label>
+                            <Label htmlFor="idExpirationDate">{t('becomeMember.fields.idExpiration')}</Label>
                             <Input
                               id="idExpirationDate"
                               type="date"
                               {...form.register("idExpirationDate")}
                               className="mt-1.5"
                             />
-                            {form.formState.errors.idExpirationDate && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.idExpirationDate.message}
-                              </p>
-                            )}
                           </div>
                         </div>
 
                         <div>
-                          <Label htmlFor="address">{t('becomeMember.fields.address')} *</Label>
+                          <Label htmlFor="address">{t('becomeMember.fields.address')}</Label>
                           <Textarea
                             id="address"
                             {...form.register("address")}
@@ -461,18 +429,13 @@ const BecomeMember = () => {
                             placeholder={t('becomeMember.placeholders.address')}
                             rows={3}
                           />
-                          {form.formState.errors.address && (
-                            <p className="text-sm text-destructive mt-1">
-                              {form.formState.errors.address.message}
-                            </p>
-                          )}
                         </div>
 
                         <div>
-                          <Label htmlFor="commune">{t('becomeMember.fields.commune')} *</Label>
+                          <Label htmlFor="commune">{t('becomeMember.fields.commune')}</Label>
                           <Select
                             onValueChange={(value) => form.setValue("commune", value)}
-                            value={form.watch("commune")}
+                            value={form.watch("commune") || ""}
                           >
                             <SelectTrigger className="mt-1.5">
                               <SelectValue placeholder={t('becomeMember.placeholders.commune')} />
@@ -485,58 +448,29 @@ const BecomeMember = () => {
                               ))}
                             </SelectContent>
                           </Select>
-                          {form.formState.errors.commune && (
-                            <p className="text-sm text-destructive mt-1">
-                              {form.formState.errors.commune.message}
-                            </p>
-                          )}
                         </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="phone">{t('becomeMember.fields.phone')} *</Label>
-                            <Input
-                              id="phone"
-                              type="tel"
-                              {...form.register("phone")}
-                              className="mt-1.5"
-                              placeholder={t('becomeMember.placeholders.phone')}
-                            />
-                            {form.formState.errors.phone && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.phone.message}
-                              </p>
-                            )}
-                          </div>
-                          <div>
-                            <Label htmlFor="email">{t('becomeMember.fields.email')} *</Label>
-                            <Input
-                              id="email"
-                              type="email"
-                              {...form.register("email")}
-                              className="mt-1.5"
-                              placeholder={t('becomeMember.placeholders.email')}
-                            />
-                            {form.formState.errors.email && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.email.message}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+                      </div>}
                     </div>
 
-                    {/* Section C - Héritiers */}
+                    {/* Section C - Héritiers (optional) */}
                     <div className="space-y-4 sm:space-y-6">
                       <div>
-                        <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          {t('becomeMember.sections.beneficiaries')}
-                        </h2>
+                        <button
+                          type="button"
+                          onClick={() => setBeneficiariesOpen((o) => !o)}
+                          className="flex items-center gap-2 w-full text-left mb-4"
+                        >
+                          <h2 className="text-lg sm:text-xl font-bold text-foreground">
+                            {t('becomeMember.sections.beneficiaries')}
+                          </h2>
+                          <ChevronDown
+                            className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${beneficiariesOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
                         <Separator className="mb-4" />
                       </div>
 
-                      <div className="space-y-6">
+                      {beneficiariesOpen && <div className="space-y-6">
                         {fields.map((field, index) => (
                           <Card key={field.id} className="border-border bg-muted/30">
                             <CardContent className="pt-6">
@@ -544,16 +478,14 @@ const BecomeMember = () => {
                                 <h3 className="font-semibold text-foreground">
                                   {t('becomeMember.beneficiary.title')} #{index + 1}
                                 </h3>
-                                {fields.length > 1 && (
-                                  <Button
-                                    type="button"
-                                    variant="destructive"
-                                    size="sm"
-                                    onClick={() => remove(index)}
-                                  >
-                                    <Trash2 className="w-4 h-4" />
-                                  </Button>
-                                )}
+                                <Button
+                                  type="button"
+                                  variant="destructive"
+                                  size="sm"
+                                  onClick={() => remove(index)}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
                               </div>
 
                               <div className="space-y-4">
@@ -585,10 +517,7 @@ const BecomeMember = () => {
                                     />
                                     {form.formState.errors.beneficiaries?.[index]?.relationship && (
                                       <p className="text-sm text-destructive mt-1">
-                                        {
-                                          form.formState.errors.beneficiaries[index]?.relationship
-                                            ?.message
-                                        }
+                                        {form.formState.errors.beneficiaries[index]?.relationship?.message}
                                       </p>
                                     )}
                                   </div>
@@ -603,10 +532,7 @@ const BecomeMember = () => {
                                     />
                                     {form.formState.errors.beneficiaries?.[index]?.dateOfBirth && (
                                       <p className="text-sm text-destructive mt-1">
-                                        {
-                                          form.formState.errors.beneficiaries[index]?.dateOfBirth
-                                            ?.message
-                                        }
+                                        {form.formState.errors.beneficiaries[index]?.dateOfBirth?.message}
                                       </p>
                                     )}
                                   </div>
@@ -659,10 +585,7 @@ const BecomeMember = () => {
                                   />
                                   {form.formState.errors.beneficiaries?.[index]?.percentage && (
                                     <p className="text-sm text-destructive mt-1">
-                                      {
-                                        form.formState.errors.beneficiaries[index]?.percentage
-                                          ?.message
-                                      }
+                                      {form.formState.errors.beneficiaries[index]?.percentage?.message}
                                     </p>
                                   )}
                                 </div>
@@ -695,19 +618,28 @@ const BecomeMember = () => {
                             <strong>{t('becomeMember.beneficiary.noteLabel')}</strong> {t('becomeMember.beneficiary.note')}
                           </p>
                         </div>
-                      </div>
+                      </div>}
                     </div>
 
                     {/* Section D - Engagement du membre */}
                     <div className="space-y-4 sm:space-y-6">
                       <div>
-                        <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          {t('becomeMember.sections.commitment')}
-                        </h2>
+                        <button
+                          type="button"
+                          onClick={() => setCommitmentOpen((o) => !o)}
+                          className="flex items-center gap-2 w-full text-left mb-4"
+                        >
+                          <h2 className="text-lg sm:text-xl font-bold text-foreground">
+                            {t('becomeMember.sections.commitment')}
+                          </h2>
+                          <ChevronDown
+                            className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${commitmentOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
                         <Separator className="mb-4" />
                       </div>
 
-                      <div className="space-y-4">
+                      {commitmentOpen && <div className="space-y-4">
                         <div className="flex items-start space-x-3">
                           <Checkbox
                             id="declaration"
@@ -718,14 +650,9 @@ const BecomeMember = () => {
                             className="mt-1"
                           />
                           <Label htmlFor="declaration" className="font-normal cursor-pointer leading-relaxed">
-                            {t('becomeMember.commitment.declaration')} *
+                            {t('becomeMember.commitment.declaration')}
                           </Label>
                         </div>
-                        {form.formState.errors.declaration && (
-                          <p className="text-sm text-destructive ml-7">
-                            {form.formState.errors.declaration.message}
-                          </p>
-                        )}
 
                         <div className="flex items-start space-x-3">
                           <Checkbox
@@ -757,73 +684,69 @@ const BecomeMember = () => {
                             {t('becomeMember.commitment.dataAuth')}
                           </Label>
                         </div>
-                      </div>
+                      </div>}
                     </div>
 
                     {/* Section E - Signature du membre */}
                     <div className="space-y-4 sm:space-y-6">
                       <div>
-                        <h2 className="text-lg sm:text-xl font-bold text-foreground mb-4">
-                          {t('becomeMember.sections.signature')}
-                        </h2>
+                        <button
+                          type="button"
+                          onClick={() => setSignatureOpen((o) => !o)}
+                          className="flex items-center gap-2 w-full text-left mb-4"
+                        >
+                          <h2 className="text-lg sm:text-xl font-bold text-foreground">
+                            {t('becomeMember.sections.signature')}
+                          </h2>
+                          <ChevronDown
+                            className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${signatureOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
                         <Separator className="mb-4" />
                       </div>
 
-                      <div className="space-y-4">
+                      {signatureOpen && <div className="space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <Label htmlFor="signaturePlace">{t('becomeMember.signature.place')} *</Label>
+                            <Label htmlFor="signaturePlace">{t('becomeMember.signature.place')}</Label>
                             <Input
                               id="signaturePlace"
                               {...form.register("signaturePlace")}
                               className="mt-1.5"
                               placeholder={t('becomeMember.signature.placePlaceholder')}
                             />
-                            {form.formState.errors.signaturePlace && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.signaturePlace.message}
-                              </p>
-                            )}
                           </div>
                           <div>
-                            <Label htmlFor="signatureDate">{t('becomeMember.signature.date')} *</Label>
+                            <Label htmlFor="signatureDate">{t('becomeMember.signature.date')}</Label>
                             <Input
                               id="signatureDate"
                               type="date"
                               {...form.register("signatureDate")}
                               className="mt-1.5"
                             />
-                            {form.formState.errors.signatureDate && (
-                              <p className="text-sm text-destructive mt-1">
-                                {form.formState.errors.signatureDate.message}
-                              </p>
-                            )}
                           </div>
                         </div>
 
                         <div>
-                          <Label htmlFor="signature">{t('becomeMember.signature.signature')} *</Label>
+                          <Label htmlFor="signature">{t('becomeMember.signature.signature')}</Label>
                           <Input
                             id="signature"
                             {...form.register("signature")}
                             className="mt-1.5"
                             placeholder={t('becomeMember.signature.signaturePlaceholder')}
                           />
-                          {form.formState.errors.signature && (
-                            <p className="text-sm text-destructive mt-1">
-                              {form.formState.errors.signature.message}
-                            </p>
-                          )}
                         </div>
-                      </div>
+                      </div>}
                     </div>
 
-                    {/* Submit Button */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                    </>}
+
+                    {/* Submit Buttons */}
+                    <div className="grid grid-cols-2 gap-4 pt-4">
                       <Button
                         type="submit"
                         size="lg"
-                        className="w-full sm:flex-1 bg-primary hover:bg-primary-dark"
+                        className="w-full bg-primary hover:bg-primary-dark"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
@@ -832,18 +755,18 @@ const BecomeMember = () => {
                             {t('becomeMember.buttons.submitting')}
                           </>
                         ) : (
-                          t('becomeMember.buttons.submit')
+                          t('becomeMember.buttons.submitNow')
                         )}
                       </Button>
                       <Button
                         type="button"
                         size="lg"
                         variant="outline"
-                        className="w-full sm:w-auto"
-                        onClick={() => form.reset()}
+                        className="w-full"
+                        onClick={() => setShowMore((v) => !v)}
                         disabled={isSubmitting}
                       >
-                        {t('becomeMember.buttons.reset')}
+                        {showMore ? t('becomeMember.buttons.seeLess') : t('becomeMember.buttons.submitWithMore')}
                       </Button>
                     </div>
                   </form>
@@ -856,7 +779,6 @@ const BecomeMember = () => {
 
       <Footer />
 
-      {/* Member Number Confirmation Dialog */}
       <MembershipConfirmationDialog
         open={showConfirmation}
         onOpenChange={setShowConfirmation}

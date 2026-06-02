@@ -644,6 +644,9 @@
     },
     "buttons": {
       "submit": "Soumèt fòmilè a",
+      "submitNow": "Soumèt kounye a",
+      "submitWithMore": "Soumèt ak plis enfòmasyon",
+      "seeLess": "Wè mwens",
       "submitting": "Ap soumèt...",
       "reset": "Reyinisyalize"
     },

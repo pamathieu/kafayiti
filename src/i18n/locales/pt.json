@@ -720,6 +720,9 @@
     },
     "buttons": {
       "submit": "Submeter Formulário",
+      "submitNow": "Submeter agora",
+      "submitWithMore": "Submeter com mais informações",
+      "seeLess": "Ver menos",
       "submitting": "A submeter...",
       "reset": "Reiniciar"
     },
