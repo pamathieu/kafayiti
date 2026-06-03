@@ -65,6 +65,8 @@ const BecomeMember = () => {
     address: z.string().optional(),
     commune: z.string().optional(),
 
+    message: z.string().optional(),
+
     // Section B - optional KAFA info
     joinDate: z.string().optional(),
     memberNumber: z.string().optional(),
@@ -119,6 +121,25 @@ const BecomeMember = () => {
     }
   };
 
+  const callLambda = (payload: Record<string, unknown>) => {
+    const emailApiUrl = import.meta.env.VITE_EMAIL_API_URL;
+    if (!emailApiUrl) return;
+    fetch(emailApiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch((err) => console.error('Lambda error:', err));
+  };
+
+  const handleSubmitWithMore = async () => {
+    if (!showMore) {
+      const isValid = await form.trigger(['firstName', 'lastName', 'phone']);
+      if (!isValid) return;
+      callLambda(form.getValues());
+    }
+    setShowMore((v) => !v);
+  };
+
   const onSubmit = async (data: MembershipFormData) => {
     setIsSubmitting(true);
 
@@ -147,7 +168,7 @@ const BecomeMember = () => {
           full_name: data.fullName || `${lastName} ${firstName}`.trim(),
           first_name: firstName,
           last_name: lastName,
-          commune: data.commune || null,
+          commune: data.commune || "",
           birth_date_place: data.birthDatePlace || null,
           gender: data.gender || null,
           profession: data.profession || null,
@@ -177,6 +198,9 @@ const BecomeMember = () => {
         console.error('Error inserting member:', insertError);
         throw new Error(t('becomeMember.messages.errorSaving'));
       }
+
+      // Write to DynamoDB and send SES email — non-blocking
+      callLambda({ ...data, memberNumber, firstName, lastName });
 
       const fullName = data.fullName || `${lastName} ${firstName}`.trim();
       setGeneratedMemberNumber(memberNumber);
@@ -741,6 +765,18 @@ const BecomeMember = () => {
 
                     </>}
 
+                    {/* Questions or Comments */}
+                    <div>
+                      <Label htmlFor="message">{t('becomeMember.fields.message')}</Label>
+                      <Textarea
+                        id="message"
+                        {...form.register("message")}
+                        className="mt-1.5"
+                        placeholder={t('becomeMember.placeholders.message')}
+                        rows={4}
+                      />
+                    </div>
+
                     {/* Submit Buttons */}
                     <div className="grid grid-cols-2 gap-4 pt-4">
                       <Button
@@ -763,7 +799,7 @@ const BecomeMember = () => {
                         size="lg"
                         variant="outline"
                         className="w-full"
-                        onClick={() => setShowMore((v) => !v)}
+                        onClick={handleSubmitWithMore}
                         disabled={isSubmitting}
                       >
                         {showMore ? t('becomeMember.buttons.seeLess') : t('becomeMember.buttons.submitWithMore')}
