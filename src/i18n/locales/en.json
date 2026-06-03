@@ -61,7 +61,8 @@
       "title": "Insurance for All Haitians",
       "subtitle": "KAFA is a cooperative insurance that protects Haitian families against funeral expenses. We guarantee 100% payment and have affordable plans for everyone.",
       "ctaBecome": "Become a KAFA Member",
-      "ctaPlans": "View Plans"
+      "ctaPlans": "View Plans",
+      "ctaAssistant": "Talk to an Assistant"
     },
     "howItWorks": {
       "title": "How Does It Work?",
@@ -725,7 +726,7 @@
   },
   "confirmation": {
     "title": "Congratulations!",
-    "subtitle": "You have successfully registered as a KAFA member!",
+    "subtitle": "Your form submission was successful. A KAFA administrator will contact you.",
     "memberNumber": "Your KAFA Member Number:",
     "saveNumber": "Please save this number for your reference.",
     "fullName": "Full Name:",
@@ -973,7 +974,8 @@
       "address": "Full Address (Home)",
       "commune": "Commune",
       "phone": "Phone",
-      "email": "Email"
+      "email": "Email",
+      "message": "Questions or Comments (Optional)"
     },
     "placeholders": {
       "lastName": "Enter your last name",
@@ -985,7 +987,8 @@
       "address": "Enter your full address",
       "commune": "Select your commune",
       "phone": "Ex: 3700-0000",
-      "email": "example@email.com"
+      "email": "example@email.com",
+      "message": "Type your question or comment here..."
     },
     "options": {
       "male": "Male",
@@ -1064,5 +1067,11 @@
       "errorSaving": "Error saving member",
       "genericError": "An error occurred"
     }
+  },
+  "assistant": {
+    "title": "KAFA Assistant",
+    "placeholder": "Ask me anything about KAFA — membership, plans, coverage, and more.",
+    "inputPlaceholder": "Type your question...",
+    "error": "Sorry, I couldn't get a response. Please try again or contact kontak@kafayiti.com."
   }
 }

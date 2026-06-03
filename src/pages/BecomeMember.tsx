@@ -15,15 +15,12 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Trash2, Loader2, ChevronDown } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { supabase } from "@/integrations/supabase/client";
 import { haitiCommunes } from "@/lib/memberNumberUtils";
 import MembershipConfirmationDialog from "@/components/MembershipConfirmationDialog";
-import { useAuth } from "@/hooks/useAuth";
 
 const BecomeMember = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const { user } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [personalInfoOpen, setPersonalInfoOpen] = useState(true);
@@ -31,7 +28,6 @@ const BecomeMember = () => {
   const [commitmentOpen, setCommitmentOpen] = useState(true);
   const [signatureOpen, setSignatureOpen] = useState(true);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const [generatedMemberNumber, setGeneratedMemberNumber] = useState("");
   const [confirmedFullName, setConfirmedFullName] = useState("");
   const [confirmedCommune, setConfirmedCommune] = useState("");
 
@@ -113,113 +109,44 @@ const BecomeMember = () => {
     name: "beneficiaries",
   });
 
-  const updateFullName = () => {
-    const lastName = form.getValues("lastName");
-    const firstName = form.getValues("firstName");
-    if (lastName || firstName) {
-      form.setValue("fullName", `${lastName} ${firstName}`.trim());
-    }
-  };
-
-  const callLambda = (payload: Record<string, unknown>) => {
+  const submitToLambda = async (payload: Record<string, unknown>) => {
     const emailApiUrl = import.meta.env.VITE_EMAIL_API_URL;
-    if (!emailApiUrl) return;
-    fetch(emailApiUrl, {
+    if (!emailApiUrl) throw new Error('Email API not configured');
+    const res = await fetch(emailApiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-    }).catch((err) => console.error('Lambda error:', err));
+    });
+    if (!res.ok) throw new Error('Submission failed');
   };
 
   const handleSubmitWithMore = async () => {
     if (!showMore) {
       const isValid = await form.trigger(['firstName', 'lastName', 'phone']);
       if (!isValid) return;
-      callLambda(form.getValues());
+      submitToLambda(form.getValues()).catch((err) => console.error('Lambda error:', err));
     }
     setShowMore((v) => !v);
   };
 
   const onSubmit = async (data: MembershipFormData) => {
     setIsSubmitting(true);
-
     try {
-      const lastName = data.lastName;
-      const firstName = data.firstName;
+      await submitToLambda(data);
 
-      const { data: memberNumberData, error: fnError } = await supabase
-        .rpc('generate_kafa_member_number', {
-          p_last_name: lastName,
-          p_first_name: firstName,
-          p_commune: data.commune || '',
-        });
-
-      if (fnError) {
-        console.error('Error generating member number:', fnError);
-        throw new Error(t('becomeMember.messages.errorGenerating'));
-      }
-
-      const memberNumber = memberNumberData as string;
-
-      const { error: insertError } = await supabase
-        .from('kafa_members')
-        .insert({
-          member_number: memberNumber,
-          full_name: data.fullName || `${lastName} ${firstName}`.trim(),
-          first_name: firstName,
-          last_name: lastName,
-          commune: data.commune || "",
-          birth_date_place: data.birthDatePlace || null,
-          gender: data.gender || null,
-          profession: data.profession || null,
-          id_number: data.idNumber || null,
-          id_type: data.idType || null,
-          id_issue_details: data.idIssueDetails || null,
-          id_expiration_date: data.idExpirationDate || null,
-          address: data.address || null,
-          phone: data.phone,
-          email: data.email || null,
-          join_date: data.joinDate || null,
-          social_shares: data.socialShares || null,
-          total_amount: data.totalAmount || null,
-          insurance_products: data.insuranceProducts || [],
-          other_insurance: data.otherInsurance || null,
-          beneficiaries: data.beneficiaries || [],
-          declaration: data.declaration || false,
-          commitment: data.commitment || false,
-          data_authorization: data.dataAuthorization || false,
-          signature_place: data.signaturePlace || null,
-          signature_date: data.signatureDate || null,
-          signature: data.signature || null,
-          user_id: user?.id || null,
-        });
-
-      if (insertError) {
-        console.error('Error inserting member:', insertError);
-        throw new Error(t('becomeMember.messages.errorSaving'));
-      }
-
-      // Write to DynamoDB and send SES email — non-blocking
-      callLambda({ ...data, memberNumber, firstName, lastName });
-
-      const fullName = data.fullName || `${lastName} ${firstName}`.trim();
-      setGeneratedMemberNumber(memberNumber);
+      const fullName = `${data.firstName} ${data.lastName}`.trim();
       setConfirmedFullName(fullName);
       setConfirmedCommune(data.commune || '');
       setShowConfirmation(true);
 
-      toast({
-        title: t('becomeMember.messages.successTitle'),
-        description: `${t('becomeMember.messages.successDesc')} ${memberNumber}`,
-      });
-
+      toast({ title: t('becomeMember.messages.successTitle') });
       form.reset();
 
     } catch (error) {
       console.error('Submission error:', error);
       toast({
         title: t('common.error'),
-        description: error instanceof Error ? error.message : t('becomeMember.messages.genericError'),
+        description: t('becomeMember.messages.genericError'),
         variant: "destructive",
       });
     } finally {
@@ -276,7 +203,6 @@ const BecomeMember = () => {
                             {...form.register("firstName")}
                             className="mt-1.5"
                             placeholder={t('becomeMember.placeholders.firstName')}
-                            onBlur={updateFullName}
                           />
                           {form.formState.errors.firstName && (
                             <p className="text-sm text-destructive mt-1">
@@ -291,7 +217,6 @@ const BecomeMember = () => {
                             {...form.register("lastName")}
                             className="mt-1.5"
                             placeholder={t('becomeMember.placeholders.lastName')}
-                            onBlur={updateFullName}
                           />
                           {form.formState.errors.lastName && (
                             <p className="text-sm text-destructive mt-1">
@@ -818,7 +743,6 @@ const BecomeMember = () => {
       <MembershipConfirmationDialog
         open={showConfirmation}
         onOpenChange={setShowConfirmation}
-        memberNumber={generatedMemberNumber}
         fullName={confirmedFullName}
         commune={confirmedCommune}
       />

@@ -8,7 +8,9 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:lambda": "zip -j /tmp/send-membership-email.zip lambda/send-membership-email/index.mjs && aws lambda update-function-code --function-name send-membership-email --zip-file fileb:///tmp/send-membership-email.zip --region us-east-1 && rm /tmp/send-membership-email.zip && echo 'Lambda deployed'",
+    "deploy:assistant": "zip -j /tmp/kafa-assistant.zip lambda/kafa-assistant/index.mjs && aws lambda update-function-code --function-name kafa-assistant --zip-file fileb:///tmp/kafa-assistant.zip --region us-east-1 && rm /tmp/kafa-assistant.zip && echo 'Assistant deployed'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

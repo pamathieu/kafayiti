@@ -46,7 +46,8 @@
       "title": "Une Assurance pour Tous les Haïtiens",
       "subtitle": "KAFA est une assurance coopérative qui protège les familles haïtiennes contre les frais funéraires. Nous garantissons 100% du paiement et avons des plans abordables pour tous.",
       "ctaBecome": "Devenir Membre KAFA",
-      "ctaPlans": "Voir les Plans"
+      "ctaPlans": "Voir les Plans",
+      "ctaAssistant": "Parler à un Assistant"
     },
     "howItWorks": {
       "title": "Comment Ça Marche?",
@@ -593,7 +594,8 @@
       "address": "Adresse complète (domicile)",
       "commune": "Commune",
       "phone": "Téléphone",
-      "email": "E-mail"
+      "email": "E-mail",
+      "message": "Questions ou commentaires (Facultatif)"
     },
     "placeholders": {
       "lastName": "Entrez votre nom de famille",
@@ -605,7 +607,8 @@
       "address": "Entrez votre adresse complète",
       "commune": "Sélectionnez votre commune",
       "phone": "Ex: 3700-0000",
-      "email": "exemple@email.com"
+      "email": "exemple@email.com",
+      "message": "Tapez votre question ou commentaire ici..."
     },
     "options": {
       "male": "Homme",
@@ -684,5 +687,23 @@
       "errorSaving": "Erreur lors de l'enregistrement du membre",
       "genericError": "Une erreur s'est produite"
     }
+  },
+  "confirmation": {
+    "title": "Félicitations !",
+    "subtitle": "Votre formulaire a bien été soumis. Un administrateur KAFA vous contactera.",
+    "memberNumber": "Votre numéro de membre KAFA :",
+    "saveNumber": "Veuillez conserver ce numéro pour référence.",
+    "fullName": "Nom complet :",
+    "commune": "Commune :",
+    "close": "Fermer",
+    "copyNumber": "Copier le numéro",
+    "copied": "Numéro copié !",
+    "copiedDesc": "Votre numéro de membre a été copié dans le presse-papiers."
+  },
+  "assistant": {
+    "title": "Assistant KAFA",
+    "placeholder": "Posez-moi toutes vos questions sur KAFA — adhésion, plans, couverture, et plus.",
+    "inputPlaceholder": "Tapez votre question...",
+    "error": "Désolé, je n'ai pas pu obtenir de réponse. Réessayez ou contactez kontak@kafayiti.com."
   }
 }

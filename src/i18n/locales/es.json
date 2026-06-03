@@ -46,7 +46,8 @@
       "title": "Un Seguro para Todos los Haitianos",
       "subtitle": "KAFA es un seguro cooperativo que protege a las familias haitianas contra los gastos funerarios. Garantizamos el 100% del pago y tenemos planes accesibles para todos.",
       "ctaBecome": "Hacerse Miembro de KAFA",
-      "ctaPlans": "Ver Planes"
+      "ctaPlans": "Ver Planes",
+      "ctaAssistant": "Hablar con un Asistente"
     },
     "howItWorks": {
       "title": "¿Cómo Funciona?",
@@ -593,7 +594,8 @@
       "address": "Dirección completa (domicilio)",
       "commune": "Comuna",
       "phone": "Teléfono",
-      "email": "Correo electrónico"
+      "email": "Correo electrónico",
+      "message": "Preguntas o Comentarios (Opcional)"
     },
     "placeholders": {
       "lastName": "Ingrese su apellido",
@@ -605,7 +607,8 @@
       "address": "Ingrese su dirección completa",
       "commune": "Seleccione su comuna",
       "phone": "Ej: 3700-0000",
-      "email": "ejemplo@email.com"
+      "email": "ejemplo@email.com",
+      "message": "Escriba su pregunta o comentario aquí..."
     },
     "options": {
       "male": "Hombre",
@@ -684,5 +687,23 @@
       "errorSaving": "Error al guardar el miembro",
       "genericError": "Se produjo un error"
     }
+  },
+  "confirmation": {
+    "title": "¡Felicitaciones!",
+    "subtitle": "Tu formulario fue enviado con éxito. Un administrador de KAFA se pondrá en contacto contigo.",
+    "memberNumber": "Tu número de miembro KAFA:",
+    "saveNumber": "Por favor guarda este número para tu referencia.",
+    "fullName": "Nombre completo:",
+    "commune": "Comuna:",
+    "close": "Cerrar",
+    "copyNumber": "Copiar número",
+    "copied": "¡Número copiado!",
+    "copiedDesc": "Tu número de miembro ha sido copiado al portapapeles."
+  },
+  "assistant": {
+    "title": "Asistente KAFA",
+    "placeholder": "Pregúntame sobre KAFA — membresía, planes, cobertura y más.",
+    "inputPlaceholder": "Escribe tu pregunta...",
+    "error": "Lo siento, no pude obtener respuesta. Intenta de nuevo o contacta kontak@kafayiti.com."
   }
 }

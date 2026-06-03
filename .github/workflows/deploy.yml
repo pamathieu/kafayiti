@@ -34,6 +34,7 @@ jobs:
         run: npm run build
         env:
           VITE_EMAIL_API_URL: ${{ secrets.VITE_EMAIL_API_URL }}
+          VITE_ASSISTANT_API_URL: ${{ secrets.VITE_ASSISTANT_API_URL }}
 
       - name: Add CNAME for GitHub Pages
         run: echo "kafayiti.com" > ./dist/CNAME

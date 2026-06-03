@@ -1,16 +1,19 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { CheckCircle, Wallet, Calendar, Smartphone, Building2, Send, ChevronDown } from "lucide-react";
+import { CheckCircle, Wallet, Calendar, Smartphone, Building2, Send, ChevronDown, MessageCircle } from "lucide-react";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import FAQSection from "@/components/FAQSection";
 import KafaFormsSection from "@/components/KafaFormsSection";
 import heroFamilyBg from "@/assets/hero-family-background.jpg";
+import AssistantChat from "@/components/AssistantChat";
 
 const Home = () => {
   const { t } = useTranslation();
+  const [chatOpen, setChatOpen] = useState(false);
 
   const steps = [{
     number: "1",
@@ -63,7 +66,17 @@ const Home = () => {
                     {t('home.hero.ctaPlans')}
                   </Button>
                 </Link>
+                <Button
+                  size="lg"
+                  onClick={() => setChatOpen(true)}
+                  className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-glow text-base sm:text-lg px-6 sm:px-8 h-12"
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  {t('home.hero.ctaAssistant')}
+                </Button>
               </div>
+
+              <AssistantChat open={chatOpen} onOpenChange={setChatOpen} />
             </div>
           </div>
         </section>

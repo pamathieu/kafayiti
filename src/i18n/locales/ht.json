@@ -46,7 +46,8 @@
       "title": "Yon Asirans pou Tout Ayisyen",
       "subtitle": "KAFA se yon koperativ asirans ki pwoteje fanmi ayisyen yo kont depans antèman. Nou garanti 100% pou peye epi nou gen plan abòdab pou tout moun.",
       "ctaBecome": "Vin Manm KAFA",
-      "ctaPlans": "Gade Plan Yo"
+      "ctaPlans": "Gade Plan Yo",
+      "ctaAssistant": "Pale ak yon Asistan"
     },
     "howItWorks": {
       "title": "Ki Jan Sa Mache?",
@@ -593,7 +594,8 @@
       "address": "Adrès konplè (lakay)",
       "commune": "Komin",
       "phone": "Telefòn",
-      "email": "Imèl"
+      "email": "Imèl",
+      "message": "Kesyon oswa Kòmantè (Opsyonèl)"
     },
     "placeholders": {
       "lastName": "Antre siyati ou",
@@ -605,7 +607,8 @@
       "address": "Antre adrès konplè ou",
       "commune": "Chwazi komin ou",
       "phone": "Egz: 3700-0000",
-      "email": "egzanp@imèl.com"
+      "email": "egzanp@imèl.com",
+      "message": "Ekri kesyon oswa kòmantè ou isit..."
     },
     "options": {
       "male": "Gason",
@@ -684,5 +687,23 @@
       "errorSaving": "Erè pandan anrejistreman manm nan",
       "genericError": "Yon erè rive"
     }
+  },
+  "confirmation": {
+    "title": "Felisitasyon!",
+    "subtitle": "Fòmilè ou a soumèt avèk siksè. Yon administratè KAFA ap kontakte ou.",
+    "memberNumber": "Nimewo Manb KAFA ou:",
+    "saveNumber": "Tanpri konsève nimewo sa a pou referans ou.",
+    "fullName": "Non Konplè:",
+    "commune": "Komin:",
+    "close": "Fèmen",
+    "copyNumber": "Kopye Nimewo",
+    "copied": "Nimewo kopye!",
+    "copiedDesc": "Nimewo manb ou kopye nan clipboard."
+  },
+  "assistant": {
+    "title": "Asistan KAFA",
+    "placeholder": "Poze mwen nenpòt kesyon sou KAFA — manb, plan, kouvèti, ak plis.",
+    "inputPlaceholder": "Ekri kesyon ou...",
+    "error": "Padon, mwen pa t kapab jwenn yon repons. Eseye ankò oswa kontakte kontak@kafayiti.com."
   }
 }
