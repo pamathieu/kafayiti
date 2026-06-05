@@ -105,7 +105,7 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="flex flex-col w-full sm:max-w-md p-0">
         <SheetHeader className="px-4 py-3 border-b bg-primary text-primary-foreground">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between pr-8">
             <SheetTitle className="flex items-center gap-2 text-primary-foreground">
               <Bot className="w-5 h-5" />
               {t("assistant.title")}
