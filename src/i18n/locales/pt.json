@@ -989,6 +989,8 @@
     "title": "Assistente KAFA",
     "placeholder": "Pergunte-me sobre KAFA — adesão, planos, cobertura e mais.",
     "inputPlaceholder": "Escreva a sua pergunta...",
-    "error": "Desculpe, não consegui obter resposta. Tente novamente ou contacte kontak@kafayiti.com."
+    "error": "Desculpe, não consegui obter resposta. Tente novamente ou contacte kontak@kafayiti.com.",
+    "clearChat": "Limpar conversa",
+    "limitReached": "Atingiu o limite de 5 conversas por dia. Tente novamente amanhã ou contacte-nos em info@kafayiti.com."
   }
 }

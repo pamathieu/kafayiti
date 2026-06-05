@@ -1072,6 +1072,8 @@
     "title": "KAFA Assistant",
     "placeholder": "Ask me anything about KAFA — membership, plans, coverage, and more.",
     "inputPlaceholder": "Type your question...",
-    "error": "Sorry, I couldn't get a response. Please try again or contact kontak@kafayiti.com."
+    "error": "Sorry, I couldn't get a response. Please try again or contact kontak@kafayiti.com.",
+    "clearChat": "Clear conversation",
+    "limitReached": "You've reached the daily limit of 5 conversations. Please try again tomorrow or contact us at info@kafayiti.com."
   }
 }

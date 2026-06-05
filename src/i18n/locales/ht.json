@@ -704,6 +704,8 @@
     "title": "Asistan KAFA",
     "placeholder": "Poze mwen nenpòt kesyon sou KAFA — manb, plan, kouvèti, ak plis.",
     "inputPlaceholder": "Ekri kesyon ou...",
-    "error": "Padon, mwen pa t kapab jwenn yon repons. Eseye ankò oswa kontakte kontak@kafayiti.com."
+    "error": "Padon, mwen pa t kapab jwenn yon repons. Eseye ankò oswa kontakte kontak@kafayiti.com.",
+    "clearChat": "Efase konvèsasyon an",
+    "limitReached": "Ou rive limit 5 konvèsasyon pa jou. Eseye ankò demen oswa kontakte nou nan info@kafayiti.com."
   }
 }

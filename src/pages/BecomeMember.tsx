@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AssistantChat from "@/components/AssistantChat";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -21,6 +22,7 @@ import MembershipConfirmationDialog from "@/components/MembershipConfirmationDia
 const BecomeMember = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const [chatOpen, setChatOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [personalInfoOpen, setPersonalInfoOpen] = useState(true);
@@ -739,6 +741,17 @@ const BecomeMember = () => {
       </main>
 
       <Footer />
+
+      {/* Floating assistant button */}
+      <button
+        onClick={() => setChatOpen(true)}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
+        aria-label="Open assistant"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </button>
+
+      <AssistantChat open={chatOpen} onOpenChange={setChatOpen} conversationType="prospect" />
 
       <MembershipConfirmationDialog
         open={showConfirmation}

@@ -30,11 +30,12 @@ export const handler = async (event) => {
     const d = JSON.parse(event.body ?? "{}");
 
     // Write prospect to DynamoDB
+    const prospectId = crypto.randomUUID();
     await dynamo.send(
       new PutCommand({
         TableName: TABLE,
         Item: {
-          id: crypto.randomUUID(),
+          id: prospectId,
           createdAt: new Date().toISOString(),
           memberNumber: d.memberNumber ?? "",
           firstName: d.firstName ?? "",
@@ -97,6 +98,42 @@ export const handler = async (event) => {
         },
       })
     );
+
+    // Send WhatsApp notification via Twilio
+    const twilioSid = process.env.TWILIO_ACCOUNT_SID;
+    const twilioToken = process.env.TWILIO_AUTH_TOKEN;
+    const whatsappFrom = process.env.TWILIO_WHATSAPP_FROM;
+    const whatsappTo = process.env.TWILIO_WHATSAPP_TO;
+
+    if (twilioSid && twilioToken && whatsappFrom && whatsappTo) {
+      const name = `${d.firstName ?? ""} ${d.lastName ?? ""}`.trim();
+      const whatsappBody = [
+        "📋 *New KAFA Membership Application*",
+        `👤 Name: ${name}`,
+        `📞 Phone: ${d.phone ?? ""}`,
+        d.email ? `📧 Email: ${d.email}` : null,
+        d.message ? `💬 Message: ${d.message}` : null,
+        `🕐 ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })}`,
+        "",
+        `👉 View prospect: https://admin.kafayiti.com?prospect=${prospectId}`,
+      ].filter((l) => l !== null).join("\n");
+
+      await fetch(
+        `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${Buffer.from(`${twilioSid}:${twilioToken}`).toString("base64")}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            From: whatsappFrom,
+            To: whatsappTo,
+            Body: whatsappBody,
+          }).toString(),
+        }
+      );
+    }
 
     return {
       statusCode: 200,
