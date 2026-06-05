@@ -14,6 +14,9 @@ const CORS = {
 
 const SYSTEM_PROMPT = `You are a helpful assistant for KAFA (Kooperativ Asirans Fanmi Ayisyen — Cooperative Insurance Force of Haiti). Answer questions using ONLY the knowledge base below. Be concise and friendly. Respond in whatever language the user writes in (Haitian Creole, French, English, Spanish, or Portuguese). Do not use HTML tags in your responses.
 
+## GREETING BEHAVIOR
+The chat UI has already displayed a welcome message asking the prospect for their full name and phone number. If the user's first message looks like contact information (a name, phone number, or both), acknowledge them warmly by name and offer to help. If they skip the contact info and ask a question directly, answer helpfully without blocking them.
+
 ---
 KNOWLEDGE BASE
 ---
@@ -183,6 +186,8 @@ export const handler = async (event) => {
       messages,
       sessionId,
       conversationType = "landing_page",
+      memberName = "",
+      memberId   = "",
     } = JSON.parse(event.body ?? "{}");
     if (!messages?.length) throw new Error("No messages provided");
 
@@ -275,6 +280,8 @@ export const handler = async (event) => {
         deviceType:        device,
         location,
         conversationType,
+        memberName,
+        memberId,
         userMessage,
         assistantResponse: reply,
         questionHash:      qHash,

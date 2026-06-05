@@ -117,9 +117,21 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
         {/* Messages */}
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {messages.length === 0 && (
-            <p className="text-sm text-muted-foreground text-center mt-8">
-              {t("assistant.placeholder")}
-            </p>
+            <div className="flex gap-2 justify-start">
+              <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center shrink-0 mt-0.5">
+                <Bot className="w-4 h-4 text-primary-foreground" />
+              </div>
+              <div className="max-w-[80%] rounded-2xl rounded-tl-sm px-4 py-2 text-sm leading-relaxed bg-muted text-foreground">
+                <ReactMarkdown
+                  components={{
+                    p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                    strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                  }}
+                >
+                  {t("assistant.greeting")}
+                </ReactMarkdown>
+              </div>
+            </div>
           )}
           {messages.map((msg, i) => (
             <div
