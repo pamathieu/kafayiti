@@ -197,7 +197,8 @@ export const handler = async (event) => {
     const userAgent = event.headers?.["User-Agent"] ?? event.headers?.["user-agent"] ?? "";
     const { browser, os, device } = parseUserAgent(userAgent);
     const today     = new Date().toISOString().split("T")[0];
-    const ipDate    = `${ipAddress}#${today}`;
+    const fiveMinBucket = Math.floor(Date.now() / (5 * 60 * 1000));
+    const ipDate    = `${ipAddress}#${fiveMinBucket}`;
     const timestamp = new Date().toISOString();
     const userMessage = messages[messages.length - 1]?.content ?? "";
     const qHash     = hashQuestion(userMessage);

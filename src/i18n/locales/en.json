@@ -1074,7 +1074,7 @@
     "inputPlaceholder": "Type your question...",
     "error": "Sorry, I couldn't get a response. Please try again or contact kontak@kafayiti.com.",
     "clearChat": "Clear conversation",
-    "limitReached": "You've reached the daily limit of 5 conversations. You can chat again in **{{timeLeft}}** or contact us at info@kafayiti.com.",
+    "limitReached": "You've reached the limit of 5 conversations. You can chat again in **{{timeLeft}}** or contact us at info@kafayiti.com.",
     "greeting": "Welcome to KAFA! I'm happy to assist you today.\n\nTo get started, could you please share your **full name** and **phone number**? This helps us follow up with you if needed."
   }
 }
