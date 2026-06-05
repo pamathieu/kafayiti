@@ -991,7 +991,7 @@
     "inputPlaceholder": "Escreva a sua pergunta...",
     "error": "Desculpe, não consegui obter resposta. Tente novamente ou contacte kontak@kafayiti.com.",
     "clearChat": "Limpar conversa",
-    "limitReached": "Atingiu o limite de 5 conversas por dia. Tente novamente amanhã ou contacte-nos em info@kafayiti.com.",
+    "limitReached": "Atingiu o limite de 5 conversas por dia. Poderá conversar novamente em **{{timeLeft}}** ou contacte-nos em info@kafayiti.com.",
     "greeting": "Bem-vindo à KAFA! Estou aqui para ajudá-lo.\n\nPara começar, poderia partilhar o seu **nome completo** e **número de telefone**? Isso ajuda-nos a fazer o acompanhamento se necessário."
   }
 }

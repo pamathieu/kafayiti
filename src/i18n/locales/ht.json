@@ -706,7 +706,7 @@
     "inputPlaceholder": "Ekri kesyon ou...",
     "error": "Padon, mwen pa t kapab jwenn yon repons. Eseye ankò oswa kontakte kontak@kafayiti.com.",
     "clearChat": "Efase konvèsasyon an",
-    "limitReached": "Ou rive limit 5 konvèsasyon pa jou. Eseye ankò demen oswa kontakte nou nan info@kafayiti.com.",
+    "limitReached": "Ou rive limit 5 konvèsasyon pa jou. Ou ka tchate ankò nan **{{timeLeft}}** oswa kontakte nou nan info@kafayiti.com.",
     "greeting": "Byenveni nan KAFA! Nou kontan ede ou jodi a.\n\nPou nou kòmanse, eske ou ka ban nou **non konplè ou** ak **nimewo telefòn ou**? Sa ede nou swiv ou si sa nesesè."
   }
 }

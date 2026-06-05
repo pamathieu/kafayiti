@@ -9,6 +9,18 @@ import { Send, Loader2, Bot, User, Trash2 } from "lucide-react";
 const STORAGE_KEY = "kafa_chat_messages";
 const SESSION_KEY = "kafa_chat_session_id";
 
+function timeUntilMidnightUTC(): string {
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setUTCHours(24, 0, 0, 0);
+  const ms = midnight.getTime() - now.getTime();
+  const h = Math.floor(ms / 3_600_000);
+  const m = Math.floor((ms % 3_600_000) / 60_000);
+  if (h > 0 && m > 0) return `${h}h ${m}m`;
+  if (h > 0) return `${h}h`;
+  return `${m}m`;
+}
+
 const getOrCreateSessionId = (): string => {
   let id = localStorage.getItem(SESSION_KEY);
   if (!id) {
@@ -77,7 +89,7 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
       });
       const data = await res.json();
       if (res.status === 429 || data.limitReached) {
-        setMessages([...updated, { role: "assistant", content: t("assistant.limitReached") }]);
+        setMessages([...updated, { role: "assistant", content: t("assistant.limitReached", { timeLeft: timeUntilMidnightUTC() }) }]);
       } else {
         setMessages([...updated, { role: "assistant", content: data.reply }]);
       }
