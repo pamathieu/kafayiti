@@ -76,7 +76,7 @@ const Home = () => {
                 </Button>
               </div>
 
-              <AssistantChat open={chatOpen} onOpenChange={setChatOpen} />
+              <AssistantChat open={chatOpen} onOpenChange={setChatOpen} conversationType="prospect_chat" />
             </div>
           </div>
         </section>

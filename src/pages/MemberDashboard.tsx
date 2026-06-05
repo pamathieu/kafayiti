@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useMemberData } from "@/hooks/useMemberData";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
-import AssistantChat from "@/components/AssistantChat";
 import { DashboardProfile } from "@/components/Dashboard/DashboardProfile";
 import { DashboardPlanInfo } from "@/components/Dashboard/DashboardPlanInfo";
 import { DashboardPayments } from "@/components/Dashboard/DashboardPayments";
@@ -242,17 +241,6 @@ const MemberDashboard = () => {
       </main>
 
       <Footer />
-
-      {/* Floating assistant button */}
-      <button
-        onClick={() => setChatOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center hover:bg-primary/90 transition-colors"
-        aria-label="Open assistant"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </button>
-
-      <AssistantChat open={chatOpen} onOpenChange={setChatOpen} conversationType="member" />
     </div>
   );
 };
