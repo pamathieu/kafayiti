@@ -29,6 +29,59 @@ export const handler = async (event) => {
   try {
     const d = JSON.parse(event.body ?? "{}");
 
+    // ── Approval email ────────────────────────────────────────────────────────
+    if (d.action === "approval") {
+      if (!d.email) throw new Error("email required for approval action");
+
+      const approvalHtml = `
+        <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+          <div style="background:#1a5c2e;padding:24px 32px;text-align:center">
+            <h1 style="color:#fff;margin:0;font-size:22px">KAFA — Kooperativ Asirans Fanmi Ayisyen</h1>
+          </div>
+          <div style="padding:32px;background:#fff">
+            <h2 style="color:#1a5c2e;margin-top:0">Congratulations, ${d.name ?? ""}! 🎉</h2>
+            <p>We are pleased to inform you that your KAFA membership application has been <strong>approved</strong>. Welcome to the KAFA family!</p>
+            <div style="background:#f0faf4;border-left:4px solid #1a5c2e;padding:16px 20px;margin:24px 0;border-radius:4px">
+              <p style="margin:0;font-weight:bold;color:#1a5c2e">Your Member Number</p>
+              <p style="margin:8px 0 0;font-size:20px;letter-spacing:1px">${d.memberNumber ?? "—"}</p>
+            </div>
+            <p>You can now access your member portal to view your plan, make payments, and manage your account:</p>
+            <div style="text-align:center;margin:32px 0">
+              <a href="https://member.kafayiti.com"
+                 style="background:#1a5c2e;color:#fff;padding:14px 32px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:16px;display:inline-block">
+                Access Member Portal
+              </a>
+            </div>
+            <p>If you have any questions, feel free to reach us:</p>
+            <ul style="color:#333;line-height:2">
+              <li>📧 <a href="mailto:info@kafayiti.com" style="color:#1a5c2e">info@kafayiti.com</a></li>
+              <li>📞 (509) 3500-0326 / (509) 4439-8595</li>
+              <li>🌐 <a href="https://kafayiti.com" style="color:#1a5c2e">kafayiti.com</a></li>
+            </ul>
+          </div>
+          <div style="background:#f0f0f0;padding:16px 32px;text-align:center;font-size:12px;color:#888">
+            KAFA — 874 Rue Ste Catherine, Léogâne, Haïti
+          </div>
+        </div>`;
+
+      await ses.send(
+        new SendEmailCommand({
+          Source: "KAFA <noreply@kafayiti.com>",
+          Destination: { ToAddresses: [d.email] },
+          Message: {
+            Subject: { Data: "KAFA — Membership Approved! Welcome to the Family" },
+            Body: { Html: { Data: approvalHtml } },
+          },
+        })
+      );
+
+      return {
+        statusCode: 200,
+        headers: CORS,
+        body: JSON.stringify({ success: true }),
+      };
+    }
+
     // Write prospect to DynamoDB
     const prospectId = crypto.randomUUID();
     await dynamo.send(

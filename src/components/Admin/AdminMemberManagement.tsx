@@ -88,9 +88,31 @@ const AdminMemberManagement = ({
 
       if (error) throw error;
 
+      // Send approval email when converting to active for the first time
+      const isConvertingToMember =
+        membershipStatus === "active" &&
+        member.membership_status !== "active" &&
+        member.email;
+
+      if (isConvertingToMember) {
+        const apiUrl = import.meta.env.VITE_EMAIL_API_URL;
+        await fetch(apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "approval",
+            email: member.email,
+            name: member.full_name,
+            memberNumber: member.member_number,
+          }),
+        });
+      }
+
       toast({
         title: "Membre mis à jour",
-        description: "Les informations du membre ont été mises à jour avec succès",
+        description: isConvertingToMember && member.email
+          ? `Email d'approbation envoyé à ${member.email}`
+          : "Les informations du membre ont été mises à jour avec succès",
       });
       onMemberUpdated();
     } catch (error) {
