@@ -186,11 +186,11 @@ export const handler = async (event) => {
       messages,
       sessionId,
       conversationType = "landing_page",
-      memberName    = "",
-      memberId      = "",
-      prospectName  = "",
-      prospectPhone = "",
+      memberName = "",
+      memberId   = "",
     } = JSON.parse(event.body ?? "{}");
+    let prospectName  = "";
+    let prospectPhone = "";
     if (!messages?.length) throw new Error("No messages provided");
 
     // ── Agent info ────────────────────────────────────────────────────────────
@@ -248,7 +248,7 @@ export const handler = async (event) => {
     }
 
     // ── Prospect extraction (first message only, runs in parallel) ────────────
-    const isFirstMessage = messages.length === 1 && !prospectName && !prospectPhone;
+    const isFirstMessage = messages.length === 1;
     const extractionFetch = isFirstMessage
       ? fetch("https://api.anthropic.com/v1/messages", {
           method: "POST",
