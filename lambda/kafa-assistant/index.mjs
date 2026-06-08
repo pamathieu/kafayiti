@@ -17,6 +17,12 @@ const SYSTEM_PROMPT = `You are a helpful assistant for KAFA (Kooperativ Asirans 
 ## GREETING BEHAVIOR
 The chat UI has already displayed a welcome message asking the prospect for their full name and phone number. If the user's first message looks like contact information (a name, phone number, or both), acknowledge them warmly by name and offer to help. If they skip the contact info and ask a question directly, answer helpfully without blocking them.
 
+## CONTACT EXTRACTION
+When the user's message contains their name and/or phone number, prepend your response with this exact tag on its own line before anything else:
+[PROSPECT_INFO]{"name":"<full name only>","phone":"<phone number only>"}[/PROSPECT_INFO]
+
+Extract only the actual name (e.g. "Roy Palmer") and phone (e.g. "312-543-9021") — not the surrounding sentence. Use empty string if not present. This tag is stripped before the user sees your reply.
+
 ---
 KNOWLEDGE BASE
 ---
@@ -247,57 +253,34 @@ export const handler = async (event) => {
       console.warn("Cache check unavailable:", e.message);
     }
 
-    // ── Prospect extraction (first message only, runs in parallel) ────────────
-    const isFirstMessage = messages.length === 1;
-    const extractionFetch = isFirstMessage
-      ? fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-            "anthropic-version": "2023-06-01",
-          },
-          body: JSON.stringify({
-            model: "claude-haiku-4-5-20251001",
-            max_tokens: 60,
-            system: 'Extract the person\'s name and phone number. Return ONLY valid JSON: {"name":"","phone":""}. Use empty string if not found.',
-            messages: [{ role: "user", content: userMessage }],
-          }),
-        })
-      : Promise.resolve(null);
-
-    const mainFetch = reply
-      ? Promise.resolve(null)
-      : fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": apiKey,
-            "anthropic-version": "2023-06-01",
-          },
-          body: JSON.stringify({
-            model: "claude-haiku-4-5-20251001",
-            max_tokens: 1024,
-            system: SYSTEM_PROMPT,
-            messages,
-          }),
-        });
-
-    const [mainRes, extractRes] = await Promise.all([mainFetch, extractionFetch]);
-
-    if (mainRes) {
-      if (!mainRes.ok) throw new Error(`Anthropic API error: ${await mainRes.text()}`);
-      reply = (await mainRes.json()).content?.[0]?.text ?? "";
+    if (!reply) {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify({
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 1024,
+          system: SYSTEM_PROMPT,
+          messages,
+        }),
+      });
+      if (!res.ok) throw new Error(`Anthropic API error: ${await res.text()}`);
+      reply = (await res.json()).content?.[0]?.text ?? "";
     }
 
-    if (extractRes) {
+    // ── Extract prospect info from reply tag ──────────────────────────────────
+    const tagMatch = reply.match(/^\[PROSPECT_INFO\](.*?)\[\/PROSPECT_INFO\]\n?/s);
+    if (tagMatch) {
       try {
-        const extracted = JSON.parse((await extractRes.json()).content?.[0]?.text ?? "{}");
-        if (extracted.name)  prospectName  = extracted.name.trim();
-        if (extracted.phone) prospectPhone = extracted.phone.trim();
-      } catch {
-        // extraction best-effort
-      }
+        const info = JSON.parse(tagMatch[1]);
+        if (info.name)  prospectName  = info.name.trim();
+        if (info.phone) prospectPhone = info.phone.trim();
+      } catch { /* best-effort */ }
+      reply = reply.replace(/^\[PROSPECT_INFO\].*?\[\/PROSPECT_INFO\]\n?/s, "").trim();
     }
 
     // ── Persist exchange ──────────────────────────────────────────────────────
