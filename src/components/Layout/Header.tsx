@@ -67,11 +67,11 @@ const Header = () => {
                 </Button>
               </>
             ) : (
-              <Link to="/auth/login">
+              <a href="https://member.kafayiti.com">
                 <Button className="ml-2 bg-primary hover:bg-primary-dark">
                   {t('nav.login')}
                 </Button>
-              </Link>
+              </a>
             )}
             <LanguageSwitcher />
           </nav>
@@ -118,11 +118,11 @@ const Header = () => {
                 </button>
               </>
             ) : (
-              <Link to="/auth/login" onClick={() => setIsMenuOpen(false)} className="block pt-2">
-                <Button className="w-full bg-primary hover:bg-primary-dark">
+              <a href="https://member.kafayiti.com" className="block pt-2">
+                <Button className="w-full bg-primary hover:bg-primary-dark" onClick={() => setIsMenuOpen(false)}>
                   {t('nav.login')}
                 </Button>
-              </Link>
+              </a>
             )}
             <div className="pt-2 px-4">
               <LanguageSwitcher />

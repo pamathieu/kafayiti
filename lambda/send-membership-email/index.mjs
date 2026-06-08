@@ -99,6 +99,45 @@ export const handler = async (event) => {
       })
     );
 
+    // Send confirmation email to prospect (if email provided)
+    if (d.email) {
+      const name = `${d.firstName ?? ""} ${d.lastName ?? ""}`.trim();
+      const confirmHtml = `
+        <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+          <div style="background:#1a5c2e;padding:24px 32px;text-align:center">
+            <h1 style="color:#fff;margin:0;font-size:22px">KAFA — Kooperativ Asirans Fanmi Ayisyen</h1>
+          </div>
+          <div style="padding:32px;background:#fff">
+            <p style="font-size:16px">Dear ${name},</p>
+            <p>Thank you for submitting your KAFA membership application. We have received your information and a KAFA representative will contact you shortly.</p>
+            <div style="background:#f5f5f5;border-left:4px solid #1a5c2e;padding:16px 20px;margin:24px 0;border-radius:4px">
+              <p style="margin:0;font-weight:bold;color:#1a5c2e">Your Member Number</p>
+              <p style="margin:8px 0 0;font-size:20px;letter-spacing:1px">${d.memberNumber ?? "—"}</p>
+            </div>
+            <p>If you have any questions in the meantime, feel free to reach us:</p>
+            <ul style="color:#333;line-height:2">
+              <li>📧 <a href="mailto:info@kafayiti.com" style="color:#1a5c2e">info@kafayiti.com</a></li>
+              <li>📞 (509) 3500-0326 / (509) 4439-8595</li>
+              <li>🌐 <a href="https://kafayiti.com" style="color:#1a5c2e">kafayiti.com</a></li>
+            </ul>
+          </div>
+          <div style="background:#f0f0f0;padding:16px 32px;text-align:center;font-size:12px;color:#888">
+            KAFA — 874 Rue Ste Catherine, Léogâne, Haïti
+          </div>
+        </div>`;
+
+      await ses.send(
+        new SendEmailCommand({
+          Source: "KAFA <noreply@kafayiti.com>",
+          Destination: { ToAddresses: [d.email] },
+          Message: {
+            Subject: { Data: "KAFA — Membership Application Received" },
+            Body: { Html: { Data: confirmHtml } },
+          },
+        })
+      );
+    }
+
     // Send WhatsApp notification via Twilio
     const twilioSid = process.env.TWILIO_ACCOUNT_SID;
     const twilioToken = process.env.TWILIO_AUTH_TOKEN;
