@@ -81,16 +81,10 @@ jobs:
       - name: Sync to S3 (www.kafayiti.com)
         run: aws s3 sync ./dist s3://www.kafayiti.com --delete
 
-      - name: Sync to S3 (admin.kafayiti.com)
-        run: aws s3 sync ./dist s3://kafa-admin-kafayiti --delete
-
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
-          aws cloudfront create-invalidation \
-            --distribution-id E26L9YGGOBRFGL \
             --paths "/*"
 
   deploy-lambda:
