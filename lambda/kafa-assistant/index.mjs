@@ -247,23 +247,57 @@ export const handler = async (event) => {
       console.warn("Cache check unavailable:", e.message);
     }
 
-    if (!reply) {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey,
-          "anthropic-version": "2023-06-01",
-        },
-        body: JSON.stringify({
-          model: "claude-haiku-4-5-20251001",
-          max_tokens: 1024,
-          system: SYSTEM_PROMPT,
-          messages,
-        }),
-      });
-      if (!res.ok) throw new Error(`Anthropic API error: ${await res.text()}`);
-      reply = (await res.json()).content?.[0]?.text ?? "";
+    // ── Prospect extraction (first message only, runs in parallel) ────────────
+    const isFirstMessage = messages.length === 1 && !prospectName && !prospectPhone;
+    const extractionFetch = isFirstMessage
+      ? fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apiKey,
+            "anthropic-version": "2023-06-01",
+          },
+          body: JSON.stringify({
+            model: "claude-haiku-4-5-20251001",
+            max_tokens: 60,
+            system: 'Extract the person\'s name and phone number. Return ONLY valid JSON: {"name":"","phone":""}. Use empty string if not found.',
+            messages: [{ role: "user", content: userMessage }],
+          }),
+        })
+      : Promise.resolve(null);
+
+    const mainFetch = reply
+      ? Promise.resolve(null)
+      : fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-api-key": apiKey,
+            "anthropic-version": "2023-06-01",
+          },
+          body: JSON.stringify({
+            model: "claude-haiku-4-5-20251001",
+            max_tokens: 1024,
+            system: SYSTEM_PROMPT,
+            messages,
+          }),
+        });
+
+    const [mainRes, extractRes] = await Promise.all([mainFetch, extractionFetch]);
+
+    if (mainRes) {
+      if (!mainRes.ok) throw new Error(`Anthropic API error: ${await mainRes.text()}`);
+      reply = (await mainRes.json()).content?.[0]?.text ?? "";
+    }
+
+    if (extractRes) {
+      try {
+        const extracted = JSON.parse((await extractRes.json()).content?.[0]?.text ?? "{}");
+        if (extracted.name)  prospectName  = extracted.name.trim();
+        if (extracted.phone) prospectPhone = extracted.phone.trim();
+      } catch {
+        // extraction best-effort
+      }
     }
 
     // ── Persist exchange ──────────────────────────────────────────────────────
@@ -297,7 +331,7 @@ export const handler = async (event) => {
     return {
       statusCode: 200,
       headers: CORS,
-      body: JSON.stringify({ reply, fromCache }),
+      body: JSON.stringify({ reply, fromCache, prospectName, prospectPhone }),
     };
   } catch (err) {
     console.error(err);

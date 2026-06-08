@@ -20,16 +20,6 @@ function timeUntilNextWindow(): string {
   return `${s}s`;
 }
 
-function extractContactInfo(text: string): { name: string; phone: string } {
-  const phoneMatch = text.match(/\+?[\d][\d\s\-(). ]{5,}/);
-  const phone = phoneMatch ? phoneMatch[0].trim() : "";
-  const name = text
-    .replace(phoneMatch?.[0] ?? "", "")
-    .replace(/[,;/|]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  return { name, phone };
-}
 
 const getOrCreateSessionId = (): string => {
   let id = localStorage.getItem(SESSION_KEY);
@@ -98,17 +88,6 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
     const text = input.trim();
     if (!text || loading) return;
 
-    // First reply after the greeting — extract name/phone
-    let currentProspect = prospect;
-    if (messages.length === 0 && !prospect.name && !prospect.phone) {
-      const info = extractContactInfo(text);
-      if (info.name || info.phone) {
-        currentProspect = info;
-        setProspect(info);
-        localStorage.setItem(PROSPECT_KEY, JSON.stringify(info));
-      }
-    }
-
     const userMessage: Message = { role: "user", content: text };
     const updated = [...messages, userMessage];
     setMessages(updated);
@@ -124,8 +103,8 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
           messages: updated,
           sessionId: getOrCreateSessionId(),
           conversationType,
-          prospectName: currentProspect.name,
-          prospectPhone: currentProspect.phone,
+          prospectName: prospect.name,
+          prospectPhone: prospect.phone,
         }),
       });
       const data = await res.json();
@@ -133,6 +112,11 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
         setMessages([...updated, { role: "assistant", content: t("assistant.limitReached", { timeLeft: timeUntilNextWindow() }) }]);
       } else {
         setMessages([...updated, { role: "assistant", content: data.reply }]);
+        if (data.prospectName || data.prospectPhone) {
+          const info = { name: data.prospectName ?? "", phone: data.prospectPhone ?? "" };
+          setProspect(info);
+          localStorage.setItem(PROSPECT_KEY, JSON.stringify(info));
+        }
       }
     } catch {
       setMessages([
