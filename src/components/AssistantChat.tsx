@@ -8,6 +8,7 @@ import { Send, Loader2, Bot, User, Trash2 } from "lucide-react";
 
 const STORAGE_KEY = "kafa_chat_messages";
 const SESSION_KEY = "kafa_chat_session_id";
+const PROSPECT_KEY = "kafa_prospect_info";
 
 function timeUntilNextWindow(): string {
   const windowMs = 5 * 60 * 1000;
@@ -17,6 +18,17 @@ function timeUntilNextWindow(): string {
   if (m > 0 && s > 0) return `${m}m ${s}s`;
   if (m > 0) return `${m}m`;
   return `${s}s`;
+}
+
+function extractContactInfo(text: string): { name: string; phone: string } {
+  const phoneMatch = text.match(/\+?[\d][\d\s\-(). ]{5,}/);
+  const phone = phoneMatch ? phoneMatch[0].trim() : "";
+  const name = text
+    .replace(phoneMatch?.[0] ?? "", "")
+    .replace(/[,;/|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return { name, phone };
 }
 
 const getOrCreateSessionId = (): string => {
@@ -31,6 +43,11 @@ const getOrCreateSessionId = (): string => {
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+interface ProspectInfo {
+  name: string;
+  phone: string;
 }
 
 interface AssistantChatProps {
@@ -49,6 +66,14 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
       return [];
     }
   });
+  const [prospect, setProspect] = useState<ProspectInfo>(() => {
+    try {
+      const saved = localStorage.getItem(PROSPECT_KEY);
+      return saved ? JSON.parse(saved) : { name: "", phone: "" };
+    } catch {
+      return { name: "", phone: "" };
+    }
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -63,14 +88,26 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
 
   const clearChat = () => {
     setMessages([]);
+    setProspect({ name: "", phone: "" });
     localStorage.removeItem(STORAGE_KEY);
-    // New session ID so cleared conversations are tracked separately
+    localStorage.removeItem(PROSPECT_KEY);
     localStorage.removeItem(SESSION_KEY);
   };
 
   const send = async () => {
     const text = input.trim();
     if (!text || loading) return;
+
+    // First reply after the greeting — extract name/phone
+    let currentProspect = prospect;
+    if (messages.length === 0 && !prospect.name && !prospect.phone) {
+      const info = extractContactInfo(text);
+      if (info.name || info.phone) {
+        currentProspect = info;
+        setProspect(info);
+        localStorage.setItem(PROSPECT_KEY, JSON.stringify(info));
+      }
+    }
 
     const userMessage: Message = { role: "user", content: text };
     const updated = [...messages, userMessage];
@@ -83,7 +120,13 @@ const AssistantChat = ({ open, onOpenChange, conversationType = "landing_page" }
       const res = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: updated, sessionId: getOrCreateSessionId(), conversationType }),
+        body: JSON.stringify({
+          messages: updated,
+          sessionId: getOrCreateSessionId(),
+          conversationType,
+          prospectName: currentProspect.name,
+          prospectPhone: currentProspect.phone,
+        }),
       });
       const data = await res.json();
       if (res.status === 429 || data.limitReached) {

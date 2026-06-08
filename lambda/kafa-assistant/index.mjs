@@ -186,8 +186,10 @@ export const handler = async (event) => {
       messages,
       sessionId,
       conversationType = "landing_page",
-      memberName = "",
-      memberId   = "",
+      memberName    = "",
+      memberId      = "",
+      prospectName  = "",
+      prospectPhone = "",
     } = JSON.parse(event.body ?? "{}");
     if (!messages?.length) throw new Error("No messages provided");
 
@@ -283,6 +285,8 @@ export const handler = async (event) => {
         conversationType,
         memberName,
         memberId,
+        prospectName,
+        prospectPhone,
         userMessage,
         assistantResponse: reply,
         questionHash:      qHash,
