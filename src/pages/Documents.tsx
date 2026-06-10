@@ -7,6 +7,7 @@ import Footer from "@/components/Layout/Footer";
 import kafaLogo from "@/assets/kafa-logo.png";
 
 const LANGS = [
+  { code: "fr", label: "Français" },
   { code: "en", label: "English" },
   { code: "ht", label: "Kreyòl" },
   { code: "es", label: "Español" },
@@ -99,7 +100,7 @@ const Documents = () => {
                               </CardTitle>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                 <span className="px-2 py-0.5 bg-muted rounded-full font-medium">DOCX</span>
-                                <span>4 {t('language.select')}</span>
+                                <span>5 {t('language.select')}</span>
                               </div>
                             </div>
                           </div>
@@ -108,7 +109,7 @@ const Documents = () => {
                           <CardDescription className="text-sm text-muted-foreground mb-4">
                             {doc.description}
                           </CardDescription>
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-3 gap-2">
                             {LANGS.map((lang) => (
                               <a
                                 key={lang.code}
