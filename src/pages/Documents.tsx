@@ -22,7 +22,6 @@ const Documents = () => {
   // Map current site language to a supported document language, fall back to French
   const currentLang = SUPPORTED.has(i18n.language) ? i18n.language : "fr";
   const currentLabel = LANGS.find(l => l.code === currentLang)?.label ?? "Français";
-  const otherLangs = LANGS.filter(l => l.code !== currentLang);
 
   const documentCategories = [
     {
@@ -125,25 +124,6 @@ const Documents = () => {
                             </Button>
                           </a>
 
-                          {/* Other languages */}
-                          <div className="grid grid-cols-2 gap-1.5">
-                            {otherLangs.map((lang) => (
-                              <a
-                                key={lang.code}
-                                href={`/documents/${doc.base}_${lang.code}.docx`}
-                                download
-                              >
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-xs"
-                                >
-                                  <Download className="w-3 h-3 mr-1" />
-                                  {lang.label}
-                                </Button>
-                              </a>
-                            ))}
-                          </div>
                         </CardContent>
                       </Card>
                     ))}
