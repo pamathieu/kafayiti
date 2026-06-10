@@ -14,8 +14,15 @@ const LANGS = [
   { code: "pt", label: "Português" },
 ];
 
+const SUPPORTED = new Set(LANGS.map(l => l.code));
+
 const Documents = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Map current site language to a supported document language, fall back to French
+  const currentLang = SUPPORTED.has(i18n.language) ? i18n.language : "fr";
+  const currentLabel = LANGS.find(l => l.code === currentLang)?.label ?? "Français";
+  const otherLangs = LANGS.filter(l => l.code !== currentLang);
 
   const documentCategories = [
     {
@@ -100,7 +107,7 @@ const Documents = () => {
                               </CardTitle>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                 <span className="px-2 py-0.5 bg-muted rounded-full font-medium">DOCX</span>
-                                <span>5 {t('language.select')}</span>
+                                <span>{currentLabel}</span>
                               </div>
                             </div>
                           </div>
@@ -109,8 +116,18 @@ const Documents = () => {
                           <CardDescription className="text-sm text-muted-foreground mb-4">
                             {doc.description}
                           </CardDescription>
-                          <div className="grid grid-cols-3 gap-2">
-                            {LANGS.map((lang) => (
+
+                          {/* Primary download — current language */}
+                          <a href={`/documents/${doc.base}_${currentLang}.docx`} download className="block mb-3">
+                            <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+                              <Download className="w-4 h-4 mr-2" />
+                              {t('documents.download')} — {currentLabel}
+                            </Button>
+                          </a>
+
+                          {/* Other languages */}
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {otherLangs.map((lang) => (
                               <a
                                 key={lang.code}
                                 href={`/documents/${doc.base}_${lang.code}.docx`}
@@ -119,7 +136,7 @@ const Documents = () => {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="w-full border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-colors text-xs"
+                                  className="w-full border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-xs"
                                 >
                                   <Download className="w-3 h-3 mr-1" />
                                   {lang.label}
