@@ -6,6 +6,13 @@ import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import kafaLogo from "@/assets/kafa-logo.png";
 
+const LANGS = [
+  { code: "en", label: "English" },
+  { code: "ht", label: "Kreyòl" },
+  { code: "es", label: "Español" },
+  { code: "pt", label: "Português" },
+];
+
 const Documents = () => {
   const { t } = useTranslation();
 
@@ -16,20 +23,16 @@ const Documents = () => {
       description: t('documents.categories.membershipDesc'),
       documents: [
         {
-          title: "Formulaire d'Adhésion",
+          title: t('forms.membershipForm'),
           description: t('forms.membershipFormDesc'),
-          fileType: "DOCX",
-          fileSize: "45 KB",
-          downloadLink: "/documents/FormulaireAdhesion.docx"
+          base: "FormulaireAdhesion",
         },
         {
-          title: "Devenir Membre KAFA",
+          title: t('forms.becomeMember'),
           description: t('forms.becomeMemberDesc'),
-          fileType: "DOCX",
-          fileSize: "32 KB",
-          downloadLink: "/documents/DevenirMembre.docx"
-        }
-      ]
+          base: "DevenirMembre",
+        },
+      ],
     },
     {
       category: t('documents.categories.funeral'),
@@ -37,38 +40,28 @@ const Documents = () => {
       description: t('documents.categories.funeralDesc'),
       documents: [
         {
-          title: "Souscription Plan Funéraire",
+          title: t('forms.funeralPlan'),
           description: t('forms.funeralPlanDesc'),
-          fileType: "DOCX",
-          fileSize: "52 KB",
-          downloadLink: "/documents/AppPlanFuneraire.docx"
-        }
-      ]
-    }
+          base: "AppPlanFuneraire",
+        },
+      ],
+    },
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="hero-padding bg-gradient-to-b from-primary/10 to-background">
           <div className="section-container">
             <div className="text-center content-container-sm">
               <div className="flex justify-center mb-6">
-                <img 
-                  src={kafaLogo} 
-                  alt="KAFA Logo" 
-                  className="h-20 sm:h-24 w-auto object-contain"
-                />
+                <img src={kafaLogo} alt="KAFA Logo" className="h-20 sm:h-24 w-auto object-contain" />
               </div>
-              <h1 className="hero-title text-foreground">
-                {t('documents.hero.title')}
-              </h1>
-              <p className="section-subtitle">
-                {t('documents.hero.subtitle')}
-              </p>
+              <h1 className="hero-title text-foreground">{t('documents.hero.title')}</h1>
+              <p className="section-subtitle">{t('documents.hero.subtitle')}</p>
             </div>
           </div>
         </section>
@@ -77,28 +70,22 @@ const Documents = () => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="content-spacing-lg">
-              {documentCategories.map((category, categoryIndex) => (
-                <div key={categoryIndex}>
-                  {/* Category Header */}
+              {documentCategories.map((category, ci) => (
+                <div key={ci}>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <category.icon className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-                        {category.category}
-                      </h2>
-                      <p className="text-sm text-muted-foreground">
-                        {category.description}
-                      </p>
+                      <h2 className="text-xl sm:text-2xl font-bold text-foreground">{category.category}</h2>
+                      <p className="text-sm text-muted-foreground">{category.description}</p>
                     </div>
                   </div>
 
-                  {/* Documents List */}
                   <div className="card-grid-2">
-                    {category.documents.map((doc, docIndex) => (
-                      <Card 
-                        key={docIndex}
+                    {category.documents.map((doc, di) => (
+                      <Card
+                        key={di}
                         className="bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-md"
                       >
                         <CardHeader className="pb-3">
@@ -111,10 +98,8 @@ const Documents = () => {
                                 {doc.title}
                               </CardTitle>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                <span className="px-2 py-0.5 bg-muted rounded-full font-medium">
-                                  {doc.fileType}
-                                </span>
-                                <span>{doc.fileSize}</span>
+                                <span className="px-2 py-0.5 bg-muted rounded-full font-medium">DOCX</span>
+                                <span>4 {t('language.select')}</span>
                               </div>
                             </div>
                           </div>
@@ -123,15 +108,24 @@ const Documents = () => {
                           <CardDescription className="text-sm text-muted-foreground mb-4">
                             {doc.description}
                           </CardDescription>
-                          <a href={doc.downloadLink} download className="block">
-                            <Button 
-                              variant="outline" 
-                              className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
-                            >
-                              <Download className="w-4 h-4 mr-2" />
-                              {t('documents.download')}
-                            </Button>
-                          </a>
+                          <div className="grid grid-cols-2 gap-2">
+                            {LANGS.map((lang) => (
+                              <a
+                                key={lang.code}
+                                href={`/documents/${doc.base}_${lang.code}.docx`}
+                                download
+                              >
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-colors text-xs"
+                                >
+                                  <Download className="w-3 h-3 mr-1" />
+                                  {lang.label}
+                                </Button>
+                              </a>
+                            ))}
+                          </div>
                         </CardContent>
                       </Card>
                     ))}
@@ -153,9 +147,7 @@ const Documents = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href="tel:+50935000326">
-                      <Button variant="outline" className="w-full sm:w-auto">
-                        (509) 3500-0326
-                      </Button>
+                      <Button variant="outline" className="w-full sm:w-auto">(509) 3500-0326</Button>
                     </a>
                     <a href="mailto:info@kafayiti.com">
                       <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90">
