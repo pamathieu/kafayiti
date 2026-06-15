@@ -243,12 +243,15 @@
       "subtitle": "Choose the plan that's best for you and your family"
     },
     "description": "All KAFA plans offer solid protection for your family. Choose the coverage that matches your needs and assets.",
+    "validityNotice": "These premiums are in effect until December 2026.",
     "basic": "Basic Plan",
     "standard": "Standard Plan",
-    "premium": "Premium Plan",
-    "savings": "Savings Plan",
+    "savings": "Funeral Savings Plan",
     "popular": "Most Popular",
     "gourdes": "Gourdes",
+    "annual": "Annual",
+    "monthly": "Monthly",
+    "savingsTagline": "Save for your funeral",
     "choosePlan": "Choose This Plan",
     "features": {
       "coverage": "Coverage",

@@ -228,12 +228,15 @@
       "subtitle": "Choisissez le plan qui vous convient le mieux, à vous et votre famille"
     },
     "description": "Tous les plans KAFA offrent une protection solide pour votre famille. Choisissez la couverture qui correspond à vos besoins et vos biens.",
+    "validityNotice": "Ces primes sont en vigueur jusqu'en décembre 2026.",
     "basic": "Plan de Base",
     "standard": "Plan Standard",
-    "premium": "Plan Premium",
-    "savings": "Plan Épargne",
+    "savings": "Plan d'Épargne Funéraire",
     "popular": "Le Plus Populaire",
     "gourdes": "Gourdes",
+    "annual": "Annuel",
+    "monthly": "Mensuel",
+    "savingsTagline": "Épargnez pour vos funérailles",
     "choosePlan": "Choisir Ce Plan",
     "features": {
       "coverage": "Couverture",

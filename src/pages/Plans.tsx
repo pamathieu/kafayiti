@@ -4,7 +4,7 @@ import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Info } from "lucide-react";
 
 const Plans = () => {
   const { t } = useTranslation();
@@ -12,9 +12,13 @@ const Plans = () => {
   const plans = [
     {
       name: t('plans.basic'),
-      coverage: "250,000",
+      coverage: "270,000",
+      annualUSD: "US$120",
+      annualGdes: "16,250",
+      monthlyUSD: "US$10",
+      monthlyGdes: "1,350",
       features: [
-        `${t('plans.features.coverage')} 250,000 Gdes`,
+        `${t('plans.features.coverage')} 270,000 Gdes`,
         t('plans.features.ageAcceptance'),
         t('plans.features.noExam'),
         t('plans.features.fixedPremium'),
@@ -25,9 +29,13 @@ const Plans = () => {
     },
     {
       name: t('plans.standard'),
-      coverage: "350,000",
+      coverage: "400,000",
+      annualUSD: "US$240",
+      annualGdes: "32,500",
+      monthlyUSD: "US$20",
+      monthlyGdes: "2,700",
       features: [
-        `${t('plans.features.coverage')} 350,000 Gdes`,
+        `${t('plans.features.coverage')} 400,000 Gdes`,
         t('plans.features.ageAcceptance'),
         t('plans.features.noExam'),
         t('plans.features.fixedPremium'),
@@ -39,25 +47,13 @@ const Plans = () => {
       popular: true
     },
     {
-      name: t('plans.premium'),
-      coverage: "500,000",
-      features: [
-        `${t('plans.features.coverage')} 500,000 Gdes`,
-        t('plans.features.ageAcceptance'),
-        t('plans.features.noExam'),
-        t('plans.features.fixedPremium'),
-        t('plans.features.flexiblePayment'),
-        t('plans.features.fastClaims'),
-        t('plans.features.support247'),
-        t('plans.features.ceremonyAssist')
-      ],
-      color: "accent"
-    },
-    {
       name: t('plans.savings'),
-      coverage: "750,000",
+      coverage: null,
+      annualUSD: null,
+      annualGdes: null,
+      monthlyUSD: null,
+      monthlyGdes: null,
       features: [
-        `${t('plans.features.coverage')} 750,000 Gdes`,
         t('plans.features.allAges'),
         t('plans.features.unlimitedSavings'),
         t('plans.features.continuousDeposit'),
@@ -74,7 +70,7 @@ const Plans = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="bg-gradient-hero hero-padding text-primary-foreground">
@@ -90,6 +86,16 @@ const Plans = () => {
           </div>
         </section>
 
+        {/* Validity Notice */}
+        <section className="bg-amber-50 border-b border-amber-200 py-3 px-4">
+          <div className="section-container">
+            <div className="flex items-center justify-center gap-2 text-amber-800 text-sm font-medium text-center">
+              <Info className="w-4 h-4 flex-shrink-0" />
+              <span>{t('plans.validityNotice')}</span>
+            </div>
+          </div>
+        </section>
+
         {/* Plans Section */}
         <section className="section-padding bg-background">
           <div className="section-container">
@@ -99,10 +105,10 @@ const Plans = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
               {plans.map((plan, index) => (
-                <Card 
-                  key={index} 
+                <Card
+                  key={index}
                   className={`relative flex flex-col rounded-2xl border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
                     plan.popular ? 'border-secondary shadow-md' : 'border-border shadow-sm'
                   }`}
@@ -114,19 +120,41 @@ const Plans = () => {
                       </span>
                     </div>
                   )}
-                  
-                  <CardHeader className="text-center pb-6 pt-8">
+
+                  <CardHeader className="text-center pb-4 pt-8">
                     <CardTitle className="text-2xl font-bold text-foreground mb-2">
                       {plan.name}
                     </CardTitle>
-                    <div className="mt-4">
-                      <div className="text-4xl lg:text-5xl font-bold text-primary">
-                        {plan.coverage}
+                    {plan.coverage ? (
+                      <div className="mt-4">
+                        <div className="text-4xl lg:text-5xl font-bold text-primary">
+                          {plan.coverage}
+                        </div>
+                        <div className="text-muted-foreground mt-1 text-base">
+                          {t('plans.gourdes')}
+                        </div>
+                        <div className="mt-4 space-y-1.5 text-sm">
+                          <div className="flex items-center justify-center gap-2 bg-muted rounded-lg px-3 py-2">
+                            <span className="text-muted-foreground">{t('plans.annual')}:</span>
+                            <span className="font-semibold text-foreground">{plan.annualUSD}</span>
+                            <span className="text-muted-foreground">|</span>
+                            <span className="font-semibold text-foreground">{plan.annualGdes} Gdes</span>
+                          </div>
+                          <div className="flex items-center justify-center gap-2 bg-muted rounded-lg px-3 py-2">
+                            <span className="text-muted-foreground">{t('plans.monthly')}:</span>
+                            <span className="font-semibold text-foreground">{plan.monthlyUSD}</span>
+                            <span className="text-muted-foreground">|</span>
+                            <span className="font-semibold text-foreground">{plan.monthlyGdes} Gdes</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-muted-foreground mt-2 text-base">
-                        {t('plans.gourdes')}
+                    ) : (
+                      <div className="mt-4">
+                        <div className="text-lg font-semibold text-primary px-3 py-2 bg-primary/10 rounded-xl">
+                          {t('plans.savingsTagline')}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </CardHeader>
 
                   <CardContent className="flex-grow flex flex-col pt-2 pb-6 px-6">
@@ -140,10 +168,10 @@ const Plans = () => {
                     </div>
 
                     <Link to="/become-member" className="block mt-auto">
-                      <Button 
+                      <Button
                         className={`w-full shadow-sm ${
-                          plan.popular 
-                            ? 'bg-secondary hover:bg-secondary/90 text-secondary-foreground' 
+                          plan.popular
+                            ? 'bg-secondary hover:bg-secondary/90 text-secondary-foreground'
                             : 'bg-primary hover:bg-primary/90'
                         }`}
                         size="lg"

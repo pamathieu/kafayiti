@@ -228,12 +228,15 @@
       "subtitle": "Chwazi plan ki pi bon pou ou ak fanmi ou"
     },
     "description": "Tout plan KAFA yo ofri pwoteksyon solid pou fanmi ou. Chwazi kouvèti ki koresponn ak bezwen ou ak pwopriyete ou posede.",
+    "validityNotice": "Pri prim sa yo an vigè jiska desanm 2026.",
     "basic": "Plan Debaz",
     "standard": "Plan Estanda",
-    "premium": "Plan Premyòm",
-    "savings": "Plan Sere Lajan",
+    "savings": "Plan Epay Antèman",
     "popular": "Pi Popilè",
     "gourdes": "Gourdes",
+    "annual": "Anyèl",
+    "monthly": "Chak mwa",
+    "savingsTagline": "Sere lajan pou antèman ou",
     "choosePlan": "Chwazi Plan Sa",
     "features": {
       "coverage": "Kouvèti",
