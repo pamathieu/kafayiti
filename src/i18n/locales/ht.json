@@ -491,7 +491,7 @@
     "a14": {
       "address": "📍 874 Rue Ste Catherine, Léogâne, Haïti",
       "phone": "📞 Téléphone: (509) 3500-0326 / (509) 4439-8595 / (850) 321-4670",
-      "email": "📧 Email: info@kafayiti.com",
+      "email": "📧 Email: kontak@kafayiti.com",
       "website": "🌐 Site web: www.kafayiti.com"
     },
     "q15": "15. Eske gen aplikasyon mobil?",
@@ -572,7 +572,7 @@
     "header": {
       "title": "Koperativ Asirans Fòs Ayiti (KAFA)",
       "address": "874 Rue Sainte Catherine, Léogâne, Haiti HT 6212",
-      "contact": "Telefòn: (509) 3500-0326 / 4439-8595 | Imèl: info@kafayiti.com"
+      "contact": "Telefòn: (509) 3500-0326 / 4439-8595 | Imèl: kontak@kafayiti.com"
     },
     "form": {
       "title": "Fòmilè Adezyon",
@@ -709,7 +709,7 @@
     "inputPlaceholder": "Ekri kesyon ou...",
     "error": "Padon, mwen pa t kapab jwenn yon repons. Eseye ankò oswa kontakte kontak@kafayiti.com.",
     "clearChat": "Efase konvèsasyon an",
-    "limitReached": "Ou rive limit 5 konvèsasyon. Ou ka tchate ankò nan **{{timeLeft}}** oswa kontakte nou nan info@kafayiti.com.",
+    "limitReached": "Ou rive limit 5 konvèsasyon. Ou ka tchate ankò nan **{{timeLeft}}** oswa kontakte nou nan kontak@kafayiti.com.",
     "greeting": "Byenveni nan KAFA! Nou kontan ede ou jodi a.\n\nPou nou kòmanse, eske ou ka ban nou **non konplè ou** ak **nimewo telefòn ou**? Sa ede nou swiv ou si sa nesesè."
   }
 }

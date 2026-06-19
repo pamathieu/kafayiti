@@ -147,9 +147,9 @@ const Documents = () => {
                     <a href="tel:+50935000326">
                       <Button variant="outline" className="w-full sm:w-auto">(509) 3500-0326</Button>
                     </a>
-                    <a href="mailto:info@kafayiti.com">
+                    <a href="mailto:kontak@kafayiti.com">
                       <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90">
-                        info@kafayiti.com
+                        kontak@kafayiti.com
                       </Button>
                     </a>
                   </div>

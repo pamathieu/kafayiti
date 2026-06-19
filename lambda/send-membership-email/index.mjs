@@ -54,7 +54,7 @@ export const handler = async (event) => {
             </div>
             <p>If you have any questions, feel free to reach us:</p>
             <ul style="color:#333;line-height:2">
-              <li>📧 <a href="mailto:info@kafayiti.com" style="color:#1a5c2e">info@kafayiti.com</a></li>
+              <li>📧 <a href="mailto:kontak@kafayiti.com" style="color:#1a5c2e">kontak@kafayiti.com</a></li>
               <li>📞 (509) 3500-0326 / (509) 4439-8595</li>
               <li>🌐 <a href="https://kafayiti.com" style="color:#1a5c2e">kafayiti.com</a></li>
             </ul>
@@ -169,7 +169,7 @@ export const handler = async (event) => {
             </div>
             <p>If you have any questions in the meantime, feel free to reach us:</p>
             <ul style="color:#333;line-height:2">
-              <li>📧 <a href="mailto:info@kafayiti.com" style="color:#1a5c2e">info@kafayiti.com</a></li>
+              <li>📧 <a href="mailto:kontak@kafayiti.com" style="color:#1a5c2e">kontak@kafayiti.com</a></li>
               <li>📞 (509) 3500-0326 / (509) 4439-8595</li>
               <li>🌐 <a href="https://kafayiti.com" style="color:#1a5c2e">kafayiti.com</a></li>
             </ul>

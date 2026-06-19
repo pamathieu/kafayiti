@@ -491,7 +491,7 @@
     "a14": {
       "address": "📍 874 Rue Ste Catherine, Léogâne, Haïti",
       "phone": "📞 Téléphone: (509) 3500-0326 / (509) 4439-8595 / (850) 321-4670",
-      "email": "📧 Email: info@kafayiti.com",
+      "email": "📧 Email: kontak@kafayiti.com",
       "website": "🌐 Site web: www.kafayiti.com"
     },
     "q15": "15. Y a-t-il une application mobile?",
@@ -572,7 +572,7 @@
     "header": {
       "title": "Coopérative d'Assurance Force d'Haïti (KAFA)",
       "address": "874 Rue Sainte Catherine, Léogâne, Haïti HT 6212",
-      "contact": "Téléphone: (509) 3500-0326 / 4439-8595 | Email: info@kafayiti.com"
+      "contact": "Téléphone: (509) 3500-0326 / 4439-8595 | Email: kontak@kafayiti.com"
     },
     "form": {
       "title": "Formulaire d'Adhésion",
@@ -709,7 +709,7 @@
     "inputPlaceholder": "Tapez votre question...",
     "error": "Désolé, je n'ai pas pu obtenir de réponse. Réessayez ou contactez kontak@kafayiti.com.",
     "clearChat": "Effacer la conversation",
-    "limitReached": "Vous avez atteint la limite de 5 conversations. Vous pourrez de nouveau chatter dans **{{timeLeft}}** ou contactez-nous à info@kafayiti.com.",
+    "limitReached": "Vous avez atteint la limite de 5 conversations. Vous pourrez de nouveau chatter dans **{{timeLeft}}** ou contactez-nous à kontak@kafayiti.com.",
     "greeting": "Bienvenue chez KAFA ! Je suis là pour vous aider.\n\nPour commencer, pourriez-vous partager votre **nom complet** et votre **numéro de téléphone** ? Cela nous aide à vous recontacter si nécessaire."
   }
 }

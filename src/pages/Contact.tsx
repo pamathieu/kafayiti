@@ -64,7 +64,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: t('contact.info.email'),
-      lines: ["info@kafayiti.com"],
+      lines: ["kontak@kafayiti.com"],
     },
     {
       icon: Clock,

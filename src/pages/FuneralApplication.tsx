@@ -132,7 +132,7 @@ const FuneralApplication = () => {
                     <h1 className="text-2xl md:text-3xl font-bold">ASSURANCE FUNÉRAIRE</h1>
                     <p className="text-sm text-muted-foreground">874 Rue Sainte Catherine, Léogâne, Haiti HT 6212</p>
                     <p className="text-sm text-muted-foreground">Téléphone: (509) 3500-0326 / 4439-8595</p>
-                    <p className="text-sm text-muted-foreground">Email: info@kafayiti.com | Website: www.kafayiti.com</p>
+                    <p className="text-sm text-muted-foreground">Email: kontak@kafayiti.com | Website: www.kafayiti.com</p>
                   </div>
                   <Separator />
                   <CardDescription className="text-base">

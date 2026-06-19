@@ -41,8 +41,8 @@ const Footer = () => {
               <li>874 Rue Ste Catherine</li>
               <li>Léogâne, Ayiti</li>
               <li className="pt-2">
-                <a href="mailto:info@kafayiti.com" className="hover:text-secondary transition-colors">
-                  info@kafayiti.com
+                <a href="mailto:kontak@kafayiti.com" className="hover:text-secondary transition-colors">
+                  kontak@kafayiti.com
                 </a>
               </li>
               <li>

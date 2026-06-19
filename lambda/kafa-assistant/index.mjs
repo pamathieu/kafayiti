@@ -129,13 +129,13 @@ The mobile app will be available very soon. For now, all services are available 
 ## CONTACT INFORMATION
 - Address: 874 Rue Ste Catherine, Léogâne, Haiti
 - Phone: (509) 3500-0326 / (509) 4439-8595 / (850) 321-4670
-- Email: info@kafayiti.com / kontak@kafayiti.com
+- Email: kontak@kafayiti.com
 - Website: www.kafayiti.com
 - Social media: Facebook, Instagram, TikTok, LinkedIn
 - Contact options: phone, WhatsApp, email, contact form on website
 
 ---
-If a question cannot be answered from the above knowledge base, say so honestly and direct the user to contact info@kafayiti.com or call (509) 3500-0326.`;
+If a question cannot be answered from the above knowledge base, say so honestly and direct the user to contact kontak@kafayiti.com or call (509) 3500-0326.`;
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
