@@ -251,6 +251,12 @@
       "unlimitedSavings": "Épargne illimitée",
       "continuousDeposit": "Flexibilité de dépôt continu"
     },
+    "preferredShares": {
+      "title": "Part Privilégiée",
+      "description": "Investissez dans les parts privilégiées de KAFA et recevez un taux annuel fixe selon le montant investi.",
+      "rangeHeader": "Tranche d'investissement",
+      "rateHeader": "Taux annuel"
+    },
     "info": {
       "title": "Informations Importantes",
       "whoCanJoin": "Qui peut adhérer?",
@@ -598,7 +604,8 @@
       "commune": "Commune",
       "phone": "Téléphone",
       "email": "E-mail",
-      "message": "Questions ou commentaires (Facultatif)"
+      "message": "Questions ou commentaires (Facultatif)",
+      "selectedPlan": "Plan sélectionné"
     },
     "placeholders": {
       "lastName": "Entrez votre nom de famille",

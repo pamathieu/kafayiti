@@ -95,6 +95,7 @@ export const handler = async (event) => {
           lastName: d.lastName ?? "",
           phone: d.phone ?? "",
           email: d.email ?? "",
+          plan: d.plan ?? "",
           message: d.message ?? "",
           data: {
             address: d.address ?? "",
@@ -123,6 +124,7 @@ export const handler = async (event) => {
           ${row("Last Name", d.lastName)}
           ${row("Phone", d.phone)}
           ${row("Email", d.email)}
+          ${row("Plan Selected", d.plan)}
           ${row("Place of Birth", d.birthDatePlace)}
           ${row("Gender", d.gender)}
           ${row("Profession", d.profession)}

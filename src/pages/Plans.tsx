@@ -11,6 +11,7 @@ const Plans = () => {
 
   const plans = [
     {
+      id: 'basic',
       name: t('plans.basic'),
       coverage: "270,000",
       annualUSD: "US$120",
@@ -28,6 +29,7 @@ const Plans = () => {
       color: "primary"
     },
     {
+      id: 'standard',
       name: t('plans.standard'),
       coverage: "400,000",
       annualUSD: "US$240",
@@ -47,6 +49,7 @@ const Plans = () => {
       popular: true
     },
     {
+      id: 'savings',
       name: t('plans.savings'),
       coverage: null,
       annualUSD: null,
@@ -65,6 +68,15 @@ const Plans = () => {
       color: "primary",
       isSavings: true
     }
+  ];
+
+  const preferredShareRates = [
+    { range: '$500 – $1,000', rate: '4%' },
+    { range: '$1,001 – $2,000', rate: '5%' },
+    { range: '$2,001 – $3,000', rate: '6%' },
+    { range: '$3,001 – $5,000', rate: '7%' },
+    { range: '$5,001 – $10,000', rate: '10%' },
+    { range: '$11,000+', rate: '12%' },
   ];
 
   return (
@@ -167,7 +179,11 @@ const Plans = () => {
                       ))}
                     </div>
 
-                    <Link to="/become-member" className="block mt-auto">
+                    <Link
+                      to="/become-member"
+                      state={{ planId: plan.id, planName: plan.name }}
+                      className="block mt-auto"
+                    >
                       <Button
                         className={`w-full shadow-sm ${
                           plan.popular
@@ -182,6 +198,48 @@ const Plans = () => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Preferred Shares Section */}
+        <section className="section-padding bg-background">
+          <div className="section-container">
+            <div className="content-container">
+              <h2 className="section-title-sm text-center mb-3">
+                {t('plans.preferredShares.title')}
+              </h2>
+              <p className="section-subtitle text-center mb-6 sm:mb-8">
+                {t('plans.preferredShares.description')}
+              </p>
+
+              <Card className="border-border rounded-xl shadow-sm max-w-2xl mx-auto overflow-hidden">
+                <table className="w-full text-sm sm:text-base">
+                  <thead>
+                    <tr className="bg-muted">
+                      <th className="text-left px-4 sm:px-6 py-3 font-semibold text-foreground">
+                        {t('plans.preferredShares.rangeHeader')}
+                      </th>
+                      <th className="text-right px-4 sm:px-6 py-3 font-semibold text-foreground">
+                        {t('plans.preferredShares.rateHeader')}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {preferredShareRates.map((row, index) => (
+                      <tr
+                        key={index}
+                        className={index % 2 === 0 ? 'bg-background' : 'bg-muted/40'}
+                      >
+                        <td className="px-4 sm:px-6 py-3 text-foreground">{row.range}</td>
+                        <td className="px-4 sm:px-6 py-3 text-right font-semibold text-primary">
+                          {row.rate}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Card>
             </div>
           </div>
         </section>

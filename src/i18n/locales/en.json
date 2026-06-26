@@ -266,6 +266,12 @@
       "unlimitedSavings": "Unlimited savings",
       "continuousDeposit": "Continuous deposit flexibility"
     },
+    "preferredShares": {
+      "title": "Preferred Shares (Part Privilégiée)",
+      "description": "Invest in KAFA preferred shares and earn a fixed annual rate based on your investment amount.",
+      "rangeHeader": "Investment Range",
+      "rateHeader": "Annual Rate"
+    },
     "info": {
       "title": "Important Information",
       "whoCanJoin": "Who can join?",
@@ -978,7 +984,8 @@
       "commune": "Commune",
       "phone": "Phone",
       "email": "Email",
-      "message": "Questions or Comments (Optional)"
+      "message": "Questions or Comments (Optional)",
+      "selectedPlan": "Selected Plan"
     },
     "placeholders": {
       "lastName": "Enter your last name",

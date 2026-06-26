@@ -266,6 +266,12 @@
       "unlimitedSavings": "Poupança ilimitada",
       "continuousDeposit": "Flexibilidade de depósito contínuo"
     },
+    "preferredShares": {
+      "title": "Ações Preferenciais",
+      "description": "Invista em ações preferenciais da KAFA e receba uma taxa anual fixa com base no valor investido.",
+      "rangeHeader": "Faixa de Investimento",
+      "rateHeader": "Taxa Anual"
+    },
     "info": {
       "title": "Informações Importantes",
       "whoCanJoin": "Quem pode aderir?",
@@ -674,7 +680,8 @@
       "commune": "Comuna",
       "phone": "Telefone",
       "email": "Email",
-      "message": "Perguntas ou Comentários (Opcional)"
+      "message": "Perguntas ou Comentários (Opcional)",
+      "selectedPlan": "Plano Selecionado"
     },
     "placeholders": {
       "lastName": "Introduza o seu apelido",

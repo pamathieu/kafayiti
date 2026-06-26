@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import AssistantChat from "@/components/AssistantChat";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +23,8 @@ import MembershipConfirmationDialog from "@/components/MembershipConfirmationDia
 const BecomeMember = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const location = useLocation();
+  const selectedPlanName = (location.state as { planName?: string } | null)?.planName;
   const [chatOpen, setChatOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -50,6 +53,9 @@ const BecomeMember = () => {
 
     // Optional contact
     email: z.string().email(t('becomeMember.validation.emailInvalid')).optional().or(z.literal("")),
+
+    // Plan selected on the Plans page (if any)
+    plan: z.string().optional(),
 
     // Section A - optional additional info
     fullName: z.string().optional(),
@@ -96,6 +102,7 @@ const BecomeMember = () => {
       lastName: "",
       phone: "",
       email: "",
+      plan: selectedPlanName || "",
       fullName: "",
       commune: "",
       beneficiaries: [],
@@ -194,6 +201,12 @@ const BecomeMember = () => {
 
                 <CardContent>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8">
+
+                    {selectedPlanName && (
+                      <div className="bg-primary/10 border border-primary/20 rounded-lg px-4 py-3 text-sm text-foreground">
+                        {t('becomeMember.fields.selectedPlan')}: <span className="font-semibold">{selectedPlanName}</span>
+                      </div>
+                    )}
 
                     {/* Required contact fields */}
                     <div className="space-y-4">

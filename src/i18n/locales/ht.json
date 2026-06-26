@@ -251,6 +251,12 @@
       "unlimitedSavings": "Epay san limit",
       "continuousDeposit": "Fleksibilite depo kontinyèl"
     },
+    "preferredShares": {
+      "title": "Aksyon Privilejye",
+      "description": "Envesti nan aksyon privilejye KAFA epi resevwa yon to anyèl fiks selon kantite lajan ou envesti.",
+      "rangeHeader": "Kantite Envestisman",
+      "rateHeader": "To Anyèl"
+    },
     "info": {
       "title": "Enfòmasyon Enpòtan",
       "whoCanJoin": "Ki moun ki ka enskri?",
@@ -598,7 +604,8 @@
       "commune": "Komin",
       "phone": "Telefòn",
       "email": "Imèl",
-      "message": "Kesyon oswa Kòmantè (Opsyonèl)"
+      "message": "Kesyon oswa Kòmantè (Opsyonèl)",
+      "selectedPlan": "Plan ou chwazi"
     },
     "placeholders": {
       "lastName": "Antre siyati ou",
