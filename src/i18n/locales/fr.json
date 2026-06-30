@@ -31,6 +31,7 @@
     "plans": "Plans Funéraires",
     "documents": "Documents",
     "becomeMember": "Devenir Membre",
+    "howToInvest": "Comment Investir",
     "contact": "Nous Contacter",
     "login": "Connexion",
     "logout": "Déconnexion",
@@ -718,5 +719,37 @@
     "clearChat": "Effacer la conversation",
     "limitReached": "Vous avez atteint la limite de 5 conversations. Vous pourrez de nouveau chatter dans **{{timeLeft}}** ou contactez-nous à kontak@kafayiti.com.",
     "greeting": "Bienvenue chez KAFA ! Je suis là pour vous aider.\n\nPour commencer, pourriez-vous partager votre **nom complet** et votre **numéro de téléphone** ? Cela nous aide à vous recontacter si nécessaire."
+  },
+  "howToInvest": {
+    "hero": {
+      "title": "Comment Investir dans KAFA?"
+    },
+    "intro": "Vous pouvez investir dans \"KAFA\" en achetant des parts privilégiées, qui offrent un taux d'intérêt concurrentiel, conformément aux modalités et aux conditions établies par la coopérative.",
+    "preferredShare": {
+      "title": "Qu'est-ce qu'une Part Privilégiée?",
+      "description": "Une part privilégiée est un titre de participation émis par une coopérative qui confère à son détenteur certains avantages financiers particuliers par rapport aux parts ordinaires, dans les limites prévues par les statuts et la réglementation applicable.",
+      "advantagesTitle": "Ces avantages peuvent notamment comprendre:",
+      "advantage1": "Une rémunération prioritaire, sous forme d'intérêt ou de ristourne privilégiée, lorsque la coopérative réalise des excédents et que leur distribution est autorisée.",
+      "advantage2": "Un droit préférentiel à cette rémunération selon les modalités prévues par les statuts ou les conditions d'émission de la part.",
+      "advantage3": "Une priorité de remboursement du capital investi en cas de rachat des parts par la coopérative ou lors de sa liquidation, sous réserve des droits des créanciers.",
+      "governance": "Toutefois, la détention de parts privilégiées ne confère aucun avantage en matière de gouvernance. Le principe coopératif fondamental « une personne, une voix » demeure pleinement applicable, indépendamment du nombre ou de la catégorie de parts détenues par un membre."
+    },
+    "priorityReturn": {
+      "title": "Rémunération Prioritaire",
+      "description": "Cela signifie que les détenteurs de certaines parts (parts privilégiées) ont le droit de recevoir une rémunération (intérêt ou dividende, selon le cadre juridique) avant que les détenteurs de parts ordinaires ne reçoivent une rémunération. Cette priorité ne garantit pas nécessairement un paiement: elle s'applique seulement si la coopérative dispose de bénéfices distribuables et si les règles de distribution le permettent."
+    },
+    "patronageRefund": {
+      "title": "Ristourne Privilégiée",
+      "description": "Dans une coopérative, une ristourne est une redistribution des excédents aux membres en fonction de leur utilisation de la coopérative (par exemple, leurs achats, leurs ventes ou leur volume d'affaires avec la coopérative), et non en fonction du capital qu'ils ont investi.",
+      "preferred": "Une ristourne privilégiée désigne une ristourne accordée en priorité ou selon des conditions préférentielles à certains détenteurs de parts privilégiées, si les statuts de la coopérative ou la loi le permettent."
+    },
+    "parValue": {
+      "title": "Valeur Nominale",
+      "description": "La valeur nominale est la valeur attribuée à une part sociale lors de son émission. C'est une valeur fixée dans les statuts ou par la résolution autorisant l'émission des parts; elle ne correspond pas nécessairement à la valeur marchande de la part.",
+      "usesTitle": "Dans une coopérative, la valeur nominale sert notamment à:",
+      "use1": "Déterminer le prix d'émission d'une part sociale;",
+      "use2": "Calculer le capital social de la coopérative;",
+      "use3": "Établir, dans certains cas, la base de calcul de la rémunération des parts (par exemple, un intérêt de 5% sur la valeur nominale)."
+    }
   }
 }

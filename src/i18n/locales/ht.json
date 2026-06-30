@@ -31,6 +31,7 @@
     "plans": "Plan Antèman",
     "documents": "Dokiman",
     "becomeMember": "Vin Manm",
+    "howToInvest": "Kijan pou Envesti",
     "contact": "Kontakte Nou",
     "login": "Konekte",
     "logout": "Dekonekte",
@@ -718,5 +719,37 @@
     "clearChat": "Efase konvèsasyon an",
     "limitReached": "Ou rive limit 5 konvèsasyon. Ou ka tchate ankò nan **{{timeLeft}}** oswa kontakte nou nan kontak@kafayiti.com.",
     "greeting": "Byenveni nan KAFA! Nou kontan ede ou jodi a.\n\nPou nou kòmanse, eske ou ka ban nou **non konplè ou** ak **nimewo telefòn ou**? Sa ede nou swiv ou si sa nesesè."
+  },
+  "howToInvest": {
+    "hero": {
+      "title": "Kijan pou Envesti nan KAFA?"
+    },
+    "intro": "Ou ka envesti nan \"KAFA\" lè ou achte pati privilejye, ki ofri yon to enterè konpetitif, konfòmeman ak tèm ak kondisyon kooperativ la etabli yo.",
+    "preferredShare": {
+      "title": "Kisa yon Pati Privilejye ye?",
+      "description": "Yon pati privilejye se yon tit patisipasyon yon kooperativ emèt ki bay mèt li kèk avantaj finansye espesyal pa rapò ak pati òdinè yo, nan limit estati yo ak règleman ki aplikab yo prevwa.",
+      "advantagesTitle": "Avantaj sa yo ka enkli:",
+      "advantage1": "Yon rekonpans prioritè, nan fòm enterè oswa retou privilejye, lè kooperativ la fè eksedan epi distribisyon yo otorize.",
+      "advantage2": "Yon dwa preferansyèl sou rekonpans sa a selon modalite estati yo oswa kondisyon emisyon pati a prevwa.",
+      "advantage3": "Yon priyorite ranbousman kapital ki envesti a si kooperativ la rachte pati yo oswa lè li likide, anba dwa kreyansye yo.",
+      "governance": "Sepandan, posede pati privilejye yo pa bay okenn avantaj nan gouvènans. Prensip kooperatif fondamantal \"yon moun, yon vòt\" kontinye aplike nèt, kèlkeswa kantite oswa kategori pati yon manm posede."
+    },
+    "priorityReturn": {
+      "title": "Rekonpans Prioritè",
+      "description": "Sa vle di ke mèt kèk pati (pati privilejye) gen dwa pou resevwa yon rekonpans (enterè oswa dividann, selon kad legal la) anvan mèt pati òdinè yo resevwa rekonpans. Priyorite sa a pa garanti peman nesesèman: li aplike sèlman si kooperativ la gen benefis distribiab epi règ distribisyon yo pèmèt la."
+    },
+    "patronageRefund": {
+      "title": "Retou Privilejye",
+      "description": "Nan yon kooperativ, yon retou se yon redistribisyon eksedan bay manm yo selon itilizasyon yo fè kooperativ la (pa egzanp, achte, vann oswa volim biznis yo ak kooperativ la), epi non pa selon kapital yo te envesti.",
+      "preferred": "Yon retou privilejye deziye yon retou yo bay ak priyorite oswa selon kondisyon preferansyèl a kèk mèt pati privilejye, si estati kooperativ la oswa lwa a pèmèt la."
+    },
+    "parValue": {
+      "title": "Valè Nominale",
+      "description": "Valè nominale a se valè yo atribiye a yon pati sosyal lè yo emèt li. Se yon valè ki fikse nan estati yo oswa pa rezolisyon ki otorize emisyon pati yo; li pa nesesèman koresponn ak valè mache pati a.",
+      "usesTitle": "Nan yon kooperativ, valè nominale a sèvi sitou pou:",
+      "use1": "Detèmine pri emisyon yon pati sosyal;",
+      "use2": "Kalkile kapital sosyal kooperativ la;",
+      "use3": "Etabli, nan kèk ka, baz kalkil rekonpans pati yo (pa egzanp, yon enterè 5% sou valè nominale a)."
+    }
   }
 }

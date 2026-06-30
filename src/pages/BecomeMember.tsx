@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { haitiCommunes } from "@/lib/memberNumberUtils";
 import MembershipConfirmationDialog from "@/components/MembershipConfirmationDialog";
 
+
 const BecomeMember = () => {
   const { t } = useTranslation();
   const { toast } = useToast();

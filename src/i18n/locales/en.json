@@ -46,6 +46,7 @@
     "plans": "Funeral Plans",
     "documents": "Documents",
     "becomeMember": "Become a Member",
+    "howToInvest": "How to Invest",
     "contact": "Contact Us",
     "login": "Login",
     "logout": "Logout",
@@ -1086,5 +1087,37 @@
     "clearChat": "Clear conversation",
     "limitReached": "You've reached the limit of 5 conversations. You can chat again in **{{timeLeft}}** or contact us at kontak@kafayiti.com.",
     "greeting": "Welcome to KAFA! I'm happy to assist you today.\n\nTo get started, could you please share your **full name** and **phone number**? This helps us follow up with you if needed."
+  },
+  "howToInvest": {
+    "hero": {
+      "title": "How to Invest in KAFA?"
+    },
+    "intro": "You can invest in \"KAFA\" by purchasing preferred shares, which offer a competitive interest rate, in accordance with the terms and conditions established by the cooperative.",
+    "preferredShare": {
+      "title": "What Is a Preferred Share?",
+      "description": "A preferred share is a participation certificate issued by a cooperative that grants its holder certain specific financial advantages over ordinary shares, within the limits set by the bylaws and applicable regulations.",
+      "advantagesTitle": "These advantages may include:",
+      "advantage1": "A priority return, in the form of interest or a preferred patronage refund, when the cooperative generates surpluses and their distribution is authorized.",
+      "advantage2": "A preferential right to this return according to the terms provided by the bylaws or the share issuance conditions.",
+      "advantage3": "A priority reimbursement of invested capital in the event of share buyback by the cooperative or upon its liquidation, subject to creditors' rights.",
+      "governance": "However, holding preferred shares confers no advantages in terms of governance. The fundamental cooperative principle of \"one person, one vote\" remains fully applicable, regardless of the number or category of shares held by a member."
+    },
+    "priorityReturn": {
+      "title": "Priority Return",
+      "description": "This means that holders of certain shares (preferred shares) have the right to receive a return (interest or dividend, depending on the legal framework) before holders of ordinary shares receive any return. This priority does not necessarily guarantee payment: it applies only if the cooperative has distributable profits and if distribution rules allow it."
+    },
+    "patronageRefund": {
+      "title": "Preferred Patronage Refund",
+      "description": "In a cooperative, a patronage refund is a redistribution of surpluses to members based on their use of the cooperative (for example, their purchases, sales, or volume of business with the cooperative), and not based on the capital they have invested.",
+      "preferred": "A preferred patronage refund refers to a refund granted on a priority basis or under preferential conditions to certain holders of preferred shares, if the cooperative's bylaws or applicable law permit it."
+    },
+    "parValue": {
+      "title": "Par Value (Nominal Value)",
+      "description": "The par value is the value assigned to a share at the time of its issuance. It is a value set in the bylaws or by the resolution authorizing the issuance of shares; it does not necessarily correspond to the market value of the share.",
+      "usesTitle": "In a cooperative, the par value is used notably to:",
+      "use1": "Determine the issuance price of a share;",
+      "use2": "Calculate the cooperative's share capital;",
+      "use3": "Establish, in certain cases, the basis for calculating the return on shares (for example, an interest rate of 5% on the par value)."
+    }
   }
 }

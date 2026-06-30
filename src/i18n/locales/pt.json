@@ -46,6 +46,7 @@
     "plans": "Planos Funerários",
     "documents": "Documentos",
     "becomeMember": "Tornar-se Membro",
+    "howToInvest": "Como Investir",
     "contact": "Contacte-nos",
     "login": "Entrar",
     "logout": "Sair",
@@ -1003,5 +1004,37 @@
     "clearChat": "Limpar conversa",
     "limitReached": "Atingiu o limite de 5 conversas. Poderá conversar novamente em **{{timeLeft}}** ou contacte-nos em kontak@kafayiti.com.",
     "greeting": "Bem-vindo à KAFA! Estou aqui para ajudá-lo.\n\nPara começar, poderia partilhar o seu **nome completo** e **número de telefone**? Isso ajuda-nos a fazer o acompanhamento se necessário."
+  },
+  "howToInvest": {
+    "hero": {
+      "title": "Como Investir na KAFA?"
+    },
+    "intro": "Pode investir na \"KAFA\" comprando partes privilegiadas, que oferecem uma taxa de juro competitiva, em conformidade com os termos e condições estabelecidos pela cooperativa.",
+    "preferredShare": {
+      "title": "O Que É uma Parte Privilegiada?",
+      "description": "Uma parte privilegiada é um título de participação emitido por uma cooperativa que confere ao seu titular certas vantagens financeiras específicas em relação às partes ordinárias, dentro dos limites previstos pelos estatutos e pela regulamentação aplicável.",
+      "advantagesTitle": "Estas vantagens podem incluir:",
+      "advantage1": "Uma remuneração prioritária, sob a forma de juro ou retorno privilegiado, quando a cooperativa gera excedentes e a sua distribuição é autorizada.",
+      "advantage2": "Um direito preferencial a essa remuneração nos termos previstos pelos estatutos ou pelas condições de emissão da parte.",
+      "advantage3": "Uma prioridade de reembolso do capital investido em caso de recompra das partes pela cooperativa ou aquando da sua liquidação, sem prejuízo dos direitos dos credores.",
+      "governance": "Todavia, a detenção de partes privilegiadas não confere qualquer vantagem em matéria de governação. O princípio cooperativo fundamental «uma pessoa, um voto» mantém-se plenamente aplicável, independentemente do número ou da categoria de partes detidas por um membro."
+    },
+    "priorityReturn": {
+      "title": "Remuneração Prioritária",
+      "description": "Isso significa que os titulares de certas partes (partes privilegiadas) têm o direito de receber uma remuneração (juro ou dividendo, conforme o enquadramento jurídico) antes de os titulares de partes ordinárias receberem qualquer remuneração. Esta prioridade não garante necessariamente o pagamento: aplica-se apenas se a cooperativa dispuser de lucros distribuíveis e se as regras de distribuição o permitirem."
+    },
+    "patronageRefund": {
+      "title": "Retorno Privilegiado",
+      "description": "Numa cooperativa, um retorno é uma redistribuição dos excedentes aos membros em função da sua utilização da cooperativa (por exemplo, as suas compras, vendas ou volume de negócios com a cooperativa), e não em função do capital que investiram.",
+      "preferred": "Um retorno privilegiado designa um retorno concedido com carácter prioritário ou em condições preferenciais a certos titulares de partes privilegiadas, se os estatutos da cooperativa ou a lei o permitirem."
+    },
+    "parValue": {
+      "title": "Valor Nominal",
+      "description": "O valor nominal é o valor atribuído a uma parte social aquando da sua emissão. É um valor fixado nos estatutos ou pela resolução que autoriza a emissão das partes; não corresponde necessariamente ao valor de mercado da parte.",
+      "usesTitle": "Numa cooperativa, o valor nominal serve nomeadamente para:",
+      "use1": "Determinar o preço de emissão de uma parte social;",
+      "use2": "Calcular o capital social da cooperativa;",
+      "use3": "Estabelecer, em certos casos, a base de cálculo da remuneração das partes (por exemplo, uma taxa de juro de 5% sobre o valor nominal)."
+    }
   }
 }

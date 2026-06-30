@@ -801,6 +801,15 @@ const AdminDashboard = () => {
                   </div>
                 </div>
 
+                <div>
+                  <p className="text-xs text-muted-foreground">Plan sélectionné</p>
+                  <p className="font-medium">
+                    {selectedMember.selected_plan
+                      ? { basic: "Plan de Base", standard: "Plan Standard", premium: "Plan Premium", sere_lajan: "Plan Sere Lajan" }[selectedMember.selected_plan] ?? selectedMember.selected_plan
+                      : "-"}
+                  </p>
+                </div>
+
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <p className="text-xs text-muted-foreground">

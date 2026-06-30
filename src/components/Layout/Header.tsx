@@ -18,6 +18,7 @@ const Header = () => {
     { label: t('nav.plans'), href: "/plans" },
     { label: t('nav.documents'), href: "/documents" },
     { label: t('nav.becomeMember'), href: "/become-member" },
+    { label: t('nav.howToInvest'), href: "/how-to-invest" },
   ];
 
   const handleSignOut = async () => {

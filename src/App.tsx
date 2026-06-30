@@ -13,6 +13,7 @@ import MemberNumbers from "./pages/MemberNumbers";
 import MemberLookup from "./pages/MemberLookup";
 import Documents from "./pages/Documents";
 import BecomeMember from "./pages/BecomeMember";
+import HowToInvest from "./pages/HowToInvest";
 import FuneralApplication from "./pages/FuneralApplication";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminAuth from "./pages/AdminAuth";
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="/member-lookup" element={<MemberLookup />} />
             <Route path="/documents" element={<Documents />} />
             <Route path="/become-member" element={<BecomeMember />} />
+            <Route path="/how-to-invest" element={<HowToInvest />} />
             <Route path="/funeral-application" element={<FuneralApplication />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/login" element={<AdminAuth />} />
