@@ -50,6 +50,11 @@ const Footer = () => {
                   www.kafayiti.com
                 </a>
               </li>
+              <li>
+                <a href="http://www.fosayiti2054.org" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                  www.fosayiti2054.org
+                </a>
+              </li>
             </ul>
           </div>
 
