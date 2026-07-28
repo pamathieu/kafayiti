@@ -52,7 +52,7 @@ const AdminAuth = () => {
   // Redirect if already logged in as admin
   useEffect(() => {
     if (!loading && user && isAdmin) {
-      navigate("/admin");
+      navigate("/");
     }
   }, [user, isAdmin, loading, navigate]);
 
@@ -134,7 +134,7 @@ const AdminAuth = () => {
         variant: "destructive",
       });
     } else if (!loading && user && isAdmin) {
-      navigate("/admin");
+      navigate("/");
     }
   }, [user, isAdmin, loading]);
 
