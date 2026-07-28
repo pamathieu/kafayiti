@@ -759,6 +759,7 @@
     "tabRegister": "Registrarse",
     "username": "Usuario",
     "usernamePlaceholder": "admin@kafayiti.com",
+    "usernameRequired": "Usuario requerido",
     "usernameInvalid": "Email inválido",
     "password": "Contraseña",
     "passwordPlaceholder": "••••••••",

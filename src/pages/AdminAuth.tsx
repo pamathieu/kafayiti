@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { Loader2, Shield, Mail, Lock, User } from "lucide-react";
+import { Loader2, Shield, Lock, User } from "lucide-react";
 
 const AdminAuth = () => {
   const { t } = useTranslation();
@@ -24,13 +24,13 @@ const AdminAuth = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   const loginSchema = z.object({
-    email: z.string().email(t('adminAuth.usernameInvalid')),
+    email: z.string().min(1, t('adminAuth.usernameRequired')),
     password: z.string().min(6, t('adminAuth.passwordMin')),
   });
 
   const registerSchema = z.object({
     fullName: z.string().min(2, t('adminAuth.fullNameMin')),
-    email: z.string().email(t('adminAuth.usernameInvalid')),
+    email: z.string().min(1, t('adminAuth.usernameRequired')),
     password: z.string().min(6, t('adminAuth.passwordMin')),
     confirmPassword: z.string().min(6, t('adminAuth.confirmMin')),
   }).refine((data) => data.password === data.confirmPassword, {
@@ -163,7 +163,7 @@ const AdminAuth = () => {
                   <div>
                     <Label htmlFor="login-email">{t('adminAuth.username')}</Label>
                     <div className="relative mt-1.5">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="login-email"
                         type="text"
@@ -232,7 +232,7 @@ const AdminAuth = () => {
                   <div>
                     <Label htmlFor="register-email">{t('adminAuth.username')}</Label>
                     <div className="relative mt-1.5">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="register-email"
                         type="text"
