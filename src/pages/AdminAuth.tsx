@@ -166,7 +166,7 @@ const AdminAuth = () => {
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="login-email"
-                        type="email"
+                        type="text"
                         {...loginForm.register("email")}
                         className="pl-10"
                         placeholder={t('adminAuth.usernamePlaceholder')}
@@ -235,7 +235,7 @@ const AdminAuth = () => {
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="register-email"
-                        type="email"
+                        type="text"
                         {...registerForm.register("email")}
                         className="pl-10"
                         placeholder={t('adminAuth.usernamePlaceholder')}
