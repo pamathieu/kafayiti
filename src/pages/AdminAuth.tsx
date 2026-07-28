@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { Loader2, Shield, Lock, User } from "lucide-react";
@@ -19,100 +18,42 @@ const AdminAuth = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { user, isAdmin, loading, signIn, signUp } = useAuth();
+  const { isAdmin, loading, signIn } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [activeTab, setActiveTab] = useState("login");
 
   const loginSchema = z.object({
-    email: z.string().min(1, t('adminAuth.usernameRequired')),
+    username: z.string().min(1, t('adminAuth.usernameRequired')),
     password: z.string().min(6, t('adminAuth.passwordMin')),
-  });
-
-  const registerSchema = z.object({
-    fullName: z.string().min(2, t('adminAuth.fullNameMin')),
-    email: z.string().min(1, t('adminAuth.usernameRequired')),
-    password: z.string().min(6, t('adminAuth.passwordMin')),
-    confirmPassword: z.string().min(6, t('adminAuth.confirmMin')),
-  }).refine((data) => data.password === data.confirmPassword, {
-    message: t('adminAuth.passwordMismatch'),
-    path: ["confirmPassword"],
   });
 
   type LoginFormData = z.infer<typeof loginSchema>;
-  type RegisterFormData = z.infer<typeof registerSchema>;
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  });
-
-  const registerForm = useForm<RegisterFormData>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: { fullName: "", email: "", password: "", confirmPassword: "" },
+    defaultValues: { username: "", password: "" },
   });
 
   useEffect(() => {
-    if (!loading && user && isAdmin) {
-      navigate("/");
-    }
-  }, [user, isAdmin, loading, navigate]);
-
-  useEffect(() => {
-    if (!loading && user && !isAdmin) {
-      toast({
-        title: t('adminAuth.accessDenied'),
-        description: t('adminAuth.noAdminPermission'),
-        variant: "destructive",
-      });
-    } else if (!loading && user && isAdmin) {
-      navigate("/");
-    }
-  }, [user, isAdmin, loading]);
+    if (!loading && isAdmin) navigate("/");
+  }, [isAdmin, loading, navigate]);
 
   const handleLogin = async (data: LoginFormData) => {
     setIsSubmitting(true);
     try {
-      const { error } = await signIn(data.email, data.password);
+      const { error } = await signIn(data.username, data.password);
       if (error) {
-        const isNetwork = error.message === "Failed to fetch";
-        const description = isNetwork
-          ? t('adminAuth.networkError')
-          : error.message === "Invalid login credentials"
-            ? t('adminAuth.invalidCredentials')
-            : error.message;
+        const description = error.message === "invalid_credentials"
+          ? t('adminAuth.invalidCredentials')
+          : t('adminAuth.genericError');
         console.error("[AdminAuth] Login error:", error.message);
         toast({ title: t('adminAuth.loginError'), description, variant: "destructive" });
         return;
       }
-      console.log("[AdminAuth] Login successful, verifying admin permissions...");
+      console.log("[AdminAuth] Login successful.");
       toast({ title: t('adminAuth.loginSuccess'), description: t('adminAuth.verifying') });
     } catch (err) {
-      console.error("[AdminAuth] Unexpected login error:", err);
+      console.error("[AdminAuth] Unexpected error:", err);
       toast({ title: t('adminAuth.loginError'), description: t('adminAuth.genericError'), variant: "destructive" });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleRegister = async (data: RegisterFormData) => {
-    setIsSubmitting(true);
-    try {
-      const { error } = await signUp(data.email, data.password, data.fullName);
-      if (error) {
-        const description = error.message.includes("already registered")
-          ? t('adminAuth.alreadyRegistered')
-          : error.message;
-        console.error("[AdminAuth] Register error:", error.message);
-        toast({ title: t('adminAuth.registerError'), description, variant: "destructive" });
-        return;
-      }
-      console.log("[AdminAuth] Registration successful.");
-      toast({ title: t('adminAuth.registerSuccess'), description: t('adminAuth.registerSuccessDesc') });
-      setActiveTab("login");
-      registerForm.reset();
-    } catch (err) {
-      console.error("[AdminAuth] Unexpected register error:", err);
-      toast({ title: t('adminAuth.registerError'), description: t('adminAuth.genericError'), variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
@@ -141,155 +82,54 @@ const AdminAuth = () => {
           </CardHeader>
 
           <CardContent>
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="login">{t('adminAuth.tabLogin')}</TabsTrigger>
-                <TabsTrigger value="register">{t('adminAuth.tabRegister')}</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="login">
-                <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-4">
-                  <div>
-                    <Label htmlFor="login-email">{t('adminAuth.username')}</Label>
-                    <div className="relative mt-1.5">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="login-email"
-                        type="text"
-                        {...loginForm.register("email")}
-                        className="pl-10"
-                        placeholder={t('adminAuth.usernamePlaceholder')}
-                      />
-                    </div>
-                    {loginForm.formState.errors.email && (
-                      <p className="text-sm text-destructive mt-1">
-                        {loginForm.formState.errors.email.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="login-password">{t('adminAuth.password')}</Label>
-                    <div className="relative mt-1.5">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="login-password"
-                        type="password"
-                        {...loginForm.register("password")}
-                        className="pl-10"
-                        placeholder={t('adminAuth.passwordPlaceholder')}
-                      />
-                    </div>
-                    {loginForm.formState.errors.password && (
-                      <p className="text-sm text-destructive mt-1">
-                        {loginForm.formState.errors.password.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {t('adminAuth.signingIn')}
-                      </>
-                    ) : t('adminAuth.signIn')}
-                  </Button>
-                </form>
-              </TabsContent>
-
-              <TabsContent value="register">
-                <form onSubmit={registerForm.handleSubmit(handleRegister)} className="space-y-4">
-                  <div>
-                    <Label htmlFor="register-name">{t('adminAuth.fullName')}</Label>
-                    <div className="relative mt-1.5">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="register-name"
-                        {...registerForm.register("fullName")}
-                        className="pl-10"
-                        placeholder={t('adminAuth.fullNamePlaceholder')}
-                      />
-                    </div>
-                    {registerForm.formState.errors.fullName && (
-                      <p className="text-sm text-destructive mt-1">
-                        {registerForm.formState.errors.fullName.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="register-email">{t('adminAuth.username')}</Label>
-                    <div className="relative mt-1.5">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="register-email"
-                        type="text"
-                        {...registerForm.register("email")}
-                        className="pl-10"
-                        placeholder={t('adminAuth.usernamePlaceholder')}
-                      />
-                    </div>
-                    {registerForm.formState.errors.email && (
-                      <p className="text-sm text-destructive mt-1">
-                        {registerForm.formState.errors.email.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="register-password">{t('adminAuth.password')}</Label>
-                    <div className="relative mt-1.5">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="register-password"
-                        type="password"
-                        {...registerForm.register("password")}
-                        className="pl-10"
-                        placeholder={t('adminAuth.passwordPlaceholder')}
-                      />
-                    </div>
-                    {registerForm.formState.errors.password && (
-                      <p className="text-sm text-destructive mt-1">
-                        {registerForm.formState.errors.password.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="register-confirm">{t('adminAuth.confirmPassword')}</Label>
-                    <div className="relative mt-1.5">
-                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="register-confirm"
-                        type="password"
-                        {...registerForm.register("confirmPassword")}
-                        className="pl-10"
-                        placeholder={t('adminAuth.passwordPlaceholder')}
-                      />
-                    </div>
-                    {registerForm.formState.errors.confirmPassword && (
-                      <p className="text-sm text-destructive mt-1">
-                        {registerForm.formState.errors.confirmPassword.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {t('adminAuth.registering')}
-                      </>
-                    ) : t('adminAuth.register')}
-                  </Button>
-
-                  <p className="text-xs text-muted-foreground text-center">
-                    {t('adminAuth.registerNote')}
+            <form onSubmit={loginForm.handleSubmit(handleLogin)} className="space-y-4">
+              <div>
+                <Label htmlFor="login-username">{t('adminAuth.username')}</Label>
+                <div className="relative mt-1.5">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="login-username"
+                    type="text"
+                    {...loginForm.register("username")}
+                    className="pl-10"
+                    placeholder={t('adminAuth.usernamePlaceholder')}
+                  />
+                </div>
+                {loginForm.formState.errors.username && (
+                  <p className="text-sm text-destructive mt-1">
+                    {loginForm.formState.errors.username.message}
                   </p>
-                </form>
-              </TabsContent>
-            </Tabs>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="login-password">{t('adminAuth.password')}</Label>
+                <div className="relative mt-1.5">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="login-password"
+                    type="password"
+                    {...loginForm.register("password")}
+                    className="pl-10"
+                    placeholder={t('adminAuth.passwordPlaceholder')}
+                  />
+                </div>
+                {loginForm.formState.errors.password && (
+                  <p className="text-sm text-destructive mt-1">
+                    {loginForm.formState.errors.password.message}
+                  </p>
+                )}
+              </div>
+
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t('adminAuth.signingIn')}
+                  </>
+                ) : t('adminAuth.signIn')}
+              </Button>
+            </form>
 
             <div className="mt-6 text-center">
               <Link to="/" className="text-sm text-primary hover:underline">
