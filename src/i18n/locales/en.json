@@ -1154,6 +1154,7 @@
     "registerSuccessDesc": "Your account has been created. Contact an administrator to obtain access rights.",
     "registerError": "Registration error",
     "alreadyRegistered": "An account already exists with this email",
-    "genericError": "An error occurred"
+    "genericError": "An error occurred",
+    "networkError": "Cannot reach the authentication service. Please try again later."
   }
 }

@@ -786,6 +786,7 @@
     "registerSuccessDesc": "Kont ou kreye. Kontakte yon administratè pou jwenn dwa aksè.",
     "registerError": "Erè enskripsyon",
     "alreadyRegistered": "Gen yon kont ki deja egziste ak imèl sa a",
-    "genericError": "Yon erè fèt"
+    "genericError": "Yon erè fèt",
+    "networkError": "Pa ka jwenn sèvis otantifikasyon an. Tanpri eseye ankò pita."
   }
 }

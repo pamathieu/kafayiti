@@ -1071,6 +1071,7 @@
     "registerSuccessDesc": "A sua conta foi criada. Contacte um administrador para obter direitos de acesso.",
     "registerError": "Erro de registro",
     "alreadyRegistered": "Já existe uma conta com este email",
-    "genericError": "Ocorreu um erro"
+    "genericError": "Ocorreu um erro",
+    "networkError": "Não foi possível contactar o serviço de autenticação. Por favor, tente novamente mais tarde."
   }
 }

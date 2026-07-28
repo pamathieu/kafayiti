@@ -74,25 +74,21 @@ const AdminAuth = () => {
     try {
       const { error } = await signIn(data.email, data.password);
       if (error) {
-        toast({
-          title: t('adminAuth.loginError'),
-          description: error.message === "Invalid login credentials"
+        const isNetwork = error.message === "Failed to fetch";
+        const description = isNetwork
+          ? t('adminAuth.networkError')
+          : error.message === "Invalid login credentials"
             ? t('adminAuth.invalidCredentials')
-            : error.message,
-          variant: "destructive",
-        });
+            : error.message;
+        console.error("[AdminAuth] Login error:", error.message);
+        toast({ title: t('adminAuth.loginError'), description, variant: "destructive" });
         return;
       }
-      toast({
-        title: t('adminAuth.loginSuccess'),
-        description: t('adminAuth.verifying'),
-      });
-    } catch {
-      toast({
-        title: t('adminAuth.loginError'),
-        description: t('adminAuth.genericError'),
-        variant: "destructive",
-      });
+      console.log("[AdminAuth] Login successful, verifying admin permissions...");
+      toast({ title: t('adminAuth.loginSuccess'), description: t('adminAuth.verifying') });
+    } catch (err) {
+      console.error("[AdminAuth] Unexpected login error:", err);
+      toast({ title: t('adminAuth.loginError'), description: t('adminAuth.genericError'), variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
@@ -103,27 +99,20 @@ const AdminAuth = () => {
     try {
       const { error } = await signUp(data.email, data.password, data.fullName);
       if (error) {
-        toast({
-          title: t('adminAuth.registerError'),
-          description: error.message.includes("already registered")
-            ? t('adminAuth.alreadyRegistered')
-            : error.message,
-          variant: "destructive",
-        });
+        const description = error.message.includes("already registered")
+          ? t('adminAuth.alreadyRegistered')
+          : error.message;
+        console.error("[AdminAuth] Register error:", error.message);
+        toast({ title: t('adminAuth.registerError'), description, variant: "destructive" });
         return;
       }
-      toast({
-        title: t('adminAuth.registerSuccess'),
-        description: t('adminAuth.registerSuccessDesc'),
-      });
+      console.log("[AdminAuth] Registration successful.");
+      toast({ title: t('adminAuth.registerSuccess'), description: t('adminAuth.registerSuccessDesc') });
       setActiveTab("login");
       registerForm.reset();
-    } catch {
-      toast({
-        title: t('adminAuth.registerError'),
-        description: t('adminAuth.genericError'),
-        variant: "destructive",
-      });
+    } catch (err) {
+      console.error("[AdminAuth] Unexpected register error:", err);
+      toast({ title: t('adminAuth.registerError'), description: t('adminAuth.genericError'), variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
