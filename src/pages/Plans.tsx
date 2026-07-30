@@ -5,9 +5,31 @@ import Footer from "@/components/Layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Info } from "lucide-react";
+import EditableText from "@/components/EditableText";
+import { useEditMode } from "@/hooks/useEditMode";
+import { useLocalEditableState } from "@/hooks/useLocalEditableState";
+import { translateToOtherLanguages } from "@/utils/translate";
 
 const Plans = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { isEditMode } = useEditMode();
+
+  const [textOverrides, setTextOverrides] = useLocalEditableState<Record<string, string>>(
+    "plans_text_v2",
+    {}
+  );
+  const getText = (key: string, fallback: string) =>
+    textOverrides[`${i18n.language}.${key}`] ?? textOverrides[key] ?? fallback;
+  const setText = (key: string) => (value: string) => {
+    const lang = i18n.language;
+    setTextOverrides((prev) => ({ ...prev, [key]: value, [`${lang}.${key}`]: value }));
+    translateToOtherLanguages(value, lang).then((translations) => {
+      setTextOverrides((prev) => ({
+        ...prev,
+        ...Object.fromEntries(Object.entries(translations).map(([tl, tv]) => [`${tl}.${key}`, tv])),
+      }));
+    });
+  };
 
   const plans = [
     {
@@ -88,12 +110,14 @@ const Plans = () => {
         <section className="bg-gradient-hero hero-padding text-primary-foreground">
           <div className="section-container">
             <div className="content-container text-center">
-              <h1 className="hero-title">
-                {t('plans.hero.title')}
-              </h1>
-              <p className="hero-subtitle">
-                {t('plans.hero.subtitle')}
-              </p>
+              <EditableText as="h1" isEditMode={isEditMode}
+                value={getText('hero.title', t('plans.hero.title'))}
+                onChange={setText('hero.title')}
+                className="hero-title" />
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('hero.subtitle', t('plans.hero.subtitle'))}
+                onChange={setText('hero.subtitle')}
+                className="hero-subtitle" />
             </div>
           </div>
         </section>
@@ -112,9 +136,10 @@ const Plans = () => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="section-header">
-              <p className="section-subtitle">
-                {t('plans.description')}
-              </p>
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('description', t('plans.description'))}
+                onChange={setText('description')}
+                className="section-subtitle" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
@@ -135,7 +160,9 @@ const Plans = () => {
 
                   <CardHeader className="text-center pb-4 pt-8">
                     <CardTitle className="text-2xl font-bold text-foreground mb-2">
-                      {plan.name}
+                      <EditableText isEditMode={isEditMode}
+                        value={getText(`plan.${plan.id}.name`, plan.name)}
+                        onChange={setText(`plan.${plan.id}.name`)} />
                     </CardTitle>
                     {plan.coverage ? (
                       <div className="mt-4">
@@ -304,12 +331,14 @@ const Plans = () => {
         {/* CTA Section */}
         <section className="section-padding bg-primary text-primary-foreground">
           <div className="section-container text-center">
-            <h2 className="section-title text-primary-foreground">
-              {t('plans.cta.title')}
-            </h2>
-            <p className="section-subtitle text-primary-foreground/90 mb-6 sm:mb-8">
-              {t('plans.cta.subtitle')}
-            </p>
+            <EditableText as="h2" isEditMode={isEditMode}
+              value={getText('cta.title', t('plans.cta.title'))}
+              onChange={setText('cta.title')}
+              className="section-title text-primary-foreground" />
+            <EditableText as="p" isEditMode={isEditMode}
+              value={getText('cta.subtitle', t('plans.cta.subtitle'))}
+              onChange={setText('cta.subtitle')}
+              className="section-subtitle text-primary-foreground/90 mb-6 sm:mb-8" />
             <div className="button-group">
               <Link to="/funeral-application" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base sm:text-lg px-6 sm:px-8 h-12">

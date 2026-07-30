@@ -11,9 +11,31 @@ import kafaProblemSolution from "@/assets/kafa-problem-solution.jpg";
 import roseMemorial from "@/assets/kafa-rose-memorial.png";
 import kafaLogo from "@/assets/kafa-logo.png";
 import kafaFamilyUnity from "@/assets/kafa-family-unity.jpg";
+import EditableText from "@/components/EditableText";
+import { useEditMode } from "@/hooks/useEditMode";
+import { useLocalEditableState } from "@/hooks/useLocalEditableState";
+import { translateToOtherLanguages } from "@/utils/translate";
 
 const About = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { isEditMode } = useEditMode();
+
+  const [textOverrides, setTextOverrides] = useLocalEditableState<Record<string, string>>(
+    "about_text_v2",
+    {}
+  );
+  const getText = (key: string, fallback: string) =>
+    textOverrides[`${i18n.language}.${key}`] ?? textOverrides[key] ?? fallback;
+  const setText = (key: string) => (value: string) => {
+    const lang = i18n.language;
+    setTextOverrides((prev) => ({ ...prev, [key]: value, [`${lang}.${key}`]: value }));
+    translateToOtherLanguages(value, lang).then((translations) => {
+      setTextOverrides((prev) => ({
+        ...prev,
+        ...Object.fromEntries(Object.entries(translations).map(([tl, tv]) => [`${tl}.${key}`, tv])),
+      }));
+    });
+  };
 
   const principles = [
     t('about.principles.p1'),
@@ -68,12 +90,14 @@ const About = () => {
         <section className="bg-gradient-hero hero-padding text-primary-foreground">
           <div className="section-container">
             <div className="content-container text-center">
-              <h1 className="hero-title">
-                {t('about.hero.title')}
-              </h1>
-              <p className="hero-subtitle">
-                {t('about.hero.subtitle')}
-              </p>
+              <EditableText as="h1" isEditMode={isEditMode}
+                value={getText('hero.title', t('about.hero.title'))}
+                onChange={setText('hero.title')}
+                className="hero-title" />
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('hero.subtitle', t('about.hero.subtitle'))}
+                onChange={setText('hero.subtitle')}
+                className="hero-subtitle" />
             </div>
           </div>
         </section>
@@ -85,9 +109,10 @@ const About = () => {
               {/* Header with Logo */}
               <div className="flex items-center justify-center gap-4 sm:gap-6 mb-10 sm:mb-12">
                 <img src={kafaLogo} alt="KAFA - Koperativ Asirans Fòs Ayiti official logo" className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain flex-shrink-0" width="128" height="128" />
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-                  {t('about.whoWeAre.title')}
-                </h2>
+                <EditableText as="h2" isEditMode={isEditMode}
+                  value={getText('whoWeAre.title', t('about.whoWeAre.title'))}
+                  onChange={setText('whoWeAre.title')}
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground" />
               </div>
               
               {/* Brochure Image - Full Width */}
@@ -139,10 +164,14 @@ const About = () => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">
-                {t('about.whyChoose.title')}
-              </h2>
-              <p className="section-subtitle">{t('about.whyChoose.subtitle')}</p>
+              <EditableText as="h2" isEditMode={isEditMode}
+                value={getText('whyChoose.title', t('about.whyChoose.title'))}
+                onChange={setText('whyChoose.title')}
+                className="section-title" />
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('whyChoose.subtitle', t('about.whyChoose.subtitle'))}
+                onChange={setText('whyChoose.subtitle')}
+                className="section-subtitle" />
               
               {/* Rose Memorial Image */}
               <div className="mt-6 mb-8 flex justify-center">
@@ -156,8 +185,14 @@ const About = () => {
                     <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                       <benefit.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">{benefit.title}</h3>
-                    <p className="text-sm sm:text-base text-muted-foreground">{benefit.description}</p>
+                    <EditableText as="h3" isEditMode={isEditMode}
+                      value={getText(`benefit.${index}.title`, benefit.title)}
+                      onChange={setText(`benefit.${index}.title`)}
+                      className="text-lg sm:text-xl font-bold text-foreground mb-2" />
+                    <EditableText as="p" isEditMode={isEditMode}
+                      value={getText(`benefit.${index}.desc`, benefit.description)}
+                      onChange={setText(`benefit.${index}.desc`)}
+                      className="text-sm sm:text-base text-muted-foreground" />
                   </CardContent>
                 </Card>)}
             </div>
@@ -289,12 +324,14 @@ const About = () => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="content-container">
-              <h2 className="section-title text-center">
-                {t('about.cooperative.title')}
-              </h2>
-              <p className="section-subtitle text-center mb-8 sm:mb-12">
-                {t('about.cooperative.subtitle')}
-              </p>
+              <EditableText as="h2" isEditMode={isEditMode}
+                value={getText('cooperative.title', t('about.cooperative.title'))}
+                onChange={setText('cooperative.title')}
+                className="section-title text-center" />
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('cooperative.subtitle', t('about.cooperative.subtitle'))}
+                onChange={setText('cooperative.subtitle')}
+                className="section-subtitle text-center mb-8 sm:mb-12" />
 
               <div className="content-spacing">
                 {principles.map((principle, index) => <Card key={index} className="border-border hover:shadow-primary transition-all duration-300 hover:-translate-y-1">

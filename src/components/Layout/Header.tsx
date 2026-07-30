@@ -1,16 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Menu, X, LogOut } from "lucide-react";
+import { Menu, X, ShieldCheck, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import kafaLogo from "@/assets/kafa-logo.png";
+import { useAuth } from "@/hooks/useAuth";
+
+const MEMBER_URL = (import.meta.env.VITE_MEMBER_PORTAL_URL as string) ?? "https://member.kafayiti.com";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isAdmin, signOut } = useAuth();
   const { t } = useTranslation();
+  const { isAdmin, signOut } = useAuth();
 
   const navLinks = [
     { label: t('nav.home'), href: "/" },
@@ -20,11 +28,6 @@ const Header = () => {
     { label: t('nav.becomeMember'), href: "/become-member" },
     { label: t('nav.howToInvest'), href: "/how-to-invest" },
   ];
-
-  const handleSignOut = () => {
-    signOut();
-    setIsMenuOpen(false);
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -50,19 +53,33 @@ const Header = () => {
                 </Button>
               </Link>
             ))}
-            {isAdmin ? (
-              <Button variant="outline" className="ml-2" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 mr-2" />
-                {t('nav.logout')}
+            <a href={MEMBER_URL}>
+              <Button className="ml-2 bg-primary hover:bg-primary-dark">
+                {t('nav.login')}
               </Button>
-            ) : (
-              <Link to="/admin/login">
-                <Button className="ml-2 bg-primary hover:bg-primary-dark">
-                  {t('nav.login')}
-                </Button>
-              </Link>
-            )}
+            </a>
             <LanguageSwitcher />
+            {isAdmin && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className="ml-1 flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    aria-label="Admin menu"
+                  >
+                    <ShieldCheck className="h-5 w-5" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-40">
+                  <DropdownMenuItem
+                    onClick={signOut}
+                    className="cursor-pointer text-destructive focus:text-destructive"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    {t('admin.logout')}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -88,20 +105,19 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            {isAdmin ? (
+            <a href={MEMBER_URL} className="block pt-2" onClick={() => setIsMenuOpen(false)}>
+              <Button className="w-full bg-primary hover:bg-primary-dark">
+                {t('nav.login')}
+              </Button>
+            </a>
+            {isAdmin && (
               <button
-                onClick={handleSignOut}
-                className="flex items-center gap-2 w-full py-2 px-4 text-foreground hover:bg-muted hover:text-primary rounded-md transition-colors text-left"
+                onClick={() => { signOut(); setIsMenuOpen(false); }}
+                className="flex w-full items-center gap-2 px-4 py-2 text-sm text-destructive hover:bg-muted rounded-md transition-colors"
               >
                 <LogOut className="h-4 w-4" />
-                {t('nav.logout')}
+                {t('admin.logout')}
               </button>
-            ) : (
-              <Link to="/admin/login" className="block pt-2" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full bg-primary hover:bg-primary-dark">
-                  {t('nav.login')}
-                </Button>
-              </Link>
             )}
             <div className="pt-2 px-4">
               <LanguageSwitcher />

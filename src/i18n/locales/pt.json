@@ -48,13 +48,13 @@
     "becomeMember": "Tornar-se Membro",
     "howToInvest": "Como Investir",
     "contact": "Contacte-nos",
-    "login": "Entrar",
+    "login": "Entrar como Membro",
     "logout": "Sair",
     "dashboard": "Painel",
     "memberLookup": "Pesquisar Membro",
     "memberNumbers": "Lista de Números de Membro",
     "communes": "Comunas do Haiti (146)",
-    "adminDashboard": "Painel de Administração",
+    "adminDashboard": "Login Admin",
     "conditionsPolicy": "Condições e Política"
   },
   "home": {
@@ -95,6 +95,12 @@
       "subtitle": "Não espere! Registe-se como membro da KAFA hoje e tenha tranquilidade para o amanhã.",
       "becomeMember": "Tornar-se Membro Hoje",
       "contact": "Tem Perguntas? Contacte-nos"
+    },
+    "steps": {
+      "addStep": "Adicionar um passo",
+      "removeStep": "Remover este passo",
+      "newStepTitle": "Novo Passo",
+      "newStepDescription": "Descrição do passo"
     }
   },
   "about": {
@@ -789,7 +795,7 @@
   },
   "admin": {
     "title": "Painel de Administração",
-    "connected": "Conectado:",
+    "connected": "Conectado: Admin",
     "logout": "Sair",
     "stats": {
       "totalMembers": "Total de Membros",
@@ -810,7 +816,11 @@
       "notification": "Notificação",
       "payment": "Pagamento",
       "history": "Histórico",
-      "exportCSV": "Exportar CSV"
+      "exportCSV": "Exportar CSV",
+      "all": "Todos",
+      "allStatuses": "Todos os estados",
+      "results": "resultado(s) encontrado(s)",
+      "linked": "vinculados"
     },
     "table": {
       "number": "Número",
@@ -821,7 +831,10 @@
       "status": "Estado",
       "actions": "Ações",
       "view": "Ver",
-      "manage": "Gerir"
+      "manage": "Gerir",
+      "memberNumber": "Número de Membro",
+      "fullName": "Nome Completo",
+      "account": "Conta"
     },
     "pagination": {
       "showing": "A mostrar",
@@ -833,7 +846,23 @@
       "title": "Detalhes do Membro",
       "memberInfo": "Informações do Membro",
       "kafaInfo": "Informações KAFA",
-      "contactInfo": "Informações de Contacto"
+      "contactInfo": "Informações de Contacto",
+      "description": "Informações completas do membro KAFA",
+      "memberNumberKAFA": "Número de Membro KAFA",
+      "lastName": "Apelido",
+      "firstName": "Nome",
+      "fullName": "Nome Completo",
+      "commune": "Comuna",
+      "gender": "Género",
+      "birthDatePlace": "Data e local de nascimento",
+      "profession": "Profissão",
+      "phone": "Telefone",
+      "email": "Email",
+      "socialShares": "Partes Sociais",
+      "totalAmount": "Montante Total",
+      "selectedPlan": "Plano selecionado",
+      "joinDate": "Data de adesão",
+      "registrationDate": "Data de registo"
     },
     "memberManagement": {
       "title": "Gerir Membro",
@@ -989,7 +1018,27 @@
     "userNotFoundDesc": "Nenhuma conta de utilizador encontrada com este email",
     "userAlreadyLinked": "Utilizador já ligado",
     "emailRequired": "Email obrigatório",
-    "enterUserEmail": "Por favor, introduza o email do utilizador"
+    "enterUserEmail": "Por favor, introduza o email do utilizador",
+    "editSite": "Editar site",
+    "backToDashboard": "Painel",
+    "headerBtn": "Admin",
+    "status": {
+      "active": "Ativo",
+      "pending": "Pendente",
+      "suspended": "Suspenso"
+    },
+    "memberList": {
+      "title": "Lista de Membros",
+      "description": "Todos os membros registados no sistema KAFA",
+      "noMembers": "Nenhum membro registado",
+      "noMembersFilter": "Nenhum membro corresponde aos critérios"
+    },
+    "plans": {
+      "basic": "Plano Básico",
+      "standard": "Plano Standard",
+      "premium": "Plano Premium",
+      "sereLajan": "Plano Sere Lajan"
+    }
   },
   "notFound": {
     "title": "404",

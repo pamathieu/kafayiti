@@ -9,6 +9,7 @@ interface AuthContextType {
 }
 
 const SESSION_KEY = "kafa_admin_session";
+const EDIT_MODE_KEY = "kafa_edit_mode";
 const HASH = import.meta.env.VITE_ADMIN_PASSWORD_HASH as string;
 
 async function sha256(text: string): Promise<string> {
@@ -20,14 +21,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState<boolean>(() => {
-    try { return sessionStorage.getItem(SESSION_KEY) === "1"; } catch { return false; }
+    try { return localStorage.getItem(SESSION_KEY) === "1"; } catch { return false; }
   });
 
   const signIn = async (_username: string, password: string): Promise<{ error: Error | null }> => {
     try {
       const hash = await sha256(password);
       if (hash === HASH) {
-        sessionStorage.setItem(SESSION_KEY, "1");
+        localStorage.setItem(SESSION_KEY, "1");
         setIsAdmin(true);
         console.log("[Auth] Admin signed in.");
         return { error: null };
@@ -41,7 +42,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signOut = () => {
-    try { sessionStorage.removeItem(SESSION_KEY); } catch { /* ignore */ }
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(EDIT_MODE_KEY);
+    } catch { /* ignore */ }
     setIsAdmin(false);
     console.log("[Auth] Admin signed out.");
   };

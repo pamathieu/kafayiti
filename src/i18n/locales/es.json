@@ -33,13 +33,13 @@
     "becomeMember": "Hacerse Miembro",
     "howToInvest": "Cómo Invertir",
     "contact": "Contáctenos",
-    "login": "Iniciar Sesión",
+    "login": "Iniciar sesión como Miembro",
     "logout": "Cerrar Sesión",
     "dashboard": "Panel",
     "memberLookup": "Buscar Miembro",
     "memberNumbers": "Lista de Números de Miembro",
     "communes": "Comunas de Haití (146)",
-    "adminDashboard": "Panel de Administrador",
+    "adminDashboard": "Inicio de sesión Admin",
     "conditionsPolicy": "Condiciones y Política"
   },
   "home": {
@@ -80,6 +80,12 @@
       "subtitle": "¡No espere! Regístrese como miembro de KAFA hoy y tenga tranquilidad para el mañana.",
       "becomeMember": "Hacerse Miembro Hoy",
       "contact": "¿Tiene Preguntas? Contáctenos"
+    },
+    "steps": {
+      "addStep": "Agregar un paso",
+      "removeStep": "Eliminar este paso",
+      "newStepTitle": "Nuevo Paso",
+      "newStepDescription": "Descripción del paso"
     }
   },
   "about": {
@@ -788,5 +794,103 @@
     "alreadyRegistered": "Ya existe una cuenta con este email",
     "genericError": "Ocurrió un error",
     "networkError": "No se puede conectar al servicio de autenticación. Por favor, inténtelo más tarde."
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "connected": "Conectado: Admin",
+    "editSite": "Editar sitio",
+    "logout": "Cerrar sesión",
+    "backToDashboard": "Panel",
+    "headerBtn": "Admin",
+    "stats": {
+      "totalMembers": "Total Miembros",
+      "men": "Hombres",
+      "women": "Mujeres",
+      "communesRepresented": "Comunas Representadas"
+    },
+    "filters": {
+      "title": "Filtros y Búsqueda",
+      "search": "Búsqueda",
+      "searchPlaceholder": "Nombre, número, email, tel...",
+      "commune": "Comuna",
+      "allCommunes": "Todas las comunas",
+      "gender": "Sexo",
+      "all": "Todos",
+      "status": "Estado",
+      "allStatuses": "Todos los estados",
+      "clear": "Limpiar",
+      "refresh": "Actualizar",
+      "notification": "Notificación",
+      "payment": "Pago",
+      "history": "Historial",
+      "exportCSV": "Exportar CSV",
+      "results": "resultado(s) encontrado(s)",
+      "linked": "vinculados"
+    },
+    "status": {
+      "active": "Activo",
+      "pending": "Pendiente",
+      "suspended": "Suspendido"
+    },
+    "memberList": {
+      "title": "Lista de Miembros",
+      "description": "Todos los miembros registrados en el sistema KAFA",
+      "noMembers": "Ningún miembro registrado",
+      "noMembersFilter": "Ningún miembro coincide con los criterios"
+    },
+    "table": {
+      "memberNumber": "Número Miembro",
+      "fullName": "Nombre Completo",
+      "commune": "Comuna",
+      "status": "Estado",
+      "account": "Cuenta",
+      "registrationDate": "Fecha Registro",
+      "actions": "Acciones",
+      "number": "Número",
+      "member": "Miembro",
+      "gender": "Sexo",
+      "view": "Ver",
+      "manage": "Gestionar"
+    },
+    "pagination": {
+      "page": "Página",
+      "of": "de",
+      "members": "miembros",
+      "showing": "Mostrando"
+    },
+    "memberDetails": {
+      "title": "Detalles del Miembro",
+      "description": "Información completa del miembro KAFA",
+      "memberNumberKAFA": "Número de Miembro KAFA",
+      "lastName": "Apellido",
+      "firstName": "Nombre",
+      "fullName": "Nombre Completo",
+      "commune": "Comuna",
+      "gender": "Sexo",
+      "birthDatePlace": "Fecha y lugar de nacimiento",
+      "profession": "Profesión",
+      "phone": "Teléfono",
+      "email": "Email",
+      "socialShares": "Partes Sociales",
+      "totalAmount": "Monto Total",
+      "selectedPlan": "Plan seleccionado",
+      "joinDate": "Fecha de adhesión",
+      "registrationDate": "Fecha de registro",
+      "memberInfo": "Información del Miembro",
+      "kafaInfo": "Información KAFA",
+      "contactInfo": "Información de Contacto"
+    },
+    "plans": {
+      "basic": "Plan Básico",
+      "standard": "Plan Estándar",
+      "premium": "Plan Premium",
+      "sereLajan": "Plan Sere Lajan"
+    },
+    "loading": "Cargando...",
+    "loadError": "No se pueden cargar los miembros",
+    "export": {
+      "success": "Exportación exitosa",
+      "membersExported": "miembros exportados"
+    }
   }
 }

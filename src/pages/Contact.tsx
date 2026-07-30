@@ -18,10 +18,32 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import EditableText from "@/components/EditableText";
+import { useEditMode } from "@/hooks/useEditMode";
+import { useLocalEditableState } from "@/hooks/useLocalEditableState";
+import { translateToOtherLanguages } from "@/utils/translate";
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
+  const { isEditMode } = useEditMode();
+
+  const [textOverrides, setTextOverrides] = useLocalEditableState<Record<string, string>>(
+    "contact_text_v2",
+    {}
+  );
+  const getText = (key: string, fallback: string) =>
+    textOverrides[`${i18n.language}.${key}`] ?? textOverrides[key] ?? fallback;
+  const setText = (key: string) => (value: string) => {
+    const lang = i18n.language;
+    setTextOverrides((prev) => ({ ...prev, [key]: value, [`${lang}.${key}`]: value }));
+    translateToOtherLanguages(value, lang).then((translations) => {
+      setTextOverrides((prev) => ({
+        ...prev,
+        ...Object.fromEntries(Object.entries(translations).map(([tl, tv]) => [`${tl}.${key}`, tv])),
+      }));
+    });
+  };
 
   const contactSchema = z.object({
     name: z.string().trim().min(1, t('contact.validation.nameRequired')).max(100, t('contact.validation.nameTooLong')),
@@ -82,12 +104,14 @@ const Contact = () => {
         <section className="bg-gradient-hero hero-padding text-primary-foreground">
           <div className="section-container">
             <div className="content-container text-center">
-              <h1 className="hero-title">
-                {t('contact.hero.title')}
-              </h1>
-              <p className="hero-subtitle">
-                {t('contact.hero.subtitle')}
-              </p>
+              <EditableText as="h1" isEditMode={isEditMode}
+                value={getText('hero.title', t('contact.hero.title'))}
+                onChange={setText('hero.title')}
+                className="hero-title" />
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('hero.subtitle', t('contact.hero.subtitle'))}
+                onChange={setText('hero.subtitle')}
+                className="hero-subtitle" />
             </div>
           </div>
         </section>
@@ -100,9 +124,10 @@ const Contact = () => {
                 
                 {/* Contact Form */}
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">
-                    {t('contact.form.title')}
-                  </h2>
+                  <EditableText as="h2" isEditMode={isEditMode}
+                    value={getText('form.title', t('contact.form.title'))}
+                    onChange={setText('form.title')}
+                    className="text-2xl sm:text-3xl font-bold text-foreground mb-6" />
                   <Card className="border-border shadow-primary">
                     <CardContent className="pt-6">
                       <Form {...form}>
@@ -180,9 +205,10 @@ const Contact = () => {
                 {/* Contact Info & Map */}
                 <div className="space-y-8">
                   <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">
-                      {t('contact.info.title')}
-                    </h2>
+                    <EditableText as="h2" isEditMode={isEditMode}
+                      value={getText('info.title', t('contact.info.title'))}
+                      onChange={setText('info.title')}
+                      className="text-2xl sm:text-3xl font-bold text-foreground mb-6" />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {contactInfo.map((info, index) => (
                         <Card key={index} className="border-border hover:shadow-primary transition-all duration-300">
@@ -206,9 +232,10 @@ const Contact = () => {
 
                   {/* Map */}
                   <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">
-                      {t('contact.info.location')}
-                    </h2>
+                    <EditableText as="h2" isEditMode={isEditMode}
+                      value={getText('info.location', t('contact.info.location'))}
+                      onChange={setText('info.location')}
+                      className="text-2xl sm:text-3xl font-bold text-foreground mb-6" />
                     <Card className="border-border overflow-hidden">
                       <div className="aspect-video w-full">
                         <iframe

@@ -48,13 +48,13 @@
     "becomeMember": "Become a Member",
     "howToInvest": "How to Invest",
     "contact": "Contact Us",
-    "login": "Login",
+    "login": "Login as Member",
     "logout": "Logout",
     "dashboard": "Dashboard",
     "memberLookup": "Member Lookup",
     "memberNumbers": "Member Numbers List",
     "communes": "Haiti Communes (146)",
-    "adminDashboard": "Admin Dashboard",
+    "adminDashboard": "Admin Login",
     "conditionsPolicy": "Conditions & Policy"
   },
   "home": {
@@ -95,6 +95,12 @@
       "subtitle": "Don't wait! Register as a KAFA member today and have peace of mind for tomorrow.",
       "becomeMember": "Become a Member Today",
       "contact": "Have Questions? Contact Us"
+    },
+    "steps": {
+      "addStep": "Add a step",
+      "removeStep": "Remove this step",
+      "newStepTitle": "New Step",
+      "newStepDescription": "Step description"
     }
   },
   "about": {
@@ -657,47 +663,87 @@
       "contact": "Phone: (509) 3500-0326 / 4439-8595 | Email: kontak@kafayiti.com"
     },
     "form": {
-      "title": "Membership Form",
-      "subtitle": "Member of Cooperative Insurance Force of Haiti (KAFA)",
-      "personalInfo": "Member Personal Information",
+      "title": "Membership Application",
+      "subtitle": "Member of Cooperative Insurance Force of Haiti (KAFA)"
+    },
+    "sections": {
+      "personalInfo": "Member's Personal Information",
+      "beneficiaries": "Heir(s) or beneficiary(ies) (in case of death)",
+      "commitment": "Member's Commitment",
+      "signature": "Member's Signature"
+    },
+    "fields": {
       "lastName": "Last Name",
       "firstName": "First Name(s)",
       "birthPlace": "Place of Birth",
       "gender": "Gender",
       "profession": "Profession / Main Activity",
-      "idNumber": "ID Number",
+      "idNumber": "ID Document Number",
       "idType": "ID Type",
-      "idIssue": "Date and place of issue",
-      "idExpiry": "Expiration date",
-      "address": "Full Address",
+      "idIssueDetails": "Date and Place of Issue",
+      "idExpiration": "Expiration Date",
+      "address": "Full Address (Home)",
       "commune": "Commune",
       "phone": "Phone",
       "email": "Email",
-      "kafaInfo": "KAFA-Related Information",
-      "joinDate": "Membership Date",
-      "socialShares": "Number of Social Shares",
-      "totalAmount": "Total Amount (Gdes)",
-      "insuranceProducts": "Insurance Products to Subscribe",
-      "otherInsurance": "Other (specify)",
-      "beneficiarySection": "Beneficiary(ies) or Rightful Claimant(s)",
-      "beneficiaryName": "Full Name",
-      "beneficiaryRelation": "Relationship",
-      "beneficiaryDOB": "Date of Birth",
-      "beneficiaryPhone": "Phone",
-      "beneficiaryEmail": "Email",
-      "beneficiaryPercentage": "Percentage",
-      "addBeneficiary": "Add Beneficiary",
-      "removeBeneficiary": "Remove",
-      "commitmentSection": "Member Commitment",
-      "declaration": "I declare that all information provided is accurate and complete.",
-      "commitment": "I commit to respecting KAFA statutes and regulations.",
-      "dataAuth": "I authorize KAFA to use my personal data for membership and insurance services.",
-      "signatureSection": "Signature",
-      "signaturePlace": "Place",
-      "signatureDate": "Date",
-      "signature": "Member Signature",
+      "message": "Questions or Comments (Optional)",
+      "selectedPlan": "Selected Plan"
+    },
+    "placeholders": {
+      "lastName": "Enter your last name",
+      "firstName": "Enter your first name(s)",
+      "birthPlace": "Ex: Port-au-Prince",
+      "profession": "Enter your profession",
+      "idNumber": "Number",
+      "idIssueDetails": "Ex: 10/05/2020, Port-au-Prince",
+      "address": "Enter your full address",
+      "commune": "Select your commune",
+      "phone": "Ex: 3700-0000",
+      "email": "example@email.com",
+      "message": "Type your question or comment here..."
+    },
+    "options": {
+      "male": "Male",
+      "female": "Female",
+      "cni": "CNI",
+      "nif": "NIF",
+      "passport": "Passport",
+      "other": "Other"
+    },
+    "beneficiary": {
+      "title": "Beneficiary",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Beneficiary's full name",
+      "relationship": "Relationship",
+      "relationshipPlaceholder": "Ex: Spouse, Son, Daughter",
+      "dob": "Date of Birth",
+      "phone": "Phone",
+      "email": "Email",
+      "percentage": "Attribution Percentage %",
+      "percentagePlaceholder": "Ex: 50",
+      "addButton": "Add a beneficiary",
+      "noteLabel": "Note:",
+      "note": "All members are authorized to modify their list of beneficiaries upon written request."
+    },
+    "commitment": {
+      "declaration": "I declare on my honor that the information provided is accurate.",
+      "statutes": "I commit to respect the statutes, regulations and decisions of the insurance cooperative.",
+      "dataAuth": "I authorize the cooperative to use my data within the strict framework of its activities."
+    },
+    "signature": {
+      "place": "Done at",
+      "placePlaceholder": "City/Location",
+      "date": "On",
+      "signature": "Member's Signature",
+      "signaturePlaceholder": "Type your full name as signature"
+    },
+    "buttons": {
       "submit": "Submit Form",
-      "submitting": "Submitting..."
+      "submitNow": "Submit Now",
+      "submitWithMore": "Submit With More Information",
+      "seeLess": "See Less",
+      "submitting": "Submitting...",
+      "reset": "Reset"
     },
     "validation": {
       "lastNameRequired": "Last name is required",
@@ -709,28 +755,28 @@
       "idNumberRequired": "ID number is required",
       "idTypeRequired": "ID type is required",
       "idIssueRequired": "Date and place of issue is required",
-      "idExpiryRequired": "Expiration date is required",
+      "idExpirationRequired": "Expiration date is required",
       "addressRequired": "Full address is required",
       "communeRequired": "Commune is required",
       "phoneRequired": "Phone number is required",
       "emailInvalid": "Invalid email",
-      "joinDateRequired": "Membership date is required",
+      "joinDateRequired": "Join date is required",
       "socialSharesRequired": "Number of social shares is required",
       "totalAmountRequired": "Total amount is required",
       "beneficiaryRequired": "At least one beneficiary is required",
+      "relationshipRequired": "Relationship is required",
+      "dobRequired": "Date of birth is required",
+      "percentageRequired": "Percentage is required",
       "declarationRequired": "You must declare that the information is accurate",
       "signaturePlaceRequired": "Signature place is required",
       "signatureDateRequired": "Signature date is required",
       "signatureRequired": "Signature is required"
     },
-    "success": {
-      "title": "Form submitted successfully",
-      "description": "Your KAFA member number:"
-    },
-    "error": {
-      "title": "Error",
-      "memberNumberError": "Error generating member number",
-      "submitError": "Error registering member",
+    "messages": {
+      "successTitle": "Form submitted successfully",
+      "successDesc": "Your KAFA member number:",
+      "errorGenerating": "Error generating member number",
+      "errorSaving": "Error saving member",
       "genericError": "An error occurred"
     }
   },
@@ -748,7 +794,7 @@
   },
   "admin": {
     "title": "Admin Dashboard",
-    "connected": "Connected:",
+    "connected": "Connected: Admin",
     "logout": "Logout",
     "stats": {
       "totalMembers": "Total Members",
@@ -769,7 +815,11 @@
       "notification": "Notification",
       "payment": "Payment",
       "history": "History",
-      "exportCSV": "Export CSV"
+      "exportCSV": "Export CSV",
+      "all": "All",
+      "allStatuses": "All statuses",
+      "results": "result(s) found",
+      "linked": "linked"
     },
     "table": {
       "number": "Number",
@@ -780,7 +830,10 @@
       "status": "Status",
       "actions": "Actions",
       "view": "View",
-      "manage": "Manage"
+      "manage": "Manage",
+      "memberNumber": "Member Number",
+      "fullName": "Full Name",
+      "account": "Account"
     },
     "pagination": {
       "showing": "Showing",
@@ -792,7 +845,23 @@
       "title": "Member Details",
       "memberInfo": "Member Information",
       "kafaInfo": "KAFA Information",
-      "contactInfo": "Contact Information"
+      "contactInfo": "Contact Information",
+      "description": "Complete information of the KAFA member",
+      "memberNumberKAFA": "KAFA Member Number",
+      "lastName": "Last Name",
+      "firstName": "First Name",
+      "fullName": "Full Name",
+      "commune": "Commune",
+      "gender": "Gender",
+      "birthDatePlace": "Date and place of birth",
+      "profession": "Profession",
+      "phone": "Phone",
+      "email": "Email",
+      "socialShares": "Social Shares",
+      "totalAmount": "Total Amount",
+      "selectedPlan": "Selected plan",
+      "joinDate": "Join date",
+      "registrationDate": "Registration date"
     },
     "memberManagement": {
       "title": "Manage Member",
@@ -948,136 +1017,32 @@
     "userNotFoundDesc": "No user account found with this email",
     "userAlreadyLinked": "User already linked",
     "emailRequired": "Email required",
-    "enterUserEmail": "Please enter the user's email"
+    "enterUserEmail": "Please enter the user's email",
+    "editSite": "Edit Site",
+    "backToDashboard": "Dashboard",
+    "headerBtn": "Admin",
+    "status": {
+      "active": "Active",
+      "pending": "Pending",
+      "suspended": "Suspended"
+    },
+    "memberList": {
+      "title": "Member List",
+      "description": "All members registered in the KAFA system",
+      "noMembers": "No registered members",
+      "noMembersFilter": "No members match the criteria"
+    },
+    "plans": {
+      "basic": "Basic Plan",
+      "standard": "Standard Plan",
+      "premium": "Premium Plan",
+      "sereLajan": "Sere Lajan Plan"
+    }
   },
   "notFound": {
     "title": "404",
     "message": "Oops! Page not found",
     "backHome": "Return to Home"
-  },
-  "becomeMember": {
-    "header": {
-      "title": "Cooperative Insurance Force of Haiti (KAFA)",
-      "address": "874 Rue Sainte Catherine, Léogâne, Haiti HT 6212",
-      "contact": "Phone: (509) 3500-0326 / 4439-8595 | Email: kontak@kafayiti.com"
-    },
-    "form": {
-      "title": "Membership Application",
-      "subtitle": "Member of Cooperative Insurance Force of Haiti (KAFA)"
-    },
-    "sections": {
-      "personalInfo": "Member's Personal Information",
-      "beneficiaries": "Heir(s) or beneficiary(ies) (in case of death)",
-      "commitment": "Member's Commitment",
-      "signature": "Member's Signature"
-    },
-    "fields": {
-      "lastName": "Last Name",
-      "firstName": "First Name(s)",
-      "birthPlace": "Place of Birth",
-      "gender": "Gender",
-      "profession": "Profession / Main Activity",
-      "idNumber": "ID Document Number",
-      "idType": "ID Type",
-      "idIssueDetails": "Date and Place of Issue",
-      "idExpiration": "Expiration Date",
-      "address": "Full Address (Home)",
-      "commune": "Commune",
-      "phone": "Phone",
-      "email": "Email",
-      "message": "Questions or Comments (Optional)",
-      "selectedPlan": "Selected Plan"
-    },
-    "placeholders": {
-      "lastName": "Enter your last name",
-      "firstName": "Enter your first name(s)",
-      "birthPlace": "Ex: Port-au-Prince",
-      "profession": "Enter your profession",
-      "idNumber": "Number",
-      "idIssueDetails": "Ex: 10/05/2020, Port-au-Prince",
-      "address": "Enter your full address",
-      "commune": "Select your commune",
-      "phone": "Ex: 3700-0000",
-      "email": "example@email.com",
-      "message": "Type your question or comment here..."
-    },
-    "options": {
-      "male": "Male",
-      "female": "Female",
-      "cni": "CNI",
-      "nif": "NIF",
-      "passport": "Passport",
-      "other": "Other"
-    },
-    "beneficiary": {
-      "title": "Beneficiary",
-      "fullName": "Full Name",
-      "fullNamePlaceholder": "Beneficiary's full name",
-      "relationship": "Relationship",
-      "relationshipPlaceholder": "Ex: Spouse, Son, Daughter",
-      "dob": "Date of Birth",
-      "phone": "Phone",
-      "email": "Email",
-      "percentage": "Attribution Percentage %",
-      "percentagePlaceholder": "Ex: 50",
-      "addButton": "Add a beneficiary",
-      "noteLabel": "Note:",
-      "note": "All members are authorized to modify their list of beneficiaries upon written request."
-    },
-    "commitment": {
-      "declaration": "I declare on my honor that the information provided is accurate.",
-      "statutes": "I commit to respect the statutes, regulations and decisions of the insurance cooperative.",
-      "dataAuth": "I authorize the cooperative to use my data within the strict framework of its activities."
-    },
-    "signature": {
-      "place": "Done at",
-      "placePlaceholder": "City/Location",
-      "date": "On",
-      "signature": "Member's Signature",
-      "signaturePlaceholder": "Type your full name as signature"
-    },
-    "buttons": {
-      "submit": "Submit Form",
-      "submitNow": "Submit Now",
-      "submitWithMore": "Submit With More Information",
-      "seeLess": "See Less",
-      "submitting": "Submitting...",
-      "reset": "Reset"
-    },
-    "validation": {
-      "lastNameRequired": "Last name is required",
-      "firstNameRequired": "First name is required",
-      "fullNameRequired": "Full name is required",
-      "birthPlaceRequired": "Place of birth is required",
-      "genderRequired": "Gender is required",
-      "professionRequired": "Profession is required",
-      "idNumberRequired": "ID number is required",
-      "idTypeRequired": "ID type is required",
-      "idIssueRequired": "Date and place of issue is required",
-      "idExpirationRequired": "Expiration date is required",
-      "addressRequired": "Full address is required",
-      "communeRequired": "Commune is required",
-      "phoneRequired": "Phone number is required",
-      "emailInvalid": "Invalid email",
-      "joinDateRequired": "Join date is required",
-      "socialSharesRequired": "Number of social shares is required",
-      "totalAmountRequired": "Total amount is required",
-      "beneficiaryRequired": "At least one beneficiary is required",
-      "relationshipRequired": "Relationship is required",
-      "dobRequired": "Date of birth is required",
-      "percentageRequired": "Percentage is required",
-      "declarationRequired": "You must declare that the information is accurate",
-      "signaturePlaceRequired": "Signature place is required",
-      "signatureDateRequired": "Signature date is required",
-      "signatureRequired": "Signature is required"
-    },
-    "messages": {
-      "successTitle": "Form submitted successfully",
-      "successDesc": "Your KAFA member number:",
-      "errorGenerating": "Error generating member number",
-      "errorSaving": "Error saving member",
-      "genericError": "An error occurred"
-    }
   },
   "assistant": {
     "title": "KAFA Assistant",

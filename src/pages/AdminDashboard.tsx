@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -32,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import { useEditMode } from "@/hooks/useEditMode";
 import { supabase } from "@/integrations/supabase/client";
 import { haitiCommunes } from "@/lib/memberNumberUtils";
 import {
@@ -94,9 +96,11 @@ interface KafaMember {
 const ITEMS_PER_PAGE = 20;
 
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { user, isAdmin, loading: authLoading, signOut } = useAuth();
+  const { isAdmin, loading: authLoading, signOut } = useAuth();
+  const { isEditMode, toggleEditMode } = useEditMode();
   const [members, setMembers] = useState<KafaMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -105,21 +109,19 @@ const AdminDashboard = () => {
 
   // Redirect if not authenticated or not admin
   useEffect(() => {
-    if (!authLoading && !user) {
-      navigate("/admin/login");
-    } else if (!authLoading && user && !isAdmin) {
-      toast({
-        title: "Accès refusé",
-        description: "Vous n'avez pas les permissions administrateur",
-        variant: "destructive",
-      });
+    if (!authLoading && !isAdmin) {
       navigate("/admin/login");
     }
-  }, [user, isAdmin, authLoading, navigate]);
+  }, [isAdmin, authLoading, navigate]);
 
-  const handleSignOut = async () => {
-    await signOut();
+  const handleSignOut = () => {
+    signOut();
     navigate("/admin/login");
+  };
+
+  const handleGoToSite = () => {
+    if (!isEditMode) toggleEditMode();
+    navigate("/");
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedMember, setSelectedMember] = useState<KafaMember | null>(null);
@@ -142,8 +144,7 @@ const AdminDashboard = () => {
       if (error) {
         console.error("Error fetching members:", error);
         toast({
-          title: "Erreur",
-          description: "Impossible de charger les membres",
+          title: t('admin.loadError'),
           variant: "destructive",
         });
         return;
@@ -199,19 +200,19 @@ const AdminDashboard = () => {
   // Export to CSV
   const exportToCSV = () => {
     const headers = [
-      "Numéro Membre",
-      "Nom Complet",
-      "Nom",
-      "Prénom",
-      "Commune",
-      "Sexe",
-      "Profession",
-      "Téléphone",
-      "Email",
-      "Date d'adhésion",
-      "Parts Sociales",
-      "Montant Total",
-      "Date d'inscription",
+      t('admin.table.memberNumber'),
+      t('admin.table.fullName'),
+      t('admin.memberDetails.lastName'),
+      t('admin.memberDetails.firstName'),
+      t('admin.table.commune'),
+      t('admin.memberDetails.gender'),
+      t('admin.memberDetails.profession'),
+      t('admin.memberDetails.phone'),
+      t('admin.memberDetails.email'),
+      t('admin.memberDetails.joinDate'),
+      t('admin.memberDetails.socialShares'),
+      t('admin.memberDetails.totalAmount'),
+      t('admin.memberDetails.registrationDate'),
     ];
 
     const csvData = filteredMembers.map((member) => [
@@ -248,8 +249,8 @@ const AdminDashboard = () => {
     URL.revokeObjectURL(url);
 
     toast({
-      title: "Export réussi",
-      description: `${filteredMembers.length} membres exportés`,
+      title: t('admin.export.success'),
+      description: `${filteredMembers.length} ${t('admin.export.membersExported')}`,
     });
   };
 
@@ -276,11 +277,11 @@ const AdminDashboard = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">Actif</Badge>;
+        return <Badge className="bg-green-100 text-green-800 hover:bg-green-100">{t('admin.status.active')}</Badge>;
       case "pending":
-        return <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">En attente</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">{t('admin.status.pending')}</Badge>;
       case "suspended":
-        return <Badge className="bg-red-100 text-red-800 hover:bg-red-100">Suspendu</Badge>;
+        return <Badge className="bg-red-100 text-red-800 hover:bg-red-100">{t('admin.status.suspended')}</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -296,7 +297,7 @@ const AdminDashboard = () => {
   }
 
   // Don't render if not admin
-  if (!user || !isAdmin) {
+  if (!isAdmin) {
     return null;
   }
 
@@ -314,21 +315,30 @@ const AdminDashboard = () => {
                   <Shield className="h-10 w-10" />
                   <div>
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-                      Tableau de Bord Admin
+                      {t('admin.title')}
                     </h1>
                     <p className="text-sm opacity-95 mt-1">
-                      Connecté: {user.email}
+                      {t('admin.connected')}
                     </p>
                   </div>
                 </div>
-                <Button
-                  variant="secondary"
-                  onClick={handleSignOut}
-                  className="shrink-0"
-                >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Déconnexion
-                </Button>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Button
+                    variant="outline"
+                    onClick={handleGoToSite}
+                    className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white"
+                  >
+                    <Edit className="h-4 w-4 mr-2" />
+                    {t('admin.editSite')}
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    {t('admin.logout')}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -344,7 +354,7 @@ const AdminDashboard = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">
-                        Total Membres
+                        {t('admin.stats.totalMembers')}
                       </p>
                       <p className="text-2xl font-bold text-foreground">
                         {members.length}
@@ -359,7 +369,7 @@ const AdminDashboard = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">Hommes</p>
+                      <p className="text-sm text-muted-foreground">{t('admin.stats.men')}</p>
                       <p className="text-2xl font-bold text-foreground">
                         {members.filter((m) => m.gender === "homme").length}
                       </p>
@@ -375,7 +385,7 @@ const AdminDashboard = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">Femmes</p>
+                      <p className="text-sm text-muted-foreground">{t('admin.stats.women')}</p>
                       <p className="text-2xl font-bold text-foreground">
                         {members.filter((m) => m.gender === "femme").length}
                       </p>
@@ -392,7 +402,7 @@ const AdminDashboard = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground">
-                        Communes Représentées
+                        {t('admin.stats.communesRepresented')}
                       </p>
                       <p className="text-2xl font-bold text-foreground">
                         {new Set(members.map((m) => m.commune)).size}
@@ -410,34 +420,34 @@ const AdminDashboard = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Filter className="h-5 w-5" />
-                    Filtres et Recherche
+                    {t('admin.filters.title')}
                   </CardTitle>
                   <div className="flex gap-2">
                     {hasActiveFilters && (
                       <Button variant="ghost" size="sm" onClick={clearFilters}>
                         <X className="h-4 w-4 mr-1" />
-                        Effacer
+                        {t('admin.filters.clear')}
                       </Button>
                     )}
                     <Button variant="outline" size="sm" onClick={fetchMembers}>
                       <RefreshCw className="h-4 w-4 mr-1" />
-                      Actualiser
+                      {t('admin.filters.refresh')}
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => setShowNotificationDialog(true)}>
                       <Bell className="h-4 w-4 mr-1" />
-                      Notification
+                      {t('admin.filters.notification')}
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => setShowPaymentDialog(true)}>
                       <DollarSign className="h-4 w-4 mr-1" />
-                      Paiement
+                      {t('admin.filters.payment')}
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => setShowPaymentHistoryDialog(true)}>
                       <History className="h-4 w-4 mr-1" />
-                      Historique
+                      {t('admin.filters.history')}
                     </Button>
                     <Button size="sm" onClick={exportToCSV}>
                       <Download className="h-4 w-4 mr-1" />
-                      Exporter CSV
+                      {t('admin.filters.exportCSV')}
                     </Button>
                   </div>
                 </div>
@@ -446,13 +456,13 @@ const AdminDashboard = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
                     <Label htmlFor="search" className="text-sm">
-                      Recherche
+                      {t('admin.filters.search')}
                     </Label>
                     <div className="relative mt-1.5">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="search"
-                        placeholder="Nom, numéro, email, tél..."
+                        placeholder={t('admin.filters.searchPlaceholder')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="pl-10"
@@ -462,17 +472,17 @@ const AdminDashboard = () => {
 
                   <div>
                     <Label htmlFor="commune-filter" className="text-sm">
-                      Commune
+                      {t('admin.filters.commune')}
                     </Label>
                     <Select
                       value={communeFilter}
                       onValueChange={setCommuneFilter}
                     >
                       <SelectTrigger className="mt-1.5">
-                        <SelectValue placeholder="Toutes les communes" />
+                        <SelectValue placeholder={t('admin.filters.allCommunes')} />
                       </SelectTrigger>
                       <SelectContent className="max-h-[300px]">
-                        <SelectItem value="all">Toutes les communes</SelectItem>
+                        <SelectItem value="all">{t('admin.filters.allCommunes')}</SelectItem>
                         {haitiCommunes.map((commune) => (
                           <SelectItem key={commune} value={commune}>
                             {commune}
@@ -484,14 +494,14 @@ const AdminDashboard = () => {
 
                   <div>
                     <Label htmlFor="gender-filter" className="text-sm">
-                      Sexe
+                      {t('admin.filters.gender')}
                     </Label>
                     <Select value={genderFilter} onValueChange={setGenderFilter}>
                       <SelectTrigger className="mt-1.5">
-                        <SelectValue placeholder="Tous" />
+                        <SelectValue placeholder={t('admin.filters.all')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">Tous</SelectItem>
+                        <SelectItem value="all">{t('admin.filters.all')}</SelectItem>
                         <SelectItem value="homme">Homme</SelectItem>
                         <SelectItem value="femme">Femme</SelectItem>
                       </SelectContent>
@@ -500,17 +510,17 @@ const AdminDashboard = () => {
 
                   <div>
                     <Label htmlFor="status-filter" className="text-sm">
-                      Statut
+                      {t('admin.filters.status')}
                     </Label>
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
                       <SelectTrigger className="mt-1.5">
-                        <SelectValue placeholder="Tous" />
+                        <SelectValue placeholder={t('admin.filters.allStatuses')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">Tous les statuts</SelectItem>
-                        <SelectItem value="pending">En attente</SelectItem>
-                        <SelectItem value="active">Actif</SelectItem>
-                        <SelectItem value="suspended">Suspendu</SelectItem>
+                        <SelectItem value="all">{t('admin.filters.allStatuses')}</SelectItem>
+                        <SelectItem value="pending">{t('admin.status.pending')}</SelectItem>
+                        <SelectItem value="active">{t('admin.status.active')}</SelectItem>
+                        <SelectItem value="suspended">{t('admin.status.suspended')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -518,12 +528,12 @@ const AdminDashboard = () => {
 
                 <div className="mt-4 flex items-center justify-between">
                   <p className="text-sm text-muted-foreground">
-                    {filteredMembers.length} résultat(s) trouvé(s)
+                    {filteredMembers.length} {t('admin.filters.results')}
                   </p>
                   <div className="flex gap-2">
                     <p className="text-sm text-muted-foreground flex items-center gap-1">
                       <UserCheck className="h-4 w-4" />
-                      {members.filter(m => m.user_id).length} liés
+                      {members.filter(m => m.user_id).length} {t('admin.filters.linked')}
                     </p>
                   </div>
                 </div>
@@ -533,9 +543,9 @@ const AdminDashboard = () => {
             {/* Members Table */}
             <Card>
               <CardHeader>
-                <CardTitle>Liste des Membres</CardTitle>
+                <CardTitle>{t('admin.memberList.title')}</CardTitle>
                 <CardDescription>
-                  Tous les membres enregistrés dans le système KAFA
+                  {t('admin.memberList.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -543,7 +553,7 @@ const AdminDashboard = () => {
                   <div className="flex items-center justify-center py-12">
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
                     <span className="ml-2 text-muted-foreground">
-                      Chargement...
+                      {t('admin.loading')}
                     </span>
                   </div>
                 ) : paginatedMembers.length === 0 ? (
@@ -551,8 +561,8 @@ const AdminDashboard = () => {
                     <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                     <p className="text-muted-foreground">
                       {hasActiveFilters
-                        ? "Aucun membre ne correspond aux critères"
-                        : "Aucun membre enregistré"}
+                        ? t('admin.memberList.noMembersFilter')
+                        : t('admin.memberList.noMembers')}
                     </p>
                   </div>
                 ) : (
@@ -562,20 +572,20 @@ const AdminDashboard = () => {
                         <TableHeader>
                           <TableRow>
                             <TableHead className="min-w-[150px]">
-                              Numéro Membre
+                              {t('admin.table.memberNumber')}
                             </TableHead>
                             <TableHead className="min-w-[180px]">
-                              Nom Complet
+                              {t('admin.table.fullName')}
                             </TableHead>
                             <TableHead className="min-w-[120px]">
-                              Commune
+                              {t('admin.table.commune')}
                             </TableHead>
-                            <TableHead className="min-w-[100px]">Statut</TableHead>
-                            <TableHead className="min-w-[80px]">Compte</TableHead>
+                            <TableHead className="min-w-[100px]">{t('admin.table.status')}</TableHead>
+                            <TableHead className="min-w-[80px]">{t('admin.table.account')}</TableHead>
                             <TableHead className="min-w-[120px]">
-                              Date Inscription
+                              {t('admin.table.registrationDate')}
                             </TableHead>
-                            <TableHead className="w-[100px]">Actions</TableHead>
+                            <TableHead className="w-[100px]">{t('admin.table.actions')}</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -639,8 +649,8 @@ const AdminDashboard = () => {
                     {totalPages > 1 && (
                       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 pt-4 border-t">
                         <p className="text-sm text-muted-foreground">
-                          Page {currentPage} sur {totalPages} ({filteredMembers.length}{" "}
-                          membres)
+                          {t('admin.pagination.page')} {currentPage} {t('admin.pagination.of')} {totalPages} ({filteredMembers.length}{" "}
+                          {t('admin.pagination.members')})
                         </p>
                         <div className="flex items-center gap-1">
                           <Button
@@ -701,16 +711,16 @@ const AdminDashboard = () => {
       <Dialog open={showMemberDialog} onOpenChange={setShowMemberDialog}>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Détails du Membre</DialogTitle>
+            <DialogTitle>{t('admin.memberDetails.title')}</DialogTitle>
             <DialogDescription>
-              Informations complètes du membre KAFA
+              {t('admin.memberDetails.description')}
             </DialogDescription>
           </DialogHeader>
           {selectedMember && (
             <div className="space-y-4">
               <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 text-center">
                 <p className="text-sm text-muted-foreground mb-1">
-                  Numéro Membre KAFA
+                  {t('admin.memberDetails.memberNumberKAFA')}
                 </p>
                 <p className="text-xl font-bold text-primary font-mono">
                   {selectedMember.member_number}
@@ -722,27 +732,27 @@ const AdminDashboard = () => {
               <div className="grid gap-3">
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <p className="text-xs text-muted-foreground">Nom</p>
+                    <p className="text-xs text-muted-foreground">{t('admin.memberDetails.lastName')}</p>
                     <p className="font-medium">{selectedMember.last_name}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Prénom</p>
+                    <p className="text-xs text-muted-foreground">{t('admin.memberDetails.firstName')}</p>
                     <p className="font-medium">{selectedMember.first_name}</p>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-xs text-muted-foreground">Nom Complet</p>
+                  <p className="text-xs text-muted-foreground">{t('admin.memberDetails.fullName')}</p>
                   <p className="font-medium">{selectedMember.full_name}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <p className="text-xs text-muted-foreground">Commune</p>
+                    <p className="text-xs text-muted-foreground">{t('admin.memberDetails.commune')}</p>
                     <p className="font-medium">{selectedMember.commune}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Sexe</p>
+                    <p className="text-xs text-muted-foreground">{t('admin.memberDetails.gender')}</p>
                     <p className="font-medium capitalize">
                       {selectedMember.gender || "-"}
                     </p>
@@ -751,7 +761,7 @@ const AdminDashboard = () => {
 
                 <div>
                   <p className="text-xs text-muted-foreground">
-                    Date et lieu de naissance
+                    {t('admin.memberDetails.birthDatePlace')}
                   </p>
                   <p className="font-medium">
                     {selectedMember.birth_date_place || "-"}
@@ -759,7 +769,7 @@ const AdminDashboard = () => {
                 </div>
 
                 <div>
-                  <p className="text-xs text-muted-foreground">Profession</p>
+                  <p className="text-xs text-muted-foreground">{t('admin.memberDetails.profession')}</p>
                   <p className="font-medium">
                     {selectedMember.profession || "-"}
                   </p>
@@ -769,11 +779,11 @@ const AdminDashboard = () => {
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <p className="text-xs text-muted-foreground">Téléphone</p>
+                    <p className="text-xs text-muted-foreground">{t('admin.memberDetails.phone')}</p>
                     <p className="font-medium">{selectedMember.phone || "-"}</p>
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">Email</p>
+                    <p className="text-xs text-muted-foreground">{t('admin.memberDetails.email')}</p>
                     <p className="font-medium text-sm break-all">
                       {selectedMember.email || "-"}
                     </p>
@@ -785,7 +795,7 @@ const AdminDashboard = () => {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <p className="text-xs text-muted-foreground">
-                      Parts Sociales
+                      {t('admin.memberDetails.socialShares')}
                     </p>
                     <p className="font-medium">
                       {selectedMember.social_shares || "-"}
@@ -793,7 +803,7 @@ const AdminDashboard = () => {
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">
-                      Montant Total
+                      {t('admin.memberDetails.totalAmount')}
                     </p>
                     <p className="font-medium">
                       {selectedMember.total_amount || "-"}
@@ -802,10 +812,15 @@ const AdminDashboard = () => {
                 </div>
 
                 <div>
-                  <p className="text-xs text-muted-foreground">Plan sélectionné</p>
+                  <p className="text-xs text-muted-foreground">{t('admin.memberDetails.selectedPlan')}</p>
                   <p className="font-medium">
                     {selectedMember.selected_plan
-                      ? { basic: "Plan de Base", standard: "Plan Standard", premium: "Plan Premium", sere_lajan: "Plan Sere Lajan" }[selectedMember.selected_plan] ?? selectedMember.selected_plan
+                      ? ({
+                          basic: t('admin.plans.basic'),
+                          standard: t('admin.plans.standard'),
+                          premium: t('admin.plans.premium'),
+                          sere_lajan: t('admin.plans.sereLajan'),
+                        } as Record<string, string>)[selectedMember.selected_plan] ?? selectedMember.selected_plan
                       : "-"}
                   </p>
                 </div>
@@ -813,7 +828,7 @@ const AdminDashboard = () => {
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <p className="text-xs text-muted-foreground">
-                      Date d'adhésion
+                      {t('admin.memberDetails.joinDate')}
                     </p>
                     <p className="font-medium">
                       {selectedMember.join_date || "-"}
@@ -821,7 +836,7 @@ const AdminDashboard = () => {
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">
-                      Date d'inscription
+                      {t('admin.memberDetails.registrationDate')}
                     </p>
                     <p className="font-medium">
                       {format(

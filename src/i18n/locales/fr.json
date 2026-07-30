@@ -33,13 +33,13 @@
     "becomeMember": "Devenir Membre",
     "howToInvest": "Comment Investir",
     "contact": "Nous Contacter",
-    "login": "Connexion",
+    "login": "Connexion Membre",
     "logout": "Déconnexion",
     "dashboard": "Tableau de bord",
     "memberLookup": "Rechercher un Membre",
     "memberNumbers": "Liste des Numéros de Membre",
     "communes": "Communes d'Haïti (146)",
-    "adminDashboard": "Tableau de bord Admin",
+    "adminDashboard": "Connexion Admin",
     "conditionsPolicy": "Conditions et Politique"
   },
   "home": {
@@ -80,6 +80,12 @@
       "subtitle": "N'attendez pas! Inscrivez-vous comme membre KAFA aujourd'hui et ayez la tranquillité d'esprit pour demain.",
       "becomeMember": "Devenir Membre Aujourd'hui",
       "contact": "Avez-vous des Questions? Contactez-nous"
+    },
+    "steps": {
+      "addStep": "Ajouter une étape",
+      "removeStep": "Retirer cette étape",
+      "newStepTitle": "Nouvelle Étape",
+      "newStepDescription": "Description de l'étape"
     }
   },
   "about": {
@@ -788,5 +794,109 @@
     "alreadyRegistered": "Un compte existe déjà avec cet email",
     "genericError": "Une erreur s'est produite",
     "networkError": "Impossible de joindre le service d'authentification. Veuillez réessayer plus tard."
+  },
+  "admin": {
+    "title": "Tableau de Bord Admin",
+    "connected": "Connecté: Admin",
+    "editSite": "Modifier le site",
+    "logout": "Déconnexion",
+    "backToDashboard": "Tableau de bord",
+    "headerBtn": "Admin",
+    "stats": {
+      "totalMembers": "Total Membres",
+      "men": "Hommes",
+      "women": "Femmes",
+      "communesRepresented": "Communes Représentées"
+    },
+    "filters": {
+      "title": "Filtres et Recherche",
+      "search": "Recherche",
+      "searchPlaceholder": "Nom, numéro, email, tél...",
+      "commune": "Commune",
+      "allCommunes": "Toutes les communes",
+      "gender": "Sexe",
+      "all": "Tous",
+      "status": "Statut",
+      "allStatuses": "Tous les statuts",
+      "clear": "Effacer",
+      "refresh": "Actualiser",
+      "notification": "Notification",
+      "payment": "Paiement",
+      "history": "Historique",
+      "exportCSV": "Exporter CSV",
+      "results": "résultat(s) trouvé(s)",
+      "linked": "liés"
+    },
+    "status": {
+      "active": "Actif",
+      "pending": "En attente",
+      "suspended": "Suspendu"
+    },
+    "memberList": {
+      "title": "Liste des Membres",
+      "description": "Tous les membres enregistrés dans le système KAFA",
+      "noMembers": "Aucun membre enregistré",
+      "noMembersFilter": "Aucun membre ne correspond aux critères"
+    },
+    "table": {
+      "memberNumber": "Numéro Membre",
+      "fullName": "Nom Complet",
+      "commune": "Commune",
+      "status": "Statut",
+      "account": "Compte",
+      "registrationDate": "Date Inscription",
+      "actions": "Actions",
+      "number": "Numéro",
+      "member": "Membre",
+      "gender": "Sexe",
+      "view": "Voir",
+      "manage": "Gérer"
+    },
+    "pagination": {
+      "page": "Page",
+      "of": "sur",
+      "members": "membres",
+      "showing": "Affichage"
+    },
+    "memberDetails": {
+      "title": "Détails du Membre",
+      "description": "Informations complètes du membre KAFA",
+      "memberNumberKAFA": "Numéro Membre KAFA",
+      "lastName": "Nom",
+      "firstName": "Prénom",
+      "fullName": "Nom Complet",
+      "commune": "Commune",
+      "gender": "Sexe",
+      "birthDatePlace": "Date et lieu de naissance",
+      "profession": "Profession",
+      "phone": "Téléphone",
+      "email": "Email",
+      "socialShares": "Parts Sociales",
+      "totalAmount": "Montant Total",
+      "selectedPlan": "Plan sélectionné",
+      "joinDate": "Date d'adhésion",
+      "registrationDate": "Date d'inscription",
+      "memberInfo": "Informations du Membre",
+      "kafaInfo": "Informations KAFA",
+      "contactInfo": "Informations de Contact"
+    },
+    "plans": {
+      "basic": "Plan de Base",
+      "standard": "Plan Standard",
+      "premium": "Plan Premium",
+      "sereLajan": "Plan Sere Lajan"
+    },
+    "loading": "Chargement...",
+    "loadError": "Impossible de charger les membres",
+    "updateSuccess": "Membre mis à jour",
+    "updateSuccessDesc": "Les informations du membre ont été mises à jour avec succès",
+    "updateError": "Impossible de mettre à jour le membre",
+    "linkSuccess": "Membre lié avec succès",
+    "unlinkSuccess": "Membre délié",
+    "unlinkSuccessDesc": "Le membre n'est plus lié à un compte utilisateur",
+    "export": {
+      "success": "Export réussi",
+      "membersExported": "membres exportés"
+    }
   }
 }

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -11,55 +11,116 @@ import KafaFormsSection from "@/components/KafaFormsSection";
 import heroFamilyBg from "@/assets/hero-family-background.jpg";
 import AssistantChat from "@/components/AssistantChat";
 import EditableText from "@/components/EditableText";
-import EditModeFab from "@/components/EditModeFab";
-import { useAuth } from "@/hooks/useAuth";
+import { useEditMode } from "@/hooks/useEditMode";
 import { useLocalEditableState } from "@/hooks/useLocalEditableState";
+import { translateToOtherLanguages } from "@/utils/translate";
 
 interface Step {
   id: string;
-  title: string;
-  description: string;
+  title: string | null;
+  description: string | null;
+  titles?: Partial<Record<string, string | null>>;
+  descriptions?: Partial<Record<string, string | null>>;
 }
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [chatOpen, setChatOpen] = useState(false);
-  const { isAdmin } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { isEditMode } = useEditMode();
 
-  // Edit mode is only ever active for logged-in admins, and only reflects
-  // in the URL bar (client-side route, no page reload) as requested.
-  const isEditMode = isAdmin && location.pathname === "/edit";
-  const toggleEditMode = () => navigate(isEditMode ? "/" : "/edit");
-
-  // Local-only content overrides (persisted to this browser's localStorage).
+  // Section text overrides — base key is the immediate fallback for all languages;
+  // language-prefixed keys hold per-language translations once the API responds.
   const [textOverrides, setTextOverrides] = useLocalEditableState<Record<string, string>>(
-    "home_text_overrides",
+    "home_text_v5",
     {}
   );
-  const getText = (key: string, fallback: string) => textOverrides[key] ?? fallback;
-  const setText = (key: string) => (value: string) =>
-    setTextOverrides((prev) => ({ ...prev, [key]: value }));
-
-  const defaultSteps: Step[] = [
-    { id: "step-1", title: t('home.howItWorks.step1Title'), description: t('home.howItWorks.step1Desc') },
-    { id: "step-2", title: t('home.howItWorks.step2Title'), description: t('home.howItWorks.step2Desc') },
-    { id: "step-3", title: t('home.howItWorks.step3Title'), description: t('home.howItWorks.step3Desc') },
-    { id: "step-4", title: t('home.howItWorks.step4Title'), description: t('home.howItWorks.step4Desc') },
-  ];
-  const [customSteps, setCustomSteps] = useLocalEditableState<Step[] | null>("home_steps", null);
-  const steps = customSteps ?? defaultSteps;
-
-  const updateStep = (id: string, field: "title" | "description", value: string) => {
-    setCustomSteps(steps.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
+  const getText = (key: string, fallback: string) =>
+    textOverrides[`${i18n.language}.${key}`] ?? textOverrides[key] ?? fallback;
+  const setText = (key: string) => (value: string) => {
+    const lang = i18n.language;
+    setTextOverrides((prev) => ({
+      ...prev,
+      [key]: value,
+      [`${lang}.${key}`]: value,
+    }));
+    translateToOtherLanguages(value, lang).then((translations) => {
+      setTextOverrides((prev) => ({
+        ...prev,
+        ...Object.fromEntries(
+          Object.entries(translations).map(([tl, tv]) => [`${tl}.${key}`, tv])
+        ),
+      }));
+    });
   };
-  const removeStep = (id: string) => setCustomSteps(steps.filter((s) => s.id !== id));
-  const addStep = () =>
-    setCustomSteps([
-      ...steps,
-      { id: `step-${Date.now()}`, title: "Nouvo Etap", description: "Deskripsyon etap la" },
-    ]);
+
+  const i18nSteps: Record<string, { title: string; description: string }> = {
+    "step-1": { title: t('home.howItWorks.step1Title'), description: t('home.howItWorks.step1Desc') },
+    "step-2": { title: t('home.howItWorks.step2Title'), description: t('home.howItWorks.step2Desc') },
+    "step-3": { title: t('home.howItWorks.step3Title'), description: t('home.howItWorks.step3Desc') },
+    "step-4": { title: t('home.howItWorks.step4Title'), description: t('home.howItWorks.step4Desc') },
+  };
+  const defaultSteps: Step[] = Object.entries(i18nSteps).map(([id, v]) => ({ id, ...v }));
+  const [customSteps, setCustomSteps] = useLocalEditableState<Step[] | null>("home_steps_v2", null);
+
+  // Original steps always resolve from i18n. Custom steps resolve per-language
+  // content from their titles/descriptions maps, falling back to English then null.
+  const steps = useMemo(() => {
+    const raw = customSteps ?? defaultSteps;
+    return raw.map(step => {
+      if (step.id in i18nSteps) return { ...step, ...i18nSteps[step.id] };
+      return {
+        ...step,
+        title: step.titles?.[i18n.language] ?? step.title,
+        description: step.descriptions?.[i18n.language] ?? step.description,
+      };
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [customSteps, i18n.language]);
+
+  // Operate on raw customSteps to avoid baking memoized i18n strings into storage.
+  const updateStep = (id: string, field: "title" | "description", value: string | null) => {
+    const lang = i18n.language;
+    const raw = customSteps ?? defaultSteps;
+    setCustomSteps(raw.map(s => {
+      if (s.id !== id) return s;
+      if (field === 'title') return {
+        ...s,
+        title: value,
+        titles: { ...(s.titles ?? {}), [lang]: value },
+      };
+      return {
+        ...s,
+        description: value,
+        descriptions: { ...(s.descriptions ?? {}), [lang]: value },
+      };
+    }));
+    if (value) {
+      translateToOtherLanguages(value, lang).then((translations) => {
+        setCustomSteps((current) => {
+          if (!current) return current;
+          return current.map(s => {
+            if (s.id !== id) return s;
+            if (field === 'title') return {
+              ...s,
+              titles: { ...(s.titles ?? {}), ...translations, [lang]: value },
+            };
+            return {
+              ...s,
+              descriptions: { ...(s.descriptions ?? {}), ...translations, [lang]: value },
+            };
+          });
+        });
+      });
+    }
+  };
+  const removeStep = (id: string) => {
+    const raw = customSteps ?? defaultSteps;
+    setCustomSteps(raw.filter(s => s.id !== id));
+  };
+  const addStep = () => {
+    const raw = customSteps ?? defaultSteps;
+    setCustomSteps([...raw, { id: `step-${Date.now()}`, title: null, description: null }]);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -161,7 +222,7 @@ const Home = () => {
                     <button
                       type="button"
                       onClick={() => removeStep(step.id)}
-                      aria-label="Retire etap sa a"
+                      aria-label={t('home.steps.removeStep')}
                       className="absolute -top-2 -right-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow hover:bg-destructive/90"
                     >
                       <X className="h-3.5 w-3.5" />
@@ -174,15 +235,16 @@ const Home = () => {
                     <EditableText
                       as="h3"
                       isEditMode={isEditMode}
-                      value={step.title}
-                      onChange={(v) => updateStep(step.id, "title", v)}
+                      value={step.title ?? t('home.steps.newStepTitle')}
+                      onChange={(v) => updateStep(step.id, "title", v || null)}
                       className="text-lg sm:text-xl font-bold text-foreground mb-2"
                     />
                     <EditableText
                       as="p"
                       isEditMode={isEditMode}
-                      value={step.description}
-                      onChange={(v) => updateStep(step.id, "description", v)}
+                      value={step.description ?? t('home.steps.newStepDescription')}
+                      onChange={(v) => updateStep(step.id, "description", v || null)}
+
                       className="text-sm sm:text-base text-muted-foreground whitespace-pre-line"
                     />
 
@@ -265,7 +327,7 @@ const Home = () => {
                   className="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-primary/40 py-6 px-4 text-primary hover:border-primary hover:bg-primary/5 transition-colors"
                 >
                   <Plus className="h-6 w-6" />
-                  <span className="text-sm font-medium">Ajoute yon etap</span>
+                  <span className="text-sm font-medium">{t('home.steps.addStep')}</span>
                 </button>
               )}
             </div>
@@ -333,7 +395,6 @@ const Home = () => {
 
       <Footer />
 
-      {isAdmin && <EditModeFab isEditMode={isEditMode} onToggle={toggleEditMode} />}
     </div>
   );
 };

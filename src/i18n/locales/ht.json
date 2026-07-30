@@ -33,13 +33,13 @@
     "becomeMember": "Vin Manm",
     "howToInvest": "Kijan pou Envesti",
     "contact": "Kontakte Nou",
-    "login": "Konekte",
+    "login": "Konekte kòm Manm",
     "logout": "Dekonekte",
     "dashboard": "Dashboard",
     "memberLookup": "Chèche Nimewo Manb",
     "memberNumbers": "Lis Nimewo Manm",
     "communes": "Komin Ayiti (146)",
-    "adminDashboard": "Admin Dashboard",
+    "adminDashboard": "Koneksyon Admin",
     "conditionsPolicy": "Conditions & Policy"
   },
   "home": {
@@ -80,6 +80,12 @@
       "subtitle": "Pa tann! Enskri kòm manm KAFA jodi a epi gen lapè nan kè ou pou demen.",
       "becomeMember": "Vin Manm Jodi a",
       "contact": "Gen Kesyon? Kontakte Nou"
+    },
+    "steps": {
+      "addStep": "Ajoute yon etap",
+      "removeStep": "Retire etap sa a",
+      "newStepTitle": "Nouvo Etap",
+      "newStepDescription": "Deskripsyon etap la"
     }
   },
   "about": {
@@ -788,5 +794,103 @@
     "alreadyRegistered": "Gen yon kont ki deja egziste ak imèl sa a",
     "genericError": "Yon erè fèt",
     "networkError": "Pa ka jwenn sèvis otantifikasyon an. Tanpri eseye ankò pita."
+  },
+  "admin": {
+    "title": "Tablo de Bò Admin",
+    "connected": "Konekte: Admin",
+    "editSite": "Modifye Sit la",
+    "logout": "Dekonekte",
+    "backToDashboard": "Tablo de Bò",
+    "headerBtn": "Admin",
+    "stats": {
+      "totalMembers": "Total Manm",
+      "men": "Gason",
+      "women": "Fi",
+      "communesRepresented": "Komin Reprezante"
+    },
+    "filters": {
+      "title": "Filtre ak Rechèch",
+      "search": "Rechèch",
+      "searchPlaceholder": "Non, nimewo, imèl, tèl...",
+      "commune": "Komin",
+      "allCommunes": "Tout komin yo",
+      "gender": "Sèks",
+      "all": "Tout",
+      "status": "Estati",
+      "allStatuses": "Tout estati yo",
+      "clear": "Efase",
+      "refresh": "Aktyalize",
+      "notification": "Notifikasyon",
+      "payment": "Peman",
+      "history": "Istorik",
+      "exportCSV": "Ekspòte CSV",
+      "results": "rezilta jwenn",
+      "linked": "konekte"
+    },
+    "status": {
+      "active": "Aktif",
+      "pending": "Annatant",
+      "suspended": "Sispann"
+    },
+    "memberList": {
+      "title": "Lis Manm yo",
+      "description": "Tout manm ki anrejistre nan sistèm KAFA a",
+      "noMembers": "Pa gen manm anrejistre",
+      "noMembersFilter": "Pa gen manm ki koresponn ak kritè yo"
+    },
+    "table": {
+      "memberNumber": "Nimewo Manm",
+      "fullName": "Non Konplè",
+      "commune": "Komin",
+      "status": "Estati",
+      "account": "Kont",
+      "registrationDate": "Dat Enskripsyon",
+      "actions": "Aksyon",
+      "number": "Nimewo",
+      "member": "Manm",
+      "gender": "Sèks",
+      "view": "Wè",
+      "manage": "Jere"
+    },
+    "pagination": {
+      "page": "Paj",
+      "of": "sou",
+      "members": "manm",
+      "showing": "Montre"
+    },
+    "memberDetails": {
+      "title": "Detay Manm",
+      "description": "Enfòmasyon konplè manm KAFA a",
+      "memberNumberKAFA": "Nimewo Manm KAFA",
+      "lastName": "Non",
+      "firstName": "Prenon",
+      "fullName": "Non Konplè",
+      "commune": "Komin",
+      "gender": "Sèks",
+      "birthDatePlace": "Dat ak kote nesans",
+      "profession": "Pwofesyon",
+      "phone": "Telefòn",
+      "email": "Imèl",
+      "socialShares": "Pa Sosyal",
+      "totalAmount": "Montan Total",
+      "selectedPlan": "Plan seleksyone",
+      "joinDate": "Dat adezyon",
+      "registrationDate": "Dat enskripsyon",
+      "memberInfo": "Enfòmasyon Manm",
+      "kafaInfo": "Enfòmasyon KAFA",
+      "contactInfo": "Enfòmasyon Kontak"
+    },
+    "plans": {
+      "basic": "Plan Debaz",
+      "standard": "Plan Estanda",
+      "premium": "Plan Premye",
+      "sereLajan": "Plan Sere Lajan"
+    },
+    "loading": "Ap chaje...",
+    "loadError": "Pa ka chaje manm yo",
+    "export": {
+      "success": "Ekspòtasyon reyisi",
+      "membersExported": "manm ekspòte"
+    }
   }
 }

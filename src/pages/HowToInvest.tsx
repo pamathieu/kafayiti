@@ -4,9 +4,31 @@ import Footer from "@/components/Layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, TrendingUp, Star, DollarSign, BookOpen } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import EditableText from "@/components/EditableText";
+import { useEditMode } from "@/hooks/useEditMode";
+import { useLocalEditableState } from "@/hooks/useLocalEditableState";
+import { translateToOtherLanguages } from "@/utils/translate";
 
 const HowToInvest = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { isEditMode } = useEditMode();
+
+  const [textOverrides, setTextOverrides] = useLocalEditableState<Record<string, string>>(
+    "invest_text_v2",
+    {}
+  );
+  const getText = (key: string, fallback: string) =>
+    textOverrides[`${i18n.language}.${key}`] ?? textOverrides[key] ?? fallback;
+  const setText = (key: string) => (value: string) => {
+    const lang = i18n.language;
+    setTextOverrides((prev) => ({ ...prev, [key]: value, [`${lang}.${key}`]: value }));
+    translateToOtherLanguages(value, lang).then((translations) => {
+      setTextOverrides((prev) => ({
+        ...prev,
+        ...Object.fromEntries(Object.entries(translations).map(([tl, tv]) => [`${tl}.${key}`, tv])),
+      }));
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -17,7 +39,10 @@ const HowToInvest = () => {
         <section className="bg-gradient-hero hero-padding text-primary-foreground">
           <div className="section-container">
             <div className="content-container text-center">
-              <h1 className="hero-title">{t("howToInvest.hero.title")}</h1>
+              <EditableText as="h1" isEditMode={isEditMode}
+                value={getText('hero.title', t('howToInvest.hero.title'))}
+                onChange={setText('hero.title')}
+                className="hero-title" />
             </div>
           </div>
         </section>
@@ -26,9 +51,11 @@ const HowToInvest = () => {
         <section className="section-padding bg-background">
           <div className="section-container">
             <div className="content-container">
-              <p className="text-lg text-muted-foreground leading-relaxed text-center max-w-3xl mx-auto">
-                {t("howToInvest.intro")}
-              </p>
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('intro', t('howToInvest.intro'))}
+                onChange={setText('intro')}
+                className="text-lg text-muted-foreground leading-relaxed text-center max-w-3xl mx-auto"
+                multiline />
             </div>
           </div>
         </section>
@@ -39,12 +66,17 @@ const HowToInvest = () => {
             <div className="content-container space-y-6">
               <div className="flex items-center gap-3">
                 <Star className="h-7 w-7 text-primary flex-shrink-0" />
-                <h2 className="section-title-sm">{t("howToInvest.preferredShare.title")}</h2>
+                <EditableText as="h2" isEditMode={isEditMode}
+                  value={getText('preferredShare.title', t('howToInvest.preferredShare.title'))}
+                  onChange={setText('preferredShare.title')}
+                  className="section-title-sm" />
               </div>
               <Separator />
-              <p className="text-muted-foreground leading-relaxed">
-                {t("howToInvest.preferredShare.description")}
-              </p>
+              <EditableText as="p" isEditMode={isEditMode}
+                value={getText('preferredShare.desc', t('howToInvest.preferredShare.description'))}
+                onChange={setText('preferredShare.desc')}
+                className="text-muted-foreground leading-relaxed"
+                multiline />
 
               <div>
                 <p className="font-semibold text-foreground mb-4">
@@ -83,13 +115,16 @@ const HowToInvest = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-3 text-xl">
                     <TrendingUp className="h-6 w-6 text-primary flex-shrink-0" />
-                    {t("howToInvest.priorityReturn.title")}
+                    <EditableText isEditMode={isEditMode}
+                      value={getText('priorityReturn.title', t('howToInvest.priorityReturn.title'))}
+                      onChange={setText('priorityReturn.title')} />
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {t("howToInvest.priorityReturn.description")}
-                  </p>
+                  <EditableText as="p" isEditMode={isEditMode}
+                    value={getText('priorityReturn.desc', t('howToInvest.priorityReturn.description'))}
+                    onChange={setText('priorityReturn.desc')}
+                    className="text-muted-foreground leading-relaxed" multiline />
                 </CardContent>
               </Card>
 
@@ -98,16 +133,20 @@ const HowToInvest = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-3 text-xl">
                     <DollarSign className="h-6 w-6 text-primary flex-shrink-0" />
-                    {t("howToInvest.patronageRefund.title")}
+                    <EditableText isEditMode={isEditMode}
+                      value={getText('patronageRefund.title', t('howToInvest.patronageRefund.title'))}
+                      onChange={setText('patronageRefund.title')} />
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {t("howToInvest.patronageRefund.description")}
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {t("howToInvest.patronageRefund.preferred")}
-                  </p>
+                  <EditableText as="p" isEditMode={isEditMode}
+                    value={getText('patronageRefund.desc', t('howToInvest.patronageRefund.description'))}
+                    onChange={setText('patronageRefund.desc')}
+                    className="text-muted-foreground leading-relaxed" multiline />
+                  <EditableText as="p" isEditMode={isEditMode}
+                    value={getText('patronageRefund.preferred', t('howToInvest.patronageRefund.preferred'))}
+                    onChange={setText('patronageRefund.preferred')}
+                    className="text-muted-foreground leading-relaxed" multiline />
                 </CardContent>
               </Card>
 
@@ -116,13 +155,16 @@ const HowToInvest = () => {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-3 text-xl">
                     <BookOpen className="h-6 w-6 text-primary flex-shrink-0" />
-                    {t("howToInvest.parValue.title")}
+                    <EditableText isEditMode={isEditMode}
+                      value={getText('parValue.title', t('howToInvest.parValue.title'))}
+                      onChange={setText('parValue.title')} />
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {t("howToInvest.parValue.description")}
-                  </p>
+                  <EditableText as="p" isEditMode={isEditMode}
+                    value={getText('parValue.desc', t('howToInvest.parValue.description'))}
+                    onChange={setText('parValue.desc')}
+                    className="text-muted-foreground leading-relaxed" multiline />
                   <div>
                     <p className="font-semibold text-foreground mb-3">
                       {t("howToInvest.parValue.usesTitle")}
