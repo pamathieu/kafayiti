@@ -29,6 +29,10 @@ jobs:
         env:
           VITE_EMAIL_API_URL: ${{ secrets.VITE_EMAIL_API_URL }}
           VITE_ASSISTANT_API_URL: ${{ secrets.VITE_ASSISTANT_API_URL }}
+          VITE_ADMIN_PASSWORD_HASH: ${{ secrets.VITE_ADMIN_PASSWORD_HASH }}
+          VITE_MEMBER_PORTAL_URL: ${{ secrets.VITE_MEMBER_PORTAL_URL }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
