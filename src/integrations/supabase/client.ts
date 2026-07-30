@@ -2,8 +2,12 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+// Fall back to inert placeholders when unset so importing this module never
+// crashes the whole app at load time (createClient throws synchronously on a
+// missing URL). Features that actually call `supabase` will fail gracefully
+// at request time instead, until real credentials are configured.
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'placeholder-anon-key';
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
