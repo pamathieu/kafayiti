@@ -28,7 +28,7 @@ const BecomeMember = () => {
   const selectedPlanName = (location.state as { planName?: string } | null)?.planName;
   const [chatOpen, setChatOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showMore, setShowMore] = useState(false);
+  const [showMore] = useState(true);
   const [personalInfoOpen, setPersonalInfoOpen] = useState(true);
   const [beneficiariesOpen, setBeneficiariesOpen] = useState(true);
   const [commitmentOpen, setCommitmentOpen] = useState(true);
@@ -128,15 +128,6 @@ const BecomeMember = () => {
       body: JSON.stringify(payload),
     });
     if (!res.ok) throw new Error('Submission failed');
-  };
-
-  const handleSubmitWithMore = async () => {
-    if (!showMore) {
-      const isValid = await form.trigger(['firstName', 'lastName', 'phone']);
-      if (!isValid) return;
-      submitToLambda(form.getValues()).catch((err) => console.error('Lambda error:', err));
-    }
-    setShowMore((v) => !v);
   };
 
   const onSubmit = async (data: MembershipFormData) => {
@@ -718,8 +709,8 @@ const BecomeMember = () => {
                       />
                     </div>
 
-                    {/* Submit Buttons */}
-                    <div className="grid grid-cols-2 gap-4 pt-4">
+                    {/* Submit Button */}
+                    <div className="pt-4">
                       <Button
                         type="submit"
                         size="lg"
@@ -734,16 +725,6 @@ const BecomeMember = () => {
                         ) : (
                           t('becomeMember.buttons.submitNow')
                         )}
-                      </Button>
-                      <Button
-                        type="button"
-                        size="lg"
-                        variant="outline"
-                        className="w-full"
-                        onClick={handleSubmitWithMore}
-                        disabled={isSubmitting}
-                      >
-                        {showMore ? t('becomeMember.buttons.seeLess') : t('becomeMember.buttons.submitWithMore')}
                       </Button>
                     </div>
                   </form>
