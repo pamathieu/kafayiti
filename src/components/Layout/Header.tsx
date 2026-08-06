@@ -13,7 +13,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import kafaLogo from "@/assets/kafa-logo.png";
 import { useAuth } from "@/hooks/useAuth";
 
-const MEMBER_URL = (import.meta.env.VITE_MEMBER_PORTAL_URL as string) ?? "https://member.kafayiti.com";
+const MEMBER_URL = (import.meta.env.VITE_MEMBER_PORTAL_URL as string) || "https://member.kafayiti.com";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
